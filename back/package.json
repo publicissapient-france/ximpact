@@ -1,0 +1,37 @@
+{
+  "name": "ximpact-back",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": {
+    "url": "git@github.com:xebia-france/ximpact.git",
+    "type": "git"
+  },
+  "author": "Benjamin Lacroix & Julien Smadja",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "lint": "eslint */**.js",
+    "lint:watch": "esw -w src tests",
+    "pretest": "npm run lint",
+    "test": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive",
+    "posttest": "istanbul report clover",
+    "npm-check": "npm-check -E -u",
+    "dynamo": "sudo docker run -d --name -p 8000:8000 dynamodb deangiberson/aws-dynamodb-local"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.22.0",
+    "express": "^4.15.0",
+    "express-graphql": "^0.6.3",
+    "graphql": "^0.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-watch": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "npm-check": "^5.4.0"
+  }
+}
