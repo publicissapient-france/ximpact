@@ -1,12 +1,9 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
+const query = require('./queries/customer');
+const { GraphQLSchema } = require('graphql');
 
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
+const schema = new GraphQLSchema({ query });
 
 const root = { hello: () => 'Hello world!' };
 
