@@ -45,6 +45,8 @@ yarn run test
 yan run dynamo
 ```
 
+> You can open shell at http://localhost:8000/shell/
+
 ## Update dependencies
 
 ```shell

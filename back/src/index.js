@@ -1,17 +1,6 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
-const AWS = require('aws-sdk');
-
-AWS.config.update({
-  region: 'us-west-2',
-  endpoint: 'http://localhost:8000',
-});
-
-const dyn = new AWS.DynamoDB();
-dyn.listTables((err, data) => {
-  console.log('listTables', err, data);
-});
 
 const schema = buildSchema(`
   type Query {
