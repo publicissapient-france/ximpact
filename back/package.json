@@ -18,7 +18,7 @@
     "pretest": "npm run lint",
     "test": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive --timeout 100000",
     "posttest": "istanbul report clover",
-    "coverage": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --timeout 100000 --recursive -R spec tests && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "coverage": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --timeout 100000 --recursive -R spec tests && cat ./coverage/lcov.info | coveralls",
     "npm-check": "npm-check -E -u",
     "dynamo": "docker run -d --name dynamodb -p 8000:8000 deangiberson/aws-dynamodb-local"
   },
