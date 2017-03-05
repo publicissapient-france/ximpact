@@ -6,6 +6,4 @@ vogels.AWS.config.update({
   secretAccessKey: process.env.AWS_secretAccessKey_XebiaFrance,
 });
 
-//endpoint: 'http://localhost:8000',
-
 module.exports = vogels;
