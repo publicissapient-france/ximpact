@@ -1,6 +1,5 @@
 language: node_js
 node_js:
   - "7"
-cache: yarn
-
-script: cd back && yarn install && yarn run test
+before_script:
+  - cd back
