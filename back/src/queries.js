@@ -36,6 +36,12 @@ const query = new GraphQLObjectType(
           return Repository.getXebians(params.email);
         },
       },
+      hello: {
+        type: GraphQLString,
+        resolve() {
+          return 'Hello World';
+        }
+      }
     }),
   });
 
