@@ -45,23 +45,23 @@ module.exports = {
     Promise.promisify(DynamoCustomer.get)(`${email}_${lastName}`),
 
   getCustomersByCompany: company =>
-    docClient.scan({
-      TableName: 'Customers',
-      ProjectionExpression: 'company, firstName, lastName, email',
-      FilterExpression: 'begins_with(company, :company)',
-      ExpressionAttributeValues: {
-        ':company': company,
-      },
-    }).promise().then(data => data.Items),
+    new Promise((resolve, reject) => {
+      DynamoCustomer.query(company).exec((err, data) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(data.Items);
+      });
+    }),
 
   getXebians: email =>
-    docClient.scan({
-      TableName: 'Xebians',
-      ProjectionExpression: 'email, firstName',
-      FilterExpression: 'begins_with(email, :email)',
-      ExpressionAttributeValues: {
-        ':email': email,
-      },
-    }).promise().then(data => data.Items),
+    new Promise((resolve, reject) => {
+      DynamoXebian.query(email).exec((err, data) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(data.Items);
+      });
+    }),
 
 };

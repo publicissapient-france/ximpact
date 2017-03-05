@@ -9,8 +9,8 @@ const _ = require('lodash');
 describe('Repository', () => {
   before((done) => {
     vogels.createTables({
-      'Xebians': { readCapacity: 1, writeCapacity: 1 },
-      'Customers': { readCapacity: 1, writeCapacity: 1 }
+      Xebians: { readCapacity: 1, writeCapacity: 1 },
+      Customers: { readCapacity: 1, writeCapacity: 1 },
     }, done);
   });
 
@@ -54,17 +54,17 @@ describe('Repository', () => {
 
   it('should list customers by company', (done) => {
     Repository
-      .getCustomersByCompany('company')
+      .getCustomersByCompany('company_email@domain.com')
       .then((customers) => {
-        assert.deepEqual(customers,
-          [
-            {
-              company: 'company',
-              email: 'email@domain.com',
-              firstName: 'firstName',
-              lastName: 'lastName',
-            },
-          ]);
+        assert.deepEqual(
+          _.omit(customers[0].attrs, 'createdAt'),
+          {
+            company: 'company',
+            email: 'email@domain.com',
+            firstName: 'firstName',
+            lastName: 'lastName',
+            id: 'company_email@domain.com',
+          });
       })
       .then(done)
       .catch(done);
@@ -72,14 +72,15 @@ describe('Repository', () => {
 
   it('should find xebians by email', (done) => {
     Repository
-      .getXebians('jsmadja')
+      .getXebians('jsmadja@xebia.fr_Smadja')
       .then((xebians) => {
-        assert.deepEqual(xebians, [
+        assert.deepEqual(_.omit(xebians[0].attrs, 'createdAt'),
           {
             email: 'jsmadja@xebia.fr',
             firstName: 'Julien',
-          },
-        ]);
+            id: 'jsmadja@xebia.fr_Smadja',
+            lastName: 'Smadja',
+          });
       })
       .then(done)
       .catch(done);

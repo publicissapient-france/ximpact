@@ -17,10 +17,10 @@ const DynamoXebian = vogels.define('Xebian', {
     firstName: Joi.string(),
     lastName: Joi.string(),
   },
-  tableName: 'Xebians'
+  tableName: 'Xebians',
 });
 
 module.exports = {
   DynamoXebian,
-  XebianSchema
+  XebianSchema,
 };

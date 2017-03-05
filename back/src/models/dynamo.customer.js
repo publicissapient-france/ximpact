@@ -19,10 +19,10 @@ const DynamoCustomer = vogels.define('Customer', {
     lastName: Joi.string(),
     company: Joi.string(),
   },
-  tableName: 'Customers'
+  tableName: 'Customers',
 });
 
 module.exports = {
   DynamoCustomer,
-  CustomerSchema
+  CustomerSchema,
 };
