@@ -13,11 +13,11 @@ const tables = [
   {
     TableName: 'Customers',
     KeySchema: [
-      { AttributeName: 'company', KeyType: 'HASH' },
+      { AttributeName: 'email', KeyType: 'HASH' },
       { AttributeName: 'lastName', KeyType: 'RANGE' },
     ],
     AttributeDefinitions: [
-      { AttributeName: 'company', AttributeType: 'S' },
+      { AttributeName: 'email', AttributeType: 'S' },
       { AttributeName: 'lastName', AttributeType: 'S' },
     ],
     ProvisionedThroughput: {

@@ -1,19 +1,18 @@
 const AWS = require('aws-sdk');
 const Promise = require('bluebird');
 
+AWS.config.setPromisesDependency(Promise);
 AWS.config.update({
   region: 'us-west-2',
   endpoint: 'http://localhost:8000',
 });
 
 const docClient = new AWS.DynamoDB.DocumentClient();
-const put = Promise.promisify(docClient.put).bind(docClient);
-const scan = Promise.promisify(docClient.scan).bind(docClient);
 
 module.exports = {
 
   addCustomer: (company, firstName, lastName, email) =>
-    put({
+    docClient.put({
       TableName: 'Customers',
       Item: {
         company,
@@ -21,37 +20,53 @@ module.exports = {
         lastName,
         email,
       },
-      ReturnValues: 'ALL_OLD',
-    }).then(data => data.Attributes),
+    }).promise(),
 
   addXebian: (email, firstName) =>
-    put({
+    docClient.put({
       TableName: 'Xebians',
       Item: {
         firstName,
         email,
       },
-      ReturnValues: 'ALL_OLD',
-    }).then(data => data.Attributes),
+    }).promise(),
+
+  getXebian: (email, firstName) =>
+    docClient.get({
+      TableName: 'Xebians',
+      Key: {
+        email,
+        firstName,
+      },
+    }).promise().then(data => data.Item),
+
+  getCustomer: (email, lastName) =>
+    docClient.get({
+      TableName: 'Customers',
+      Key: {
+        email,
+        lastName,
+      },
+    }).promise().then(data => data.Item),
 
   getCustomersByCompany: company =>
-    scan({
+    docClient.scan({
       TableName: 'Customers',
       ProjectionExpression: 'company, firstName, lastName, email',
       FilterExpression: 'begins_with(company, :company)',
       ExpressionAttributeValues: {
         ':company': company,
       },
-    }).then(data => data.Items),
+    }).promise().then(data => data.Items),
 
   getXebians: email =>
-    scan({
+    docClient.scan({
       TableName: 'Xebians',
       ProjectionExpression: 'email, firstName',
       FilterExpression: 'begins_with(email, :email)',
       ExpressionAttributeValues: {
         ':email': email,
       },
-    }).then(data => data.Items),
+    }).promise().then(data => data.Items),
 
 };

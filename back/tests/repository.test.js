@@ -3,16 +3,10 @@ const Repository = require('../src/repository');
 const assert = require('assert');
 
 describe('Repository', () => {
-  before((done) => {
-    // Repository.dropTables();
-    // Repository.createTables();
-    // Repository.listTables().then(console.log);
-    done();
-  });
-
   it('should add a customer', (done) => {
     Repository
       .addCustomer('company', 'firstName', 'lastName', 'email')
+      .then(() => Repository.getCustomer('email', 'lastName'))
       .then((customer) => {
         assert.deepEqual(customer,
           {
@@ -20,6 +14,21 @@ describe('Repository', () => {
             email: 'email',
             firstName: 'firstName',
             lastName: 'lastName',
+          });
+      })
+      .then(done)
+      .catch(done);
+  });
+
+  it('should add a xebian', (done) => {
+    Repository
+      .addXebian('jsmadja@xebia.fr', 'Julien')
+      .then(() => Repository.getXebian('jsmadja@xebia.fr', 'Julien'))
+      .then((xebian) => {
+        assert.deepEqual(xebian,
+          {
+            email: 'jsmadja@xebia.fr',
+            firstName: 'Julien',
           });
       })
       .then(done)
@@ -39,20 +48,6 @@ describe('Repository', () => {
               lastName: 'lastName',
             },
           ]);
-      })
-      .then(done)
-      .catch(done);
-  });
-
-  it('should add a xebian', (done) => {
-    Repository
-      .addXebian('jsmadja@xebia.fr', 'Julien')
-      .then((xebian) => {
-        assert.deepEqual(xebian,
-          {
-            email: 'jsmadja@xebia.fr',
-            firstName: 'Julien',
-          });
       })
       .then(done)
       .catch(done);
