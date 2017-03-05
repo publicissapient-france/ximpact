@@ -1,5 +1,7 @@
 const AWS = require('aws-sdk');
 const Promise = require('bluebird');
+const DynamoCustomer = require('./models/dynamo.customer').DynamoCustomer;
+const DynamoXebian = require('./models/dynamo.xebian').DynamoXebian;
 
 AWS.config.setPromisesDependency(Promise);
 AWS.config.update({
@@ -12,24 +14,23 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 module.exports = {
 
   addCustomer: (company, firstName, lastName, email) =>
-    docClient.put({
-      TableName: 'Customers',
-      Item: {
+    Promise.promisify(DynamoCustomer.create)(
+      {
+        id: `${company}_${email}`,
         company,
         firstName,
         lastName,
         email,
-      },
-    }).promise(),
+      }),
 
-  addXebian: (email, firstName) =>
-    docClient.put({
-      TableName: 'Xebians',
-      Item: {
+  addXebian: (email, firstName, lastName) =>
+    Promise.promisify(DynamoXebian.create)(
+      {
+        id: `${email}_${lastName}`,
         firstName,
+        lastName,
         email,
-      },
-    }).promise(),
+      }),
 
   getXebian: (email, firstName) =>
     docClient.get({
@@ -41,13 +42,7 @@ module.exports = {
     }).promise().then(data => data.Item),
 
   getCustomer: (email, lastName) =>
-    docClient.get({
-      TableName: 'Customers',
-      Key: {
-        email,
-        lastName,
-      },
-    }).promise().then(data => data.Item),
+    Promise.promisify(DynamoCustomer.get)(`${email}_${lastName}`),
 
   getCustomersByCompany: company =>
     docClient.scan({

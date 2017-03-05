@@ -8,4 +8,3 @@ before_script:
   - sleep 2
   - cd back
   - npm install
-  - node scripts/create-local-tables.js

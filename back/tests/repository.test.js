@@ -1,19 +1,35 @@
 const Repository = require('../src/repository');
+const DynamoCustomer = require('../src/models/dynamo.customer').DynamoCustomer;
+const DynamoXebian = require('../src/models/dynamo.xebian').DynamoXebian;
+const vogels = require('../config/vogels');
 
 const assert = require('assert');
+const _ = require('lodash');
 
 describe('Repository', () => {
+  before((done) => {
+    vogels.createTables({
+      'Xebians': { readCapacity: 1, writeCapacity: 1 },
+      'Customers': { readCapacity: 1, writeCapacity: 1 }
+    }, done);
+  });
+
+  after(() => {
+    DynamoCustomer.deleteTable();
+    DynamoXebian.deleteTable();
+  });
+
   it('should add a customer', (done) => {
     Repository
-      .addCustomer('company', 'firstName', 'lastName', 'email')
-      .then(() => Repository.getCustomer('email', 'lastName'))
+      .addCustomer('company', 'firstName', 'lastName', 'email@domain.com')
       .then((customer) => {
-        assert.deepEqual(customer,
+        assert.deepEqual(_.omit(customer.attrs, ['createdAt']),
           {
             company: 'company',
-            email: 'email',
+            email: 'email@domain.com',
             firstName: 'firstName',
             lastName: 'lastName',
+            id: 'company_email@domain.com',
           });
       })
       .then(done)
@@ -22,13 +38,14 @@ describe('Repository', () => {
 
   it('should add a xebian', (done) => {
     Repository
-      .addXebian('jsmadja@xebia.fr', 'Julien')
-      .then(() => Repository.getXebian('jsmadja@xebia.fr', 'Julien'))
+      .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
       .then((xebian) => {
-        assert.deepEqual(xebian,
+        assert.deepEqual(_.omit(xebian.attrs, ['createdAt']),
           {
             email: 'jsmadja@xebia.fr',
             firstName: 'Julien',
+            lastName: 'Smadja',
+            id: 'jsmadja@xebia.fr_Smadja',
           });
       })
       .then(done)
@@ -43,7 +60,7 @@ describe('Repository', () => {
           [
             {
               company: 'company',
-              email: 'email',
+              email: 'email@domain.com',
               firstName: 'firstName',
               lastName: 'lastName',
             },
