@@ -1,7 +1,10 @@
 {
   "name": "ximpact-back",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "./src/index.js",
+  "engines": {
+    "node": ">=7.7.1"
+  },
   "repository": {
     "url": "git@github.com:xebia-france/ximpact.git",
     "type": "git"
@@ -16,7 +19,7 @@
     "test": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive",
     "posttest": "istanbul report clover",
     "npm-check": "npm-check -E -u",
-    "dynamo": "sudo docker run -d --name -p 8000:8000 dynamodb deangiberson/aws-dynamodb-local"
+    "dynamo": "docker run -d --name dynamodb -p 8000:8000 deangiberson/aws-dynamodb-local"
   },
   "dependencies": {
     "aws-sdk": "^2.22.0",

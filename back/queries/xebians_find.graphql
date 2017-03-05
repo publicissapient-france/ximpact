@@ -1,0 +1,6 @@
+{
+    xebians(email: "jsmadja@xebia.fr") {
+        email
+        firstName
+    }
+}

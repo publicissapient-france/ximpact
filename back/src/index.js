@@ -1,6 +1,6 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const query = require('./queries/customer');
+const query = require('./queries');
 const { GraphQLSchema } = require('graphql');
 
 const schema = new GraphQLSchema({ query });

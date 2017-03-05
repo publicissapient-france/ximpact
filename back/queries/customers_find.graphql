@@ -1,0 +1,8 @@
+{
+    customers(company:"comp") {
+        firstName,
+        lastName,
+        email,
+        company
+    }
+}
