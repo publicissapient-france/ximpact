@@ -1,15 +1,6 @@
-const AWS = require('aws-sdk');
 const Promise = require('bluebird');
 const DynamoCustomer = require('./models/dynamo.customer').DynamoCustomer;
 const DynamoXebian = require('./models/dynamo.xebian').DynamoXebian;
-
-AWS.config.setPromisesDependency(Promise);
-AWS.config.update({
-  region: 'us-west-2',
-  endpoint: 'http://localhost:8000',
-});
-
-const docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports = {
 
@@ -31,18 +22,6 @@ module.exports = {
         lastName,
         email,
       }),
-
-  getXebian: (email, firstName) =>
-    docClient.get({
-      TableName: 'Xebians',
-      Key: {
-        email,
-        firstName,
-      },
-    }).promise().then(data => data.Item),
-
-  getCustomer: (email, lastName) =>
-    Promise.promisify(DynamoCustomer.get)(`${email}_${lastName}`),
 
   getCustomersByCompany: company =>
     new Promise((resolve, reject) => {
