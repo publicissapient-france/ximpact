@@ -39,7 +39,7 @@ const tables = [
       ReadCapacityUnits: 10,
       WriteCapacityUnits: 10,
     },
-  }
+  },
 ];
 
 Promise

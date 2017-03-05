@@ -12,7 +12,7 @@ const listTables = Promise.promisify(dynamodb.listTables).bind(dynamodb);
 
 listTables().then(result =>
   Promise
-    .mapSeries(result.TableNames, table => {
+    .mapSeries(result.TableNames, (table) => {
       console.log(`Deleting ${table} table`);
       return deleteTable({ TableName: table });
     })
