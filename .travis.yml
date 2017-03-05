@@ -4,3 +4,6 @@ node_js:
 before_script:
   - cd back
   - npm install
+
+after_script:
+  - npm run coverage
