@@ -2,6 +2,7 @@ const Repository = require('../src/repository');
 const DynamoCustomer = require('../src/models/dynamo.customer').DynamoCustomer;
 const DynamoXebian = require('../src/models/dynamo.xebian').DynamoXebian;
 const vogels = require('../config/vogels');
+const Promise = require('bluebird');
 
 const assert = require('assert');
 const _ = require('lodash');
@@ -9,14 +10,23 @@ const _ = require('lodash');
 describe('Repository', () => {
   before((done) => {
     vogels.createTables({
-      Xebians: { readCapacity: 1, writeCapacity: 1 },
-      Customers: { readCapacity: 1, writeCapacity: 1 },
+      Xebians: {},
+      Customers: {},
     }, done);
   });
 
-  after(() => {
-    DynamoCustomer.deleteTable();
-    DynamoXebian.deleteTable();
+  after((done) => {
+    const tables = [DynamoCustomer, DynamoXebian];
+    Promise
+      .mapSeries(tables, table => Promise.promisify(table.deleteTable)())
+      .then((deletions) => {
+        deletions.forEach((deletion) => {
+          const description = deletion.TableDescription;
+          console.log(`${description.TableName}: ${description.TableStatus}`);
+        });
+      })
+      .then(done)
+      .catch(done);
   });
 
   it('should add a customer', (done) => {
