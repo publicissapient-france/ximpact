@@ -40,8 +40,8 @@ const query = new GraphQLObjectType(
         type: GraphQLString,
         resolve() {
           return 'Hello World';
-        }
-      }
+        },
+      },
     }),
   });
 
