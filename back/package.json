@@ -16,7 +16,7 @@
     "lint": "eslint */**.js",
     "lint:watch": "esw -w src tests scripts",
     "pretest": "npm run lint",
-    "test": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive --timeout 10000",
+    "test": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive",
     "posttest": "istanbul report clover",
     "npm-check": "npm-check -E -u",
     "dynamo": "docker run -d --name dynamodb -p 8000:8000 deangiberson/aws-dynamodb-local"
