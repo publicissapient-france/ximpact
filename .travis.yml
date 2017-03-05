@@ -5,5 +5,4 @@ before_script:
   - cd back
   - npm install
 
-after_script:
-  - npm run coverage
+script: npm test && npm run coverage
