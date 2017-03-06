@@ -1,8 +1,8 @@
 {
-    customers(company:"comp") {
-        firstName,
-        lastName,
-        email,
+    customers {
         company
+        email
+        firstName
+        lastName
     }
 }

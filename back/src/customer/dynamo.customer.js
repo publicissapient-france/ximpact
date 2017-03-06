@@ -1,26 +1,29 @@
 const Joi = require('joi');
 const vogels = require('../../config/vogels');
 
-const XebianSchema = {
+const CustomerSchema = {
   id: 'id',
   email: 'email',
   firstName: 'firstName',
   lastName: 'lastName',
+  company: 'company',
 };
 
-const DynamoXebian = vogels.define('Xebian', {
+const DynamoCustomer = vogels.define('Customer', {
   hashKey: 'id',
+  rangeKey: 'email',
   timestamps: true,
   schema: {
-    id: Joi.string(),
+    id: vogels.types.uuid(),
     email: Joi.string().email(),
     firstName: Joi.string(),
     lastName: Joi.string(),
+    company: Joi.string(),
   },
-  tableName: 'Xebians',
+  tableName: 'Customers',
 });
 
 module.exports = {
-  DynamoXebian,
-  XebianSchema,
+  DynamoCustomer,
+  CustomerSchema,
 };

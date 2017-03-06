@@ -1,6 +1,8 @@
 const Repository = require('../src/repository');
-const DynamoCustomer = require('../src/models/dynamo.customer').DynamoCustomer;
-const DynamoXebian = require('../src/models/dynamo.xebian').DynamoXebian;
+const DynamoCustomer = require('../src/customer/dynamo.customer').DynamoCustomer;
+const DynamoXebian = require('../src/xebian/dynamo.xebian').DynamoXebian;
+const DynamoImpact = require('../src/impact/dynamo.impact').DynamoImpact;
+const DynamoFeedback = require('../src/feedback/dynamo.feedback').DynamoFeedback;
 const vogels = require('../config/vogels');
 const Promise = require('bluebird');
 
@@ -12,11 +14,13 @@ describe('Repository', () => {
     vogels.createTables({
       Xebians: {},
       Customers: {},
+      Impacts: {},
+      Feedbacks: {},
     }, done);
   });
 
   after((done) => {
-    const tables = [DynamoCustomer, DynamoXebian];
+    const tables = [DynamoCustomer, DynamoXebian, DynamoImpact, DynamoFeedback];
     Promise
       .mapSeries(tables, table => Promise.promisify(table.deleteTable)())
       .then((deletions) => {
@@ -31,15 +35,14 @@ describe('Repository', () => {
 
   it('should add a customer', (done) => {
     Repository
-      .addCustomer('company', 'firstName', 'lastName', 'email@domain.com')
+      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
       .then((customer) => {
-        assert.deepEqual(_.omit(customer.attrs, ['createdAt']),
+        assert.deepEqual(_.omit(customer.attrs, ['createdAt', 'id']),
           {
-            company: 'company',
-            email: 'email@domain.com',
-            firstName: 'firstName',
-            lastName: 'lastName',
-            id: 'company_email@domain.com',
+            company: 'My Company',
+            email: 'mfontania@mycompany.com',
+            firstName: 'Maxime',
+            lastName: 'Fontania',
           });
       })
       .then(done)
@@ -50,12 +53,37 @@ describe('Repository', () => {
     Repository
       .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
       .then((xebian) => {
-        assert.deepEqual(_.omit(xebian.attrs, ['createdAt']),
+        assert.deepEqual(_.omit(xebian.attrs, ['createdAt', 'id']),
           {
             email: 'jsmadja@xebia.fr',
             firstName: 'Julien',
             lastName: 'Smadja',
-            id: 'jsmadja@xebia.fr_Smadja',
+          });
+      })
+      .then(done)
+      .catch(done);
+  });
+
+  it('should add an impact', (done) => {
+    Repository
+      .addImpact('xebianId', 'customerId', 'Faire un BBL par mois')
+      .then((impact) => {
+        assert.deepEqual(_.omit(impact.attrs, ['createdAt', 'id', 'xebianId', 'customerId']),
+          {
+            description: 'Faire un BBL par mois',
+          });
+      })
+      .then(done)
+      .catch(done);
+  });
+
+  it('should add a feedback', (done) => {
+    Repository
+      .addFeedback('impactId', 'Super!')
+      .then((feedback) => {
+        assert.deepEqual(_.omit(feedback.attrs, ['createdAt', 'id', 'impactId']),
+          {
+            comment: 'Super!',
           });
       })
       .then(done)
@@ -64,16 +92,15 @@ describe('Repository', () => {
 
   it('should list customers by company', (done) => {
     Repository
-      .getCustomersByCompany('company_email@domain.com')
+      .getCustomers()
       .then((customers) => {
         assert.deepEqual(
-          _.omit(customers[0].attrs, 'createdAt'),
+          _.omit(customers[0], ['createdAt', 'id']),
           {
-            company: 'company',
-            email: 'email@domain.com',
-            firstName: 'firstName',
-            lastName: 'lastName',
-            id: 'company_email@domain.com',
+            company: 'My Company',
+            email: 'mfontania@mycompany.com',
+            firstName: 'Maxime',
+            lastName: 'Fontania',
           });
       })
       .then(done)
@@ -82,13 +109,12 @@ describe('Repository', () => {
 
   it('should find xebians by email', (done) => {
     Repository
-      .getXebians('jsmadja@xebia.fr_Smadja')
+      .getXebians()
       .then((xebians) => {
-        assert.deepEqual(_.omit(xebians[0].attrs, 'createdAt'),
+        assert.deepEqual(_.omit(xebians[0], ['createdAt', 'id']),
           {
             email: 'jsmadja@xebia.fr',
             firstName: 'Julien',
-            id: 'jsmadja@xebia.fr_Smadja',
             lastName: 'Smadja',
           });
       })

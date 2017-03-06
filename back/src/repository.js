@@ -1,13 +1,15 @@
 const Promise = require('bluebird');
-const DynamoCustomer = require('./models/dynamo.customer').DynamoCustomer;
-const DynamoXebian = require('./models/dynamo.xebian').DynamoXebian;
+const DynamoCustomer = require('./customer/dynamo.customer').DynamoCustomer;
+const DynamoXebian = require('./xebian/dynamo.xebian').DynamoXebian;
+const DynamoImpact = require('./impact/dynamo.impact').DynamoImpact;
+const DynamoFeedback = require('./feedback/dynamo.feedback').DynamoFeedback;
+const _ = require('lodash');
 
 module.exports = {
 
   addCustomer: (company, firstName, lastName, email) =>
     Promise.promisify(DynamoCustomer.create)(
       {
-        id: `${company}_${email}`,
         company,
         firstName,
         lastName,
@@ -17,29 +19,43 @@ module.exports = {
   addXebian: (email, firstName, lastName) =>
     Promise.promisify(DynamoXebian.create)(
       {
-        id: `${email}_${lastName}`,
         firstName,
         lastName,
         email,
       }),
 
-  getCustomersByCompany: company =>
+  addImpact: (xebianId, customerId, description) =>
+    Promise.promisify(DynamoImpact.create)(
+      {
+        description,
+        xebianId,
+        customerId,
+      }),
+
+  addFeedback: (impactId, comment) =>
+    Promise.promisify(DynamoFeedback.create)(
+      {
+        comment,
+        impactId,
+      }),
+
+  getCustomers: () =>
     new Promise((resolve, reject) => {
-      DynamoCustomer.query(company).exec((err, data) => {
+      DynamoCustomer.scan().limit(20).loadAll().exec((err, data) => {
         if (err) {
           return reject(err);
         }
-        return resolve(data.Items);
+        return resolve(_.map(data.Items, item => item.attrs));
       });
     }),
 
-  getXebians: email =>
+  getXebians: () =>
     new Promise((resolve, reject) => {
-      DynamoXebian.query(email).exec((err, data) => {
+      DynamoXebian.scan().limit(20).exec((err, data) => {
         if (err) {
           return reject(err);
         }
-        return resolve(data.Items);
+        return resolve(_.map(data.Items, item => item.attrs));
       });
     }),
 
