@@ -1,8 +1,6 @@
 language: node_js
+
 node_js:
   - "7"
-before_script:
-  - cd back
-  - npm install
 
-script: npm run coverage
+script: cd back && npm i && npm test && cd ../web && npm i && npm test
