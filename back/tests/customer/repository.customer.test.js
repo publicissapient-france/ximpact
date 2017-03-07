@@ -1,13 +1,7 @@
-const Database = require('../database');
 const Repository = require('../../src/customer/repository.customer');
-const assert = require('assert');
 const _ = require('lodash');
 
 describe('Customer Repository', () => {
-  before(Database.createTables);
-
-  after(Database.deleteTables);
-
   it('should add a customer', (done) => {
     Repository
       .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')

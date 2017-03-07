@@ -1,5 +1,4 @@
 const assert = require('assert');
-const Database = require('./database');
 const superagent = require('superagent');
 const Promise = require('bluebird');
 const request = require('superagent-promise')(superagent, Promise);
@@ -20,10 +19,6 @@ const execute = fn =>
     });
 
 describe('GraphQL', () => {
-  before(Database.createTables);
-
-  after(Database.deleteTables);
-
   it('should get graphql', (done) => {
     const graphQLQuery = {
       query: '{ hello }',

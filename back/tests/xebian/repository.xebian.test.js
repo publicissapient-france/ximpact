@@ -1,14 +1,8 @@
-const Database = require('../database');
 const Repository = require('../../src/xebian/repository.xebian');
 
-const assert = require('assert');
 const _ = require('lodash');
 
 describe('Xebian Repository', () => {
-  before(Database.createTables);
-
-  after(Database.deleteTables);
-
   it('should add a xebian', (done) => {
     Repository
       .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
