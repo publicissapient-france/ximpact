@@ -51,7 +51,7 @@ module.exports = {
 
   getXebians: () =>
     new Promise((resolve, reject) => {
-      DynamoXebian.scan().limit(20).exec((err, data) => {
+      DynamoXebian.scan().limit(20).loadAll().exec((err, data) => {
         if (err) {
           return reject(err);
         }

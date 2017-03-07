@@ -1,22 +1,23 @@
 const {
   GraphQLObjectType,
   GraphQLString,
+  GraphQLNonNull,
 } = require('graphql');
 
 const Xebian = new GraphQLObjectType({
   name: 'Xebian',
   fields: {
     id: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
     },
     email: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
     },
     firstName: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
     },
     lastName: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
     },
   },
 });

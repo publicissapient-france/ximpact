@@ -1,0 +1,7 @@
+mutation {
+    feedback(comment:"Super Xebian", impactId:"266ed7fe-1b9c-4178-bd45-fdb0cac31f45") {
+        id,
+        comment,
+        impactId
+    }
+}

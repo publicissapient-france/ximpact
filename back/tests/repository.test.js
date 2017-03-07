@@ -10,16 +10,16 @@ const assert = require('assert');
 const _ = require('lodash');
 
 describe('Repository', () => {
-  before((done) => {
+  const createTables = (done) => {
     vogels.createTables({
       Xebians: {},
       Customers: {},
       Impacts: {},
       Feedbacks: {},
     }, done);
-  });
+  };
 
-  after((done) => {
+  const deleteTables = (done) => {
     const tables = [DynamoCustomer, DynamoXebian, DynamoImpact, DynamoFeedback];
     Promise
       .mapSeries(tables, table => Promise.promisify(table.deleteTable)())
@@ -31,7 +31,11 @@ describe('Repository', () => {
       })
       .then(done)
       .catch(done);
-  });
+  };
+
+  before(createTables);
+
+  after(deleteTables);
 
   it('should add a customer', (done) => {
     Repository

@@ -7,4 +7,6 @@ vogels.AWS.config.update({
   endpoint: process.env.DEV ? 'http://localhost:8000' : undefined,
 });
 
+console.log(`Dynamo endpoint: ${vogels.AWS.config.endpoint}`);
+
 module.exports = vogels;
