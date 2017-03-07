@@ -12,7 +12,7 @@
   "author": "Benjamin Lacroix & Julien Smadja",
   "license": "MIT",
   "scripts": {
-    "dev": "DEV=true nodemon src/index.js",
+    "dev": "nodemon src/index.js",
     "lint": "eslint */**.js",
     "lint:watch": "esw -w src tests scripts",
     "pretest": "npm run lint",
