@@ -17,6 +17,7 @@
     "lint:watch": "esw -w src tests scripts",
     "pretest": "npm run lint",
     "test": "DEV=true istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive --timeout 100000",
+    "itest": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive --timeout 100000",
     "posttest": "istanbul report clover",
     "coverage": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --timeout 100000 --recursive -R spec tests && cat ./coverage/lcov.info | coveralls",
     "npm-check": "npm-check -E -u",
