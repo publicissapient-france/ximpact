@@ -1,5 +1,5 @@
 const Xebian = require('./type.xebian');
-const Repository = require('../repository');
+const Repository = require('./repository.xebian');
 const {
   GraphQLString,
   GraphQLNonNull,
@@ -23,7 +23,6 @@ module.exports = {
   },
   resolve(obj, { email, firstName, lastName }) {
     return Repository
-      .addXebian(email, firstName, lastName)
-      .then(xebian => xebian.attrs);
+      .addXebian(email, firstName, lastName);
   },
 };

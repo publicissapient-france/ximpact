@@ -13,9 +13,6 @@ const Feedback = new GraphQLObjectType({
     comment: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    impactId: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
   },
 });
 

@@ -1,5 +1,5 @@
 const Impact = require('./type.impact');
-const Repository = require('../repository');
+const Repository = require('../xebian/repository.xebian');
 const {
   GraphQLString,
   GraphQLNonNull,
@@ -22,8 +22,6 @@ module.exports = {
     },
   },
   resolve(obj, { xebianId, customerId, description }) {
-    return Repository
-      .addImpact(xebianId, customerId, description)
-      .then(impact => impact.attrs);
+    return Repository.addImpact(xebianId, customerId, description);
   },
 };

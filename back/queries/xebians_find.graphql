@@ -1,7 +1,17 @@
 {
     xebians {
+        id
         email
         firstName
         lastName
+        impacts {
+            id
+            description
+            xebianId
+            customerId
+            feedbacks {
+                id
+            }
+        }
     }
 }

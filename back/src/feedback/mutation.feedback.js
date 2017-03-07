@@ -1,5 +1,5 @@
 const Feedback = require('./type.feedback');
-const Repository = require('../repository');
+const Repository = require('../xebian/repository.xebian');
 const {
   GraphQLString,
   GraphQLNonNull,
@@ -12,14 +12,16 @@ module.exports = {
       name: 'comment',
       type: new GraphQLNonNull(GraphQLString),
     },
+    xebianId: {
+      name: 'xebianId',
+      type: new GraphQLNonNull(GraphQLString),
+    },
     impactId: {
       name: 'impactId',
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve(obj, { impactId, comment }) {
-    return Repository
-      .addFeedback(impactId, comment)
-      .then(feedback => feedback.attrs);
+  resolve(obj, { xebianId, impactId, comment }) {
+    return Repository.addFeedback(xebianId, impactId, comment);
   },
 };

@@ -1,5 +1,5 @@
 const Customer = require('./type.customer');
-const Repository = require('../repository');
+const Repository = require('./repository.customer');
 const {
   GraphQLList,
 } = require('graphql');

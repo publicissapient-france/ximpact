@@ -1,5 +1,5 @@
 const Customer = require('./type.customer');
-const Repository = require('../repository');
+const Repository = require('./repository.customer');
 const {
   GraphQLString,
   GraphQLNonNull,
@@ -26,8 +26,6 @@ module.exports = {
     },
   },
   resolve(obj, { company, email, firstName, lastName }) {
-    return Repository
-      .addCustomer(company, firstName, lastName, email)
-      .then(customer => customer.attrs);
+    return Repository.addCustomer(company, firstName, lastName, email);
   },
 };

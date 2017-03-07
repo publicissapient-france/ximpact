@@ -2,7 +2,10 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLNonNull,
+  GraphQLList,
 } = require('graphql');
+
+const Impact = require('../impact/type.impact');
 
 const Xebian = new GraphQLObjectType({
   name: 'Xebian',
@@ -18,6 +21,9 @@ const Xebian = new GraphQLObjectType({
     },
     lastName: {
       type: new GraphQLNonNull(GraphQLString),
+    },
+    impacts: {
+      type: new GraphQLList(Impact),
     },
   },
 });

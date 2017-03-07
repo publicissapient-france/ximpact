@@ -1,5 +1,5 @@
 const Xebian = require('./type.xebian');
-const Repository = require('../repository');
+const Repository = require('./repository.xebian');
 const {
   GraphQLList,
 } = require('graphql');
