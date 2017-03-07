@@ -3,4 +3,4 @@ language: node_js
 node_js:
   - "7"
 
-script: cd back && npm i && npm itest && cd ../web && npm i && npm run unit
+script: cd back && npm i && npm run itest && cd ../web && npm i && npm run unit
