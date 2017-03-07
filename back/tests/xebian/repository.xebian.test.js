@@ -1,37 +1,13 @@
+const Database = require('../database');
 const Repository = require('../../src/xebian/repository.xebian');
-const DynamoCustomer = require('../../src/customer/dynamo.customer').DynamoCustomer;
-const DynamoXebian = require('../../src/xebian/dynamo.xebian').DynamoXebian;
-const vogels = require('../../config/vogels');
-const Promise = require('bluebird');
 
 const assert = require('assert');
 const _ = require('lodash');
 
 describe('Xebian Repository', () => {
-  const createTables = (done) => {
-    vogels.createTables({
-      Xebians: {},
-      Customers: {},
-    }, done);
-  };
+  before(Database.createTables);
 
-  const deleteTables = (done) => {
-    const tables = [DynamoCustomer, DynamoXebian];
-    Promise
-      .mapSeries(tables, table => Promise.promisify(table.deleteTable)())
-      .then((deletions) => {
-        deletions.forEach((deletion) => {
-          const description = deletion.TableDescription;
-          console.log(`${description.TableName}: ${description.TableStatus}`);
-        });
-      })
-      .then(done)
-      .catch(done);
-  };
-
-  before(createTables);
-
-  after(deleteTables);
+  after(Database.deleteTables);
 
   it('should add a xebian', (done) => {
     Repository
@@ -72,9 +48,10 @@ describe('Xebian Repository', () => {
       .catch(done);
   });
 
-  it('should find xebians by email', (done) => {
+  it('should find all xebians', (done) => {
     Repository
-      .getXebians()
+      .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
+      .then(() => Repository.getXebians())
       .then((xebians) => {
         assert.deepEqual(_.omit(xebians[0], ['createdAt', 'id', 'impacts', 'updatedAt']),
           {
