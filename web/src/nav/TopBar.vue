@@ -1,8 +1,12 @@
 <template>
   <el-menu theme="dark" class="top-bar" :default-active="active" @select="onItemClick" mode="horizontal">
-    <el-menu-item index="1">Impacts</el-menu-item>
     <el-menu-item index="2">Xebians</el-menu-item>
     <el-menu-item index="3">Clients</el-menu-item>
+    <el-submenu index="1">
+      <template slot="title">Impacts</template>
+      <el-menu-item index="1-1">Créer un impact</el-menu-item>
+      <el-menu-item index="1-2">Liste</el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 
@@ -21,7 +25,10 @@
             this.$router.push('/xebians');
             break;
           case '3':
-            this.$router.push('/clients');
+            this.$router.push('/customers');
+            break;
+          case '1-1':
+            this.$router.push('/impact/creation');
             break;
           default:
             this.$router.push('/impacts');
@@ -34,11 +41,14 @@
         case '/xebians':
           this.active = '2';
           break;
-        case '/clients':
+        case '/customers':
           this.active = '3';
           break;
+        case '/impacts/creation':
+          this.active = '1-1';
+          break;
         default:
-          this.active = '1';
+          this.active = '1-2';
           break;
       }
     },

@@ -8,6 +8,8 @@ export default {
     const graphQuery = encodeURI('{xebians{email,id}customers{email,id}}');
     return GraphService.query(graphQuery)
       .then((response) => {
+        this.customers.length = 0;
+        this.xebians.length = 0;
         _.each(response.customers, customer => this.customers.push(customer));
         _.each(response.xebians, xebian => this.xebians.push(xebian));
       });
