@@ -17,6 +17,10 @@
         prop="lastName"
         label="Prénom">
       </el-table-column>
+      <el-table-column
+        prop="company"
+        label="Entreprise">
+      </el-table-column>
     </el-table>
   </section>
 </template>
