@@ -37,7 +37,7 @@
     methods: {
       goToNewImpact(event) {
         event.preventDefault();
-        this.$router.push('/impact-creation');
+        this.$router.push('/impact/creation');
       },
     },
   };

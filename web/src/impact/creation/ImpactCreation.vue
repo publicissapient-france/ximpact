@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section class="impact-form">
     <h1>Créer un impact</h1>
-    <el-form :model="impactForm" :rules="impactRules" ref="impactForm">
+    <el-form :model="impactForm" :rules="impactRules" ref="impactForm" label-width="120px">
       <el-form-item label="Xebian" prop="xebian">
         <el-autocomplete
           placeholder="Email du Xebian"
@@ -26,20 +26,22 @@
           v-model="impactForm.impact">
         </el-input>
       </el-form-item>
-      <el-button type="primary" @click="onSubmitClick('impactForm')">OK</el-button>
-      <el-button @click="onResetClick('impactForm')">Vider les champs</el-button>
+      <el-row type="flex" class="button" justify="end">
+        <el-button type="primary" @click="onSubmitClick('impactForm')">OK</el-button>
+        <el-button @click="onResetClick('impactForm')">Vider les champs</el-button>
+      </el-row>
     </el-form>
   </section>
 </template>
 
 <script>
   import _ from 'lodash';
-  import ImpactService from './ImpactService';
-  import CustomerService from '../customer/CustomerService';
-  import XebianService from '../xebian/XebianService';
+  import ImpactService from '../ImpactService';
+  import CustomerService from '../../customer/CustomerService';
+  import XebianService from '../../xebian/XebianService';
 
   export default {
-    name: 'ImpactCreation',
+    name: 'impact-creation',
     data() {
       return {
         impactForm: {
@@ -120,7 +122,7 @@
               .then(customer => this.checkXebian()
                 .then(xebian => ImpactService.createImpact(xebian, customer, this.impactForm.impact)))
               .then(() => this.$message({
-                message: 'Impact créée ;) !',
+                message: 'Impact créé ;) !',
                 type: 'success',
               }))
               .then(() => ImpactService.fetchData())
@@ -158,7 +160,19 @@
     },
   };
 </script>
+<style scoped>
+  .impact-form {
+    margin: 15px 10px;
+    padding: 40px 20px 50px;
+    background: #ffffff;
+    border-radius: 3px;
+  }
 
-<style>
+  h1 {
+    margin-bottom: 60px;
+  }
 
+  .button {
+    margin-top: 60px;
+  }
 </style>
