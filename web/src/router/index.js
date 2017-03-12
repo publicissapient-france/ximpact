@@ -18,7 +18,7 @@ export default new Router({
       component: Signin,
     },
     {
-      path: '/impact/creation',
+      path: '/impacts/creation',
       name: 'ImpactCreation',
       component: ImpactCreation,
     },
