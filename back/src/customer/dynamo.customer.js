@@ -20,7 +20,7 @@ const DynamoCustomer = vogels.define('Customer', {
     lastName: Joi.string(),
     company: Joi.string(),
   },
-  tableName: 'Customers',
+  tableName: `${process.env.DynamoTablePrefix}_Customers`,
 });
 
 module.exports = {

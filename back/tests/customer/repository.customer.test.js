@@ -1,3 +1,4 @@
+const assert = require('assert');
 const Repository = require('../../src/customer/repository.customer');
 const _ = require('lodash');
 

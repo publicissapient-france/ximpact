@@ -17,7 +17,7 @@ const DynamoXebian = vogels.define('Xebian', {
     firstName: Joi.string(),
     lastName: Joi.string(),
   },
-  tableName: 'Xebians',
+  tableName: `${process.env.DynamoTablePrefix}_Xebians`,
 });
 
 module.exports = {

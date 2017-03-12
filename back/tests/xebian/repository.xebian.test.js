@@ -1,3 +1,4 @@
+const assert = require('assert');
 const Repository = require('../../src/xebian/repository.xebian');
 
 const _ = require('lodash');

@@ -26,11 +26,17 @@
   "dependencies": {
     "aws-sdk": "^2.22.0",
     "bluebird": "^3.5.0",
+    "cron": "^1.2.1",
+    "email-templates": "^2.4.1",
     "express": "^4.15.0",
     "express-graphql": "^0.6.3",
     "graphql": "^0.9.1",
+    "handlebars": "^4.0.5",
     "joi": "^10.2.2",
     "lodash": "^4.17.4",
+    "nodemailer": "^2.5.0",
+    "nodemailer-ses-transport": "^1.4.0",
+    "require-text": "0.0.1",
     "uuid": "^3.0.1",
     "vogels": "^2.2.0"
   },

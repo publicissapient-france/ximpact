@@ -6,8 +6,8 @@ const Promise = require('bluebird');
 module.exports = {
   createTables: (done) => {
     vogels.createTables({
-      Customers: {},
-      Xebians: {},
+      Customers: { readCapacity: 5, writeCapacity: 10 },
+      Xebians: { readCapacity: 5, writeCapacity: 10 },
     }, done);
   },
 
