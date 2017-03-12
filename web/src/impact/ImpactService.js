@@ -1,14 +1,19 @@
-import Axios from 'axios';
+import _ from 'lodash';
+import GraphService from '../tool/GraphService';
 
 export default {
   customers: [],
   xebians: [],
   fetchData() {
-    const query = encodeURI('{xebians{email}customers{email}}');
-    Axios.post(`http://localhost:4000/graphql?query=${query}`)
+    const graphQuery = encodeURI('{xebians{email,id}customers{email,id}}');
+    return GraphService.query(graphQuery)
       .then((response) => {
-        this.customers.push(response.data.customers);
-        this.xebians.push(response.data.xebians);
+        _.each(response.customers, customer => this.customers.push(customer));
+        _.each(response.xebians, xebian => this.xebians.push(xebian));
       });
+  },
+  createImpact(xebian, customer, impact) {
+    const graphQuery = encodeURI(`mutation{impact(xebianId:"${xebian.id}",customerId:"${customer.id}",description:"${impact}"){id}}`);
+    return GraphService.query(graphQuery);
   },
 };
