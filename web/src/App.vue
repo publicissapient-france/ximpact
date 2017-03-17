@@ -18,7 +18,7 @@
   };
 </script>
 
-<style>
+<style rel="stylesheet/scss" lang="scss">
   body {
     background: #f1f1f1;
     margin: 0;
