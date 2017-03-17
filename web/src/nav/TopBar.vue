@@ -1,5 +1,5 @@
 <template>
-  <el-menu router="true" theme="dark" class="top-bar" :default-active="active" @select="onItemClick" mode="horizontal">
+  <el-menu router theme="dark" class="top-bar" :default-active="active" mode="horizontal">
     <el-menu-item index="/xebians">Xebians</el-menu-item>
     <el-menu-item index="/customers">Clients</el-menu-item>
     <el-menu-item index="/impacts/creation">Créer un impact</el-menu-item>
@@ -8,7 +8,6 @@
 
 <script>
   export default {
-    name: 'top-bar',
     data() {
       return {
         active: this.$route.path,

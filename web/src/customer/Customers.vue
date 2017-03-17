@@ -1,27 +1,29 @@
 <template>
   <section class="customers">
-    <h1>Clients</h1>
-    <el-table
-      :data="customers"
-      border
-      stripe>
-      <el-table-column
-        prop="email"
-        label="Email">
-      </el-table-column>
-      <el-table-column
-        prop="firstName"
-        label="Nom">
-      </el-table-column>
-      <el-table-column
-        prop="lastName"
-        label="Prénom">
-      </el-table-column>
-      <el-table-column
-        prop="company"
-        label="Entreprise">
-      </el-table-column>
-    </el-table>
+    <el-card class="box-card">
+      <h1>Clients</h1>
+      <el-table
+        :data="customers"
+        border
+        stripe>
+        <el-table-column
+          prop="email"
+          label="Email">
+        </el-table-column>
+        <el-table-column
+          prop="firstName"
+          label="Nom">
+        </el-table-column>
+        <el-table-column
+          prop="lastName"
+          label="Prénom">
+        </el-table-column>
+        <el-table-column
+          prop="company"
+          label="Entreprise">
+        </el-table-column>
+      </el-table>
+    </el-card>
   </section>
 </template>
 
@@ -43,7 +45,6 @@
 <style scoped>
   .customers {
     margin: 15px 10px;
-    padding: 40px 20px 50px;
     background: #ffffff;
     border-radius: 3px;
   }

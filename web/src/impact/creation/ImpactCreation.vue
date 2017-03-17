@@ -1,36 +1,38 @@
 <template>
   <section class="impact-form">
-    <h1>Créer un impact</h1>
-    <el-form :model="impactForm" :rules="impactRules" ref="impactForm" label-width="120px">
-      <el-form-item label="Xebian" prop="xebian">
-        <el-autocomplete
-          placeholder="Email du Xebian"
-          :fetch-suggestions="queryXebians"
-          :trigger-on-focus="false"
-          v-model="impactForm.xebian"
-          @select="onSelectXebian"></el-autocomplete>
-      </el-form-item>
-      <el-form-item label="Contact (client)" prop="customer">
-        <el-autocomplete
-          placeholder="Email du contact"
-          :fetch-suggestions="queryCustomers"
-          :trigger-on-focus="false"
-          v-model="impactForm.customer"
-          @select="onSelectCustomer"></el-autocomplete>
-      </el-form-item>
-      <el-form-item label="Impact" prop="impact">
-        <el-input
-          type="textarea"
-          :rows="2"
-          placeholder="Entrez un impact pour le Xebian chez ce Client."
-          v-model="impactForm.impact">
-        </el-input>
-      </el-form-item>
-      <el-row type="flex" class="button" justify="end">
-        <el-button type="primary" @click="onSubmitClick('impactForm')">OK</el-button>
-        <el-button @click="onResetClick('impactForm')">Vider les champs</el-button>
-      </el-row>
-    </el-form>
+    <el-card class="box-card">
+      <h1>Créer un impact</h1>
+      <el-form :model="impactForm" :rules="impactRules" ref="impactForm" label-width="120px">
+        <el-form-item label="Xebian" prop="xebian">
+          <el-autocomplete
+            placeholder="Email du Xebian"
+            :fetch-suggestions="queryXebians"
+            :trigger-on-focus="false"
+            v-model="impactForm.xebian"
+            @select="onSelectXebian"></el-autocomplete>
+        </el-form-item>
+        <el-form-item label="Contact (client)" prop="customer">
+          <el-autocomplete
+            placeholder="Email du contact"
+            :fetch-suggestions="queryCustomers"
+            :trigger-on-focus="false"
+            v-model="impactForm.customer"
+            @select="onSelectCustomer"></el-autocomplete>
+        </el-form-item>
+        <el-form-item label="Impact" prop="impact">
+          <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="Entrez un impact pour le Xebian chez ce Client."
+            v-model="impactForm.impact">
+          </el-input>
+        </el-form-item>
+        <el-row type="flex" class="button" justify="end">
+          <el-button type="primary" @click="onSubmitClick('impactForm')">OK</el-button>
+          <el-button @click="onResetClick('impactForm')">Vider les champs</el-button>
+        </el-row>
+      </el-form>
+    </el-card>
   </section>
 </template>
 
@@ -163,7 +165,6 @@
 <style scoped>
   .impact-form {
     margin: 15px 10px;
-    padding: 40px 20px 50px;
     background: #ffffff;
     border-radius: 3px;
   }

@@ -19,8 +19,9 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
+  $light-grey: #f5f5f5;
   body {
-    background: #f1f1f1;
+    background: $light-grey;
     margin: 0;
     padding: 0;
     font-family: 'Gudea', sans-serif;

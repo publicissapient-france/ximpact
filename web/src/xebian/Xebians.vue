@@ -1,23 +1,26 @@
 <template>
   <section class="xebians">
-    <h1>Xebians</h1>
-    <el-table
-      :data="xebians"
-      border
-      stripe>
-      <el-table-column
-        prop="email"
-        label="Email">
-      </el-table-column>
-      <el-table-column
-        prop="firstName"
-        label="Nom">
-      </el-table-column>
-      <el-table-column
-        prop="lastName"
-        label="Prénom">
-      </el-table-column>
-    </el-table>
+    <el-card class="box-card">
+      <h1>Xebians</h1>
+      <el-table
+        :data="xebians"
+        border
+        stripe
+        @row-click="onRowClick">
+        <el-table-column
+          prop="email"
+          label="Email">
+        </el-table-column>
+        <el-table-column
+          prop="firstName"
+          label="Nom">
+        </el-table-column>
+        <el-table-column
+          prop="lastName"
+          label="Prénom">
+        </el-table-column>
+      </el-table>
+    </el-card>
   </section>
 </template>
 
@@ -30,6 +33,11 @@
         xebians: XebianService.xebians,
       };
     },
+    methods: {
+      onRowClick(xebian) {
+        this.$router.push(`/xebians/${xebian.id}`);
+      },
+    },
     mounted() {
       XebianService.fetchXebians();
     },
@@ -39,7 +47,6 @@
 <style scoped>
   .xebians {
     margin: 15px 10px;
-    padding: 40px 20px 50px;
     background: #ffffff;
     border-radius: 3px;
   }
