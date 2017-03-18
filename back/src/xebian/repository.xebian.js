@@ -97,6 +97,15 @@ module.exports = {
     });
   },
 
+  updateXebian: (id, firstName, lastName, email) =>
+    Promise.promisify(DynamoXebian.update)(
+      {
+        id,
+        firstName,
+        lastName,
+        email,
+      }).then(result => result.attrs),
+
   getXebian
 
 };

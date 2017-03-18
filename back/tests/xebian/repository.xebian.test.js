@@ -19,6 +19,22 @@ describe('Xebian Repository', () => {
       .catch(done);
   });
 
+  it('should update a xebian', (done) => {
+    Repository
+      .addXebian('lfontania@xebia.fr', 'Laxime', 'Fontania')
+      .then((xebian) => Repository.updateXebian(xebian.id, 'Naxime', 'Pontania', 'npontania@zelia.fr'))
+      .then((customer) => {
+        assert.deepEqual(_.omit(customer, ['createdAt', 'updatedAt', 'id']),
+          {
+            email: 'npontania@zelia.fr',
+            firstName: 'Naxime',
+            lastName: 'Pontania',
+          });
+      })
+      .then(done)
+      .catch(done);
+  });
+
   it('should find a xebian by id', (done) => {
     Repository
       .addXebian('psmadja@xebia.fr', 'Pulien', 'Smadja')

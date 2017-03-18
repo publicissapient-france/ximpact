@@ -1,8 +1,0 @@
-mutation {
-    xebian(firstName: "Mark", lastName: "Knopfler", email: "mknopfler@direstraits.com") {
-        id,
-        firstName,
-        lastName,
-        email
-    }
-}

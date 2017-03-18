@@ -46,7 +46,7 @@ describe('GraphQL', () => {
       })
       .then(() => execute(request.post(`${host}/graphql?query`, api.createXebian())))
       .then((res) => {
-        xebian = res.body.data.xebian;
+        xebian = res.body.data.xebian_create;
         assert.deepEqual(_.omit(xebian, ['id']),
           {
             email: 'kcobain@nirvana.com',
