@@ -6,7 +6,7 @@ export default {
   createCustomer(email) {
     const graphQuery = encodeURI(`mutation{customer(email:"${email}",firstName:"a",lastName:"a",company:"a"){id}}`);
     return GraphService.query(graphQuery)
-      .then(response => response.customer);
+      .then(response => response.customer_create);
   },
   fetchCustomers() {
     const graphQuery = encodeURI('{customers{id,email,firstName,lastName, company}}');

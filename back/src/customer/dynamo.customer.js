@@ -11,7 +11,6 @@ const CustomerSchema = {
 
 const DynamoCustomer = vogels.define('Customer', {
   hashKey: 'id',
-  rangeKey: 'email',
   timestamps: true,
   schema: {
     id: vogels.types.uuid(),

@@ -2,7 +2,7 @@ module.exports = {
   createCustomer: () => ({
     query: `
 mutation {
-    customer(firstName: "Mark", lastName: "Knopfler", email: "mknopfler@direstraits.com", company: "Dire Straits") {
+    customer_create(firstName: "Mark", lastName: "Knopfler", email: "mknopfler@direstraits.com", company: "Dire Straits") {
         id,
         firstName,
         lastName,

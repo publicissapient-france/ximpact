@@ -1,5 +1,5 @@
 const xebian = require('./xebian/mutation.xebian');
-const customer = require('./customer/mutation.customer');
+const { customer_create, customer_update } = require('./customer/mutation.customer');
 const impact = require('./impact/mutation.impact');
 const feedback = require('./feedback/mutation.feedback');
 const {
@@ -11,7 +11,8 @@ const mutation = new GraphQLObjectType(
     name: 'Mutation',
     fields: () => ({
       xebian,
-      customer,
+      customer_create,
+      customer_update,
       impact,
       feedback,
     }),

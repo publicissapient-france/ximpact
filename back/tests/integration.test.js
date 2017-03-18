@@ -35,7 +35,7 @@ describe('GraphQL', () => {
     let impact;
     execute(request.post(`${host}/graphql?query`, api.createCustomer()))
       .then((res) => {
-        customer = res.body.data.customer;
+        customer = res.body.data.customer_create;
         assert.deepEqual(_.omit(customer, ['id']),
           {
             company: 'Dire Straits',

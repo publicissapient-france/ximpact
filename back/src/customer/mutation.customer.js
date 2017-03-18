@@ -5,7 +5,7 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 
-module.exports = {
+const customer_create = {
   type: Customer,
   args: {
     email: {
@@ -29,3 +29,35 @@ module.exports = {
     return Repository.addCustomer(company, firstName, lastName, email);
   },
 };
+
+const customer_update = {
+  type: Customer,
+  args: {
+    id: {
+      name: 'id',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    email: {
+      name: 'email',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    firstName: {
+      name: 'firstName',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    lastName: {
+      name: 'lastName',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    company: {
+      name: 'company',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+  },
+  resolve(obj, { id, company, email, firstName, lastName }) {
+    return Repository.getCustomer(id)
+      .then(() => Repository.updateCustomer(id, company, firstName, lastName, email))
+  },
+};
+
+module.exports = { customer_create, customer_update };
