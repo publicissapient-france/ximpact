@@ -47,6 +47,12 @@ yarn run dynamo
 
 > You can open shell at http://localhost:8000/shell/
 
+## Create DynamoDB tables
+
+```shell
+yarn run db:create
+```
+
 ## Update dependencies
 
 ```shell
