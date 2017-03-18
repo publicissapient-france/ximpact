@@ -7,8 +7,6 @@
         impacts {
             id
             description
-            xebianId
-            customerId
             feedbacks {
                 id
             }

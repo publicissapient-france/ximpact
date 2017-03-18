@@ -1,8 +1,6 @@
 mutation {
-    impact(description:"Etre rapide", xebianId:"641dc49c-11bb-4938-a495-de15ca71e545", customerId:"a316bb5e-1519-43b8-900d-c1b813c92d1a") {
+    impact(description:"Etre rapide", xebianId:"1a829269-dd0f-40d1-9c09-8535a29e815d", customerId:"35cc43a8-35bc-4a3e-8419-63c7977c3c9e") {
         id,
-        description,
-        xebianId,
-        customerId
+        description
     }
 }

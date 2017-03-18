@@ -2,11 +2,23 @@ const Promise = require('bluebird');
 const DynamoXebian = require('./dynamo.xebian').DynamoXebian;
 const _ = require('lodash');
 const uuid = require('uuid/v4');
+const moment = require('moment');
 
 const getXebian = xebianId =>
   Promise.promisify(DynamoXebian.get)(xebianId).then(result => result.attrs);
 const updateXebian = xebian =>
   Promise.promisify(DynamoXebian.update)(xebian).then(result => result.attrs);
+
+const shouldBeFeedbacked = impact => {
+  if (impact.feedbacks) {
+    const lastMonthFeedBack = _(impact.feedbacks)
+      .filter(feedback => feedback.createdAt)
+      .filter(feedback => moment(feedback.createdAt).add(1, 'months').isAfter(moment()))
+      .first();
+    return !lastMonthFeedBack;
+  }
+  return true;
+};
 
 module.exports = {
 
@@ -26,6 +38,7 @@ module.exports = {
         const xebianWithImpact = _.assign({ impacts: [] }, xebian);
         impact = {
           id: uuid(),
+          createdAt: new Date().toISOString(),
           description,
         };
         xebianWithImpact.impacts.push(impact);
@@ -35,7 +48,7 @@ module.exports = {
       .then(() => impact);
   },
 
-  addFeedback: (xebianId, impactId, comment) => {
+  addFeedback: (xebianId, impactId, comment, createdAt) => {
     let feedback;
     return getXebian(xebianId)
       .then((xebian) => {
@@ -43,6 +56,7 @@ module.exports = {
         impact.feedbacks = impact.feedbacks || [];
         feedback = {
           id: uuid(),
+          createdAt: createdAt || new Date().toISOString(),
           comment,
         };
         impact.feedbacks.push(feedback);
@@ -61,5 +75,26 @@ module.exports = {
         return resolve(_.map(data.Items, item => item.attrs));
       });
     }),
+
+  getImpactsToFeedback: () => {
+    return new Promise((resolve, reject) => {
+      DynamoXebian
+        .scan()
+        .where('impacts').notNull()
+        .limit(200)
+        .loadAll()
+        .exec((err, data) => {
+          if (err) {
+            return reject(err);
+          }
+          const impacts = _(data.Items)
+            .map(item => item.attrs.impacts)
+            .flatten()
+            .filter(shouldBeFeedbacked)
+            .value();
+          return resolve(impacts);
+        });
+    });
+  }
 
 };

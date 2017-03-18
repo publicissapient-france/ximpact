@@ -1,7 +1,7 @@
 mutation {
-    feedback(comment:"Super Xebian", impactId:"266ed7fe-1b9c-4178-bd45-fdb0cac31f45") {
+    feedback(comment:"Super Xebian", xebianId:"1a829269-dd0f-40d1-9c09-8535a29e815d", impactId:"7793bf0d-0ca5-4602-a5bb-38cbe988c03d") {
         id,
         comment,
-        impactId
+        createdAt
     }
 }

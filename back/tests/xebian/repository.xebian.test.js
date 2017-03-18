@@ -45,15 +45,11 @@ describe('Xebian Repository', () => {
 
   it('should find all xebians', (done) => {
     Repository
-      .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
+      .addXebian('xsmadja@xebia.fr', 'Xulien', 'Smadja')
       .then(() => Repository.getXebians())
       .then((xebians) => {
-        assert.deepEqual(_.omit(xebians[0], ['createdAt', 'id', 'impacts', 'updatedAt']),
-          {
-            email: 'jsmadja@xebia.fr',
-            firstName: 'Julien',
-            lastName: 'Smadja',
-          });
+        const filtered = _(xebians).filter(xebian => xebian.email === 'xsmadja@xebia.fr').value();
+        assert.equal(filtered.length, 1);
       })
       .then(done)
       .catch(done);

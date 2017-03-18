@@ -5,10 +5,8 @@ global.assert = require('assert');
 
 // setup
 before(Database.createTables);
-beforeEach(() => {
-});
+// beforeEach(Database.createTables);
 
 // teardown
 after(Database.deleteTables);
-afterEach(() => {
-});
+// afterEach(Database.deleteTables);

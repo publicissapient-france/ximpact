@@ -13,6 +13,9 @@ const Feedback = new GraphQLObjectType({
     comment: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    createdAt: {
+      type: GraphQLString,
+    },
   },
 });
 
