@@ -19,6 +19,15 @@ describe('Xebian Repository', () => {
       .catch(done);
   });
 
+  it('should find a xebian by id', (done) => {
+    Repository
+      .addXebian('psmadja@xebia.fr', 'Pulien', 'Smadja')
+      .then((xebian) => Repository.getXebian(xebian.id))
+      .then((xebian) => assert.equal(xebian.email, 'psmadja@xebia.fr'))
+      .then(done)
+      .catch(done);
+  });
+
   it('should add an impact', (done) => {
     Repository
       .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')

@@ -1,0 +1,16 @@
+{
+    xebian(id: "2d2890e9-8a04-42d2-9b4a-539050c199c4") {
+        id,
+        firstName,
+        lastName,
+        email,
+        impacts {
+            id,
+            description
+            feedbacks {
+                id,
+                createdAt
+            }
+        }
+    }
+}

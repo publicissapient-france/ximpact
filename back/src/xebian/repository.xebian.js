@@ -95,6 +95,8 @@ module.exports = {
           return resolve(impacts);
         });
     });
-  }
+  },
+
+  getXebian
 
 };

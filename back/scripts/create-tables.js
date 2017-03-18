@@ -1,1 +1,1 @@
-require('../tests/database').createTables(() => {});
+require('../tests/database').createTables(console.log);
