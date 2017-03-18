@@ -1,4 +1,5 @@
 const rp = require('request-promise');
+
 const options = {
   method: 'POST',
   uri: 'http://localhost:4000/graphql',
@@ -92,13 +93,11 @@ query IntrospectionQuery {
       }
     }
   }
-`
+`,
   },
-  json: true // Automatically stringifies the body to JSON
+  json: true,
 };
 
 rp(options)
   .then(parsedBody => console.log(JSON.stringify(parsedBody)))
-  .catch(function (err) {
-    console.error(err);
-  });
+  .catch(console.error);
