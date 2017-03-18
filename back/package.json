@@ -12,6 +12,7 @@
   "author": "Benjamin Lacroix & Julien Smadja",
   "license": "MIT",
   "scripts": {
+    "graphql:update-schema": "node scripts/update-schema.js > ../graphql.schema.json",
     "db:create": "DEV=true DynamoTablePrefix=dev node scripts/create-tables",
     "dev": "DEV=true DynamoTablePrefix=dev nodemon src/index.js",
     "lint": "eslint */**.js",
@@ -38,6 +39,7 @@
     "moment": "^2.17.1",
     "nodemailer": "^2.5.0",
     "nodemailer-ses-transport": "^1.4.0",
+    "request-promise": "^4.2.0",
     "require-text": "0.0.1",
     "uuid": "^3.0.1",
     "vogels": "^2.2.0"
