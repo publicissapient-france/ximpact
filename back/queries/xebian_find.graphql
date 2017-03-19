@@ -1,5 +1,5 @@
 {
-    xebian(id: "2d2890e9-8a04-42d2-9b4a-539050c199c4") {
+    xebian(id: "{{id}}") {
         id
         firstName
         lastName

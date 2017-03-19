@@ -12,7 +12,7 @@ describe('Impact Repository', () => {
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('jsmadja@xebia.fr'))
       .then(xebian => ImpactRepository.addImpact(xebian.id, customerId, 'Etre Moteur'))
-      .then(impact => {
+      .then((impact) => {
         assert.deepEqual(_.pick(impact, ['description']), { description: 'Etre Moteur' });
         assert.equal(impact.customer.id, customerId);
       })

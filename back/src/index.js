@@ -8,8 +8,6 @@ const monthlyFeedback = require('./monthly-feedback/monthly-feedback');
 
 const schema = new GraphQLSchema({ query, mutation });
 
-const root = { hello: () => 'Hello world!' };
-
 const app = express();
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
@@ -18,7 +16,6 @@ app.use((req, res, next) => {
 });
 app.use('/graphql', graphqlHTTP({
   schema,
-  rootValue: root,
   graphiql: true,
 }));
 app.listen(4000, () => console.log('Now browse to http://localhost:4000/graphql'));

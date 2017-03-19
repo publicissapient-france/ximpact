@@ -1,5 +1,5 @@
 {
-    feedback(id: "", customerId:"", xebianId:"", impactId:"") {
+    feedback(id: "{{id}}", customerId:"{{customerId}}", xebianId:"{{xebianId}}", impactId:"{{impactId}}") {
         id,
         comment
         createdAt

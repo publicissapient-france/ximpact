@@ -16,7 +16,7 @@ module.exports = {
         if (err) {
           return reject(err);
         }
-        return resolve(_.map(data.Items, item => item.attrs));
+        return resolve(_.map(data.Items, item => _.omit(item.attrs, ['impacts'])));
       });
     }),
 
@@ -27,7 +27,8 @@ module.exports = {
         firstName,
         lastName,
         email,
-      }).then(result => result.attrs),
+      })
+      .then(result => result.attrs),
 
   updateXebianAllFields: xebian =>
     Promise.promisify(DynamoXebian.update)(xebian).then(result => result.attrs),

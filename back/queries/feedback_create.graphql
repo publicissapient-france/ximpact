@@ -1,7 +1,6 @@
 mutation {
-    feedback_create(comment:"Super Xebian", xebianId:"eb9daaea-87d8-4446-a20b-32b277864c51", impactId:"e741d224-13c8-4aec-a432-8c0ba4b4476e") {
+    feedback_create(xebianId:"{{xebianId}}", impactId:"{{impactId}}") {
         id
-        comment
         createdAt
         impactId
         customerId

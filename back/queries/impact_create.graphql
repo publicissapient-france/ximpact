@@ -1,5 +1,5 @@
 mutation {
-    impact(description: "Etre rapide", xebianId: "eb9daaea-87d8-4446-a20b-32b277864c51", customerId: "3f1c7e50-1317-4d8a-850d-b9f9d005741a") {
+    impact(description: "Etre rapide", xebianId: "{{xebianId}}", customerId: "{{customerId}}") {
         id
         description
         xebianId

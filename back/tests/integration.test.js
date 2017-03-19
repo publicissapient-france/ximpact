@@ -15,20 +15,12 @@ const execute = fn =>
       if (res.body.errors) {
         throw new Error(res.body.errors[0].message);
       }
-      return Promise.resolve(res);
+      return Promise.resolve(res.body.data);
     });
 
-describe('GraphQL', () => {
-  it('should get graphql', (done) => {
-    const graphQLQuery = {
-      query: '{ hello }',
-    };
-    execute(request.get(`${host}/graphql?{hello}`, graphQLQuery))
-      .then(res => assert.deepEqual(res.body, { data: { hello: 'Hello World' } }))
-      .then(done)
-      .catch(done);
-  });
+const graphql = query => execute(request.post(`${host}/graphql?query`, query));
 
+describe('GraphQL', () => {
   it('should do the full process', (done) => {
     let customer;
     let xebian;
@@ -36,21 +28,21 @@ describe('GraphQL', () => {
     let feedback;
 
     // Le commercial rencontre le client et crée sa fiche
-    execute(request.post(`${host}/graphql?query`, api.createCustomer()))
-      .then(res => customer = res.body.data.customer_create)
+    graphql(api.createCustomer())
+      .then(data => customer = data.customer_create)
       .then(() =>
         assert.deepEqual(_.omit(customer, ['id']), { email: 'mknopfler@direstraits.com' }))
 
       // C'est un nouveau Xebian qui sera en mission, il crée également sa fiche
-      .then(() => execute(request.post(`${host}/graphql?query`, api.createXebian())))
-      .then(res => xebian = res.body.data.xebian_create)
-      .then(() => assert.deepEqual(_.pick(xebian, ['email']), { email: 'kcobain@nirvana.com' }))
+      .then(() => graphql(api.createXebian()))
+      .then(data => xebian = data.xebian_create)
+      .then(() => assert.deepEqual(_.pick(xebian, ['email']), { email: 'kurt.cobain@nirvana.com' }))
 
       // Une fois l'impact discuté avec le client et le xebian, on crée l'impact
-      .then(() => execute(request.post(`${host}/graphql?query`, api.createImpact(xebian, customer))))
-      .then(res => impact = res.body.data.impact)
+      .then(() => graphql(api.createImpact(xebian, customer)))
+      .then(data => impact = data.impact)
       .then(() => {
-        assert.deepEqual(_.omit(impact, ['id','customer']), {
+        assert.deepEqual(_.omit(impact, ['id', 'customer']), {
           description: 'Etre rapide',
           xebianId: xebian.id,
         });
@@ -59,8 +51,8 @@ describe('GraphQL', () => {
 
       // Un mois plus tard, le cron crée le feedback et envoie un mail
       // contenant un lien (xebianId, customerId, feedbackId, impactId)
-      .then(() => execute(request.post(`${host}/graphql?query`, api.createFeedback(impact, xebian))))
-      .then(res => feedback = res.body.data.feedback_create)
+      .then(() => graphql(api.createFeedback(impact, xebian)))
+      .then(data => feedback = data.feedback_create)
       .then(() => assert.deepEqual(_.omit(feedback, ['id', 'createdAt']), {
         xebianId: xebian.id,
         customerId: customer.id,
@@ -68,15 +60,35 @@ describe('GraphQL', () => {
       }))
 
       // Le client renseigne son commentaire de feedback
-      .then(() => execute(request.post(`${host}/graphql?query`, api.updateFeedback(impact, xebian, feedback, customer))))
-      .then(res => feedback = res.body.data.feedback_update)
+      .then(() => graphql(api.updateFeedback(impact, xebian, feedback, customer)))
+      .then(data => feedback = data.feedback_update)
       .then(() => assert.deepEqual(_.omit(feedback, ['id', 'createdAt', 'updatedAt']), {
-        comment: 'Excellent mois!',
+        comment: 'OKAY',
         xebianId: xebian.id,
         customerId: customer.id,
         impactId: impact.id,
       }))
-      .then(done)
+
+      // Listes
+      .then(() => graphql(api.getCustomers()))
+      .then(() => graphql(api.getXebians()))
+
+      // ById
+      .then(() => graphql(api.getXebianById(xebian.id)))
+      .then(data => assert.deepEqual(_.omit(data.xebian, ['impacts', 'firstName', 'lastName']), xebian))
+      .then(() => graphql(api.getFeedbackById(feedback.id, impact.id, customer.id, xebian.id)))
+      .then(data => assert.deepEqual(_.omit(data.feedback, ['updatedAt']), _.omit(feedback, ['updatedAt'])))
+      .then(() => graphql(api.getImpactById(impact.id, customer.id, xebian.id)))
+      .then(data => assert.deepEqual(_.omit(data.impact, ['createdAt', 'updatedAt']), _.omit(impact, ['createdAt'])))
+
+      // Updates
+      .then(() => graphql(api.updateXebian(xebian.id)))
+      .then(data => assert.deepEqual(_.omit(data.xebian_update, ['impacts', 'firstName', 'lastName']), xebian))
+
+      .then(() => graphql(api.updateCustomer(customer.id)))
+      .then(data => assert.deepEqual(_.omit(data.customer_update, ['company', 'firstName', 'lastName']), customer))
+
+      .then(() => done())
       .catch(done);
   });
 });

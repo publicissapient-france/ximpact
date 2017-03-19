@@ -1,5 +1,5 @@
 mutation {
-    xebian_update(id: "6e8a2c8d-8b3b-4cfb-9623-5496f07bf691", firstName: "John", lastName: "Mitchel", email: "jmitchel@direstraits.com") {
+    xebian_update(id: "{{id}}", firstName: "Kurt", lastName: "Cobain", email: "kurt.cobain@nirvana.com") {
         id
         firstName
         lastName

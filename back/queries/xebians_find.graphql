@@ -6,30 +6,5 @@
         lastName
         createdAt
         updatedAt
-        impacts {
-            id
-            createdAt
-            updatedAt
-            description
-            customer {
-                id
-                email
-                createdAt
-                updatedAt
-                firstName
-                lastName
-                company
-            }
-            xebianId
-            feedbacks {
-                id
-                comment
-                createdAt
-                updatedAt
-                customerId
-                xebianId
-                impactId
-            }
-        }
     }
 }

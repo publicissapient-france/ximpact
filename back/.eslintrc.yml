@@ -9,3 +9,4 @@ rules:
   no-new: off
   no-return-assign: off
   camelcase: off
+  no-param-reassign: off

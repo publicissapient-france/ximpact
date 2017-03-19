@@ -1,5 +1,5 @@
 mutation {
-    customer_update(id: "6d162652-a029-466d-a44b-74a67c9ecd1e", firstName: "Mark", lastName: "Knopfler", email: "mknopfler@direstraits.com", company: "Dire Straits") {
+    customer_update(id: "{{id}}", firstName: "Mark", lastName: "Knopfler", email: "mknopfler@direstraits.com", company: "Dire Straits") {
         id
         firstName
         lastName
