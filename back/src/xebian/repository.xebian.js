@@ -133,7 +133,7 @@ module.exports = {
             id: xebianId,
             impacts: xebian.impacts,
           })
-          .then(result => result.attrs);
+          .then(() => feedback);
       }),
 
 };

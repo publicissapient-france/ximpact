@@ -8,10 +8,6 @@ const {
 const feedback_create = {
   type: Feedback,
   args: {
-    comment: {
-      name: 'comment',
-      type: GraphQLString,
-    },
     xebianId: {
       name: 'xebianId',
       type: new GraphQLNonNull(GraphQLString),
@@ -21,8 +17,8 @@ const feedback_create = {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve(obj, { xebianId, impactId, comment }) {
-    return Repository.addFeedback(xebianId, impactId, comment);
+  resolve(obj, { xebianId, impactId }) {
+    return Repository.addFeedback(xebianId, impactId);
   },
 };
 

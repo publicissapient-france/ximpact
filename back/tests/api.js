@@ -3,10 +3,10 @@ module.exports = {
     query: `
 mutation {
     customer_create(firstName: "Mark", lastName: "Knopfler", email: "mknopfler@direstraits.com", company: "Dire Straits") {
-        id,
-        firstName,
-        lastName,
-        email,
+        id
+        firstName
+        lastName
+        email
         company
     }
 }
@@ -17,9 +17,9 @@ mutation {
     query: `
 mutation {
     xebian_create(firstName: "Kurt", lastName: "Cobain", email: "kcobain@nirvana.com") {
-        id,
-        firstName,
-        lastName,
+        id
+        firstName
+        lastName
         email
     }
 }
@@ -29,8 +29,10 @@ mutation {
   createImpact: (xebian, customer) => ({
     query: `mutation {
     impact(description:"Etre rapide", xebianId:"${xebian.id}", customerId:"${customer.id}") {
-        id,
+        id
         description
+        xebianId
+        customerId
     }
 }
 `,
@@ -38,8 +40,27 @@ mutation {
 
   createFeedback: (impact, xebian) => ({
     query: `mutation {
-    feedback_create(comment:"Super Xebian", impactId:"${impact.id}", xebianId:"${xebian.id}") {
+    feedback_create(impactId:"${impact.id}", xebianId:"${xebian.id}") {
+        id
+        createdAt
+        xebianId
+        customerId
+        impactId
+    }
+}`,
+  }),
+
+  updateFeedback: (impact, xebian, feedback, customer) => ({
+    query: `mutation {
+    feedback_update(comment:"Excellent mois!", id:"${feedback.id}", impactId:"${impact.id}", xebianId:"${xebian.id}", customerId:"${customer.id}") {
+        id
         comment
+        xebianId
+        customerId
+        impactId
+        createdAt
+        updatedAt
+        
     }
 }`,
   }),
