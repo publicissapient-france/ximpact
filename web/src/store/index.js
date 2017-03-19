@@ -8,9 +8,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     xebian: {
+      id: '',
       firstName: '',
       lastName: '',
       impacts: [],
+    },
+    customer: {
+      id: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      company: '',
     },
   },
   mutations: {
@@ -22,6 +30,10 @@ export default new Vuex.Store({
             feedback.createdAt = moment(feedback.createdAt).format('DD MMMM YYYY');
             return null;
           }));
+    },
+    setCustomer(state, customer) {
+      _.merge(state.customer, customer);
+      return null;
     },
   },
 });

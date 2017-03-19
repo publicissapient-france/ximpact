@@ -5,7 +5,8 @@
       <el-table
         :data="customers"
         border
-        stripe>
+        stripe
+        @row-click="onRowClick">
         <el-table-column
           prop="email"
           label="Email">
@@ -35,6 +36,12 @@
       return {
         customers: CustomerService.customers,
       };
+    },
+    methods: {
+      onRowClick(customer) {
+        this.$store.commit('setCustomer', customer);
+        this.$router.push(`/customers/${customer.id}`);
+      },
     },
     mounted() {
       CustomerService.fetchCustomers();

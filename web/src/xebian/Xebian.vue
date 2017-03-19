@@ -18,14 +18,14 @@
       </el-collapse>
     </el-card>
     <div class="xebian-edition">
-      <xebian-creation></xebian-creation>
+      <xebian-update></xebian-update>
     </div>
   </section>
 </template>
 
 <script>
   import XebianService from './XebianService';
-  import XebianCreation from './creation/XebianCreation';
+  import XebianUpdate from './update/XebianUpdate';
 
   export default {
     data() {
@@ -35,7 +35,7 @@
       };
     },
     components: {
-      'xebian-creation': XebianCreation,
+      'xebian-update': XebianUpdate,
     },
     mounted() {
       XebianService.getXebian(this.$route.params.id, this.$store);

@@ -5,6 +5,7 @@ import ImpactCreation from '../impact/creation/ImpactCreation';
 import Customers from '../customer/Customers';
 import Xebians from '../xebian/Xebians';
 import Xebian from '../xebian/Xebian';
+import Customer from '../customer/Customer';
 
 Vue.use(Router);
 
@@ -23,12 +24,16 @@ export default new Router({
       component: Xebians,
     },
     {
+      path: '/xebians/:id',
+      component: Xebian,
+    },
+    {
       path: '/customers',
       component: Customers,
     },
     {
-      path: '/xebians/:id',
-      component: Xebian,
+      path: '/customers/:id',
+      component: Customer,
     },
   ],
 });

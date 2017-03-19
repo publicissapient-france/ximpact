@@ -3,13 +3,13 @@
     <h1>Éditer {{xebianForm.firstName}} {{xebianForm.lastName}}</h1>
     <el-form :model="xebianForm" :rules="xebianRules" ref="xebianForm" label-width="120px">
       <el-form-item label="Prénom" prop="firstName">
-        <el-input placeholder="Tapez le prénom du Xebian" v-model="xebianForm.firstName"></el-input>
+        <el-input placeholder="Entrez le prénom du Xebian" v-model="xebianForm.firstName"></el-input>
       </el-form-item>
       <el-form-item label="Nom" prop="lastName">
-        <el-input placeholder="Tapez le nom du Xebian" v-model="xebianForm.lastName"></el-input>
+        <el-input placeholder="Entrez le nom du Xebian" v-model="xebianForm.lastName"></el-input>
       </el-form-item>
       <el-form-item label="Email (Xebia)" prop="email">
-        <el-input placeholder="Tapez l'adresse du Xebian" v-model="xebianForm.email"></el-input>
+        <el-input placeholder="Entrez l'adresse du Xebian" v-model="xebianForm.email"></el-input>
       </el-form-item>
       <el-row type="flex" class="button" justify="end">
         <el-button type="primary" @click="onSubmitClick('xebianForm')">OK</el-button>

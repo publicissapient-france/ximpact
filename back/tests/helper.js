@@ -10,3 +10,6 @@ before(Database.createTables);
 // teardown
 after(Database.deleteTables);
 // afterEach(Database.deleteTables);
+// after(Database.deleteTables);
+afterEach(() => {
+});
