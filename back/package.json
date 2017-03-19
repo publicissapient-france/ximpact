@@ -15,7 +15,7 @@
     "graphql:update-schema": "node scripts/update-schema.js > ../graphql.schema.json",
     "db:create": "DEV=true DynamoTablePrefix=dev node scripts/create-tables",
     "dev": "DEV=true DynamoTablePrefix=dev nodemon src/index.js",
-    "lint": "eslint */**.js",
+    "lint": "eslint src tests",
     "lint:watch": "esw -w src tests scripts",
     "pretest": "npm run lint",
     "test": "DEV=true DynamoTablePrefix=tests istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive --timeout 100000",
@@ -47,7 +47,7 @@
   "devDependencies": {
     "coveralls": "2.12.0",
     "eslint": "3.18.0",
-    "eslint-config-airbnb-base": "11.1.1",
+    "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-watch": "3.0.1",
     "istanbul": "^0.4.5",

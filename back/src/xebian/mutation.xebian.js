@@ -44,10 +44,11 @@ const xebian_update = {
     lastName: {
       name: 'lastName',
       type: new GraphQLNonNull(GraphQLString),
-    }
+    },
   },
   resolve(obj, { id, email, firstName, lastName }) {
-    return Repository.getXebian(id).then(() => Repository.updateXebian(id, firstName, lastName, email))
+    return Repository.getXebian(id).then(() =>
+      Repository.updateXebian(id, firstName, lastName, email));
   },
 };
 

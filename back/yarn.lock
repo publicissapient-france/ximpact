@@ -1078,7 +1078,7 @@ eslint:
     text-table "~0.2.0"
     user-home "^2.0.0"
 
-eslint-config-airbnb-base@11.1.1:
+eslint-config-airbnb-base:
   version "11.1.1"
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-11.1.1.tgz#61e9e89e4eb89f474f6913ac817be9fbb59063e0"
 

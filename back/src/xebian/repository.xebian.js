@@ -12,7 +12,7 @@ const getImpact = (xebianId, customerId, impactId) =>
   getXebian(xebianId)
     .then(xebian => _(xebian.impacts).find(i => i.id === impactId && i.customerId === customerId));
 
-const shouldBeFeedbacked = impact => {
+const shouldBeFeedbacked = (impact) => {
   if (impact.feedbacks) {
     const lastMonthFeedBack = _(impact.feedbacks)
       .filter(feedback => feedback.createdAt)
@@ -84,8 +84,8 @@ module.exports = {
       });
     }),
 
-  getImpactsToFeedback: () => {
-    return new Promise((resolve, reject) => {
+  getImpactsToFeedback: () =>
+    new Promise((resolve, reject) => {
       DynamoXebian
         .scan()
         .where('impacts').notNull()
@@ -102,8 +102,7 @@ module.exports = {
             .value();
           return resolve(impacts);
         });
-    });
-  },
+    }),
 
   updateXebian: (id, firstName, lastName, email) =>
     Promise.promisify(DynamoXebian.update)(
@@ -122,8 +121,8 @@ module.exports = {
 
   getImpact,
 
-  updateFeedback: (feedbackId, customerId, xebianId, impactId, comment) => {
-    return getXebian(xebianId)
+  updateFeedback: (feedbackId, customerId, xebianId, impactId, comment) =>
+    getXebian(xebianId)
       .then((xebian) => {
         const feedbacks = _(xebian.impacts).find(i => i.id === impactId).feedbacks;
         const feedback = _(feedbacks).find(f => f.id === feedbackId);
@@ -135,7 +134,6 @@ module.exports = {
             impacts: xebian.impacts,
           })
           .then(result => result.attrs);
-      });
-  },
+      }),
 
 };

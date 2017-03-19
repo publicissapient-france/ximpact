@@ -56,7 +56,7 @@ const customer_update = {
   },
   resolve(obj, { id, company, email, firstName, lastName }) {
     return Repository.getCustomer(id)
-      .then(() => Repository.updateCustomer(id, company, firstName, lastName, email))
+      .then(() => Repository.updateCustomer(id, company, firstName, lastName, email));
   },
 };
 

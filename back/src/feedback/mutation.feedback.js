@@ -52,9 +52,9 @@ const feedback_update = {
   },
   resolve(obj, { id, customerId, xebianId, impactId, comment }) {
     return Repository.getFeedback(xebianId, impactId, customerId, id)
-      .then(feedback => Repository.updateFeedback(id, customerId, xebianId, impactId, comment))
+      .then(() => Repository.updateFeedback(id, customerId, xebianId, impactId, comment));
   },
 };
 
 
-module.exports = {feedback_create, feedback_update};
+module.exports = { feedback_create, feedback_update };

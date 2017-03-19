@@ -3,7 +3,7 @@ const Feedback = require('../feedback/type.feedback');
 const Impact = require('../impact/type.impact');
 const Repository = require('./repository.xebian');
 const {
-  GraphQLList, GraphQLNonNull, GraphQLString
+  GraphQLList, GraphQLNonNull, GraphQLString,
 } = require('graphql');
 
 const xebians = {
@@ -44,7 +44,7 @@ const feedback = {
     impactId: {
       name: 'impactId',
       type: new GraphQLNonNull(GraphQLString),
-    }
+    },
   },
   resolve(obj, { id, customerId, xebianId, impactId }) {
     return Repository.getFeedback(xebianId, impactId, customerId, id);

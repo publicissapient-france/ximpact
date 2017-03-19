@@ -15,7 +15,7 @@ module.exports = {
   send: message =>
     Mail
       .build(message.template, message)
-      .then((result) => sendMail({
+      .then(result => sendMail({
         from: '"Xebia" <ximpact@xebia.fr>',
         to: message.to,
         subject: result.subject,

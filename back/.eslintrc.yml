@@ -7,3 +7,5 @@ env:
 rules:
   no-console: off
   no-new: off
+  no-return-assign: off
+  camelcase: off

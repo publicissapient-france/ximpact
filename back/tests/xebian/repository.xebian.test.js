@@ -22,7 +22,7 @@ describe('Xebian Repository', () => {
   it('should update a xebian', (done) => {
     Repository
       .addXebian('lfontania@xebia.fr', 'Laxime', 'Fontania')
-      .then((xebian) => Repository.updateXebian(xebian.id, 'Naxime', 'Pontania', 'npontania@zelia.fr'))
+      .then(xebian => Repository.updateXebian(xebian.id, 'Naxime', 'Pontania', 'npontania@zelia.fr'))
       .then((customer) => {
         assert.deepEqual(_.omit(customer, ['createdAt', 'updatedAt', 'id']),
           {
@@ -38,8 +38,8 @@ describe('Xebian Repository', () => {
   it('should find a xebian by id', (done) => {
     Repository
       .addXebian('psmadja@xebia.fr', 'Pulien', 'Smadja')
-      .then((xebian) => Repository.getXebian(xebian.id))
-      .then((xebian) => assert.equal(xebian.email, 'psmadja@xebia.fr'))
+      .then(xebian => Repository.getXebian(xebian.id))
+      .then(xebian => assert.equal(xebian.email, 'psmadja@xebia.fr'))
       .then(done)
       .catch(done);
   });
@@ -69,15 +69,18 @@ describe('Xebian Repository', () => {
   });
 
   it('should updated a feedback', (done) => {
-    let xebianId, customerId, impactId, feedbackId;
+    let xebianId;
+    let customerId;
+    let impactId;
+    let feedbackId;
     CustomerRepository
       .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
       .then(() => Repository.addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja'))
       .then(xebian => xebianId = xebian.id)
-      .then(xebian => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
+      .then(() => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
       .then(impact => impactId = impact.id)
-      .then(impact => Repository.addFeedback(xebianId, impactId, 'Super!'))
+      .then(() => Repository.addFeedback(xebianId, impactId, 'Super!'))
       .then(feedback => feedbackId = feedback.id)
       .then(() => Repository.updateFeedback(feedbackId, customerId, xebianId, impactId, 'Ca c est mon comment'))
       .then(() => Repository.getFeedback(xebianId, impactId, customerId, feedbackId))
@@ -99,7 +102,10 @@ describe('Xebian Repository', () => {
   });
 
   it('should get feedback', (done) => {
-    let xebianId, customerId, impactId, feedbackId;
+    let xebianId;
+    let customerId;
+    let impactId;
+    let feedbackId;
     CustomerRepository
       .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
@@ -107,16 +113,18 @@ describe('Xebian Repository', () => {
       .then(xebian => xebianId = xebian.id)
       .then(() => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
       .then(impact => impactId = impact.id)
-      .then(impact => Repository.addFeedback(xebianId, impactId, 'Super!'))
+      .then(() => Repository.addFeedback(xebianId, impactId, 'Super!'))
       .then(feedback => feedbackId = feedback.id)
-      .then(feedback => Repository.getFeedback(xebianId, impactId, customerId, feedbackId))
+      .then(() => Repository.getFeedback(xebianId, impactId, customerId, feedbackId))
       .then(feedback => assert.equal(feedback.comment, 'Super!'))
       .then(done)
       .catch(done);
   });
 
   it('should get impact', (done) => {
-    let xebianId, customerId, impactId;
+    let xebianId;
+    let customerId;
+    let impactId;
     CustomerRepository
       .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
@@ -124,7 +132,7 @@ describe('Xebian Repository', () => {
       .then(xebian => xebianId = xebian.id)
       .then(() => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
       .then(impact => impactId = impact.id)
-      .then(impact => Repository.getImpact(xebianId, customerId, impactId))
+      .then(() => Repository.getImpact(xebianId, customerId, impactId))
       .then(impact => assert.equal(impact.description, 'Faire un BBL par mois'))
       .then(done)
       .catch(done);

@@ -22,8 +22,8 @@ describe('Customer Repository', () => {
   it('should find a customer by id', (done) => {
     Repository
       .addCustomer('My Company', 'Paxime', 'Fontania', 'pfontania@mycompany.com')
-      .then((customer) => Repository.getCustomer(customer.id))
-      .then((customer) => assert.equal(customer.email, 'pfontania@mycompany.com'))
+      .then(customer => Repository.getCustomer(customer.id))
+      .then(customer => assert.equal(customer.email, 'pfontania@mycompany.com'))
       .then(done)
       .catch(done);
   });
@@ -31,7 +31,7 @@ describe('Customer Repository', () => {
   it('should update a customer', (done) => {
     Repository
       .addCustomer('My Company', 'Laxime', 'Fontania', 'lfontania@mycompany.com')
-      .then((customer) => Repository.updateCustomer(customer.id, 'The Company', 'Naxime', 'Pontania', 'npontania@thecompany.com'))
+      .then(customer => Repository.updateCustomer(customer.id, 'The Company', 'Naxime', 'Pontania', 'npontania@thecompany.com'))
       .then((customer) => {
         assert.deepEqual(_.omit(customer, ['createdAt', 'updatedAt', 'id']),
           {
@@ -49,12 +49,8 @@ describe('Customer Repository', () => {
     Repository
       .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
       .then(() => Repository.getCustomers())
-      .then((customers) => {
-        const customer = _(customers).find(customer => customer.email === 'mfontania@mycompany.com');
-        assert.ok(customer);
-      })
+      .then(customers => assert.ok(_(customers).find(customer => customer.email === 'mfontania@mycompany.com')))
       .then(done)
       .catch(done);
   });
-
 });
