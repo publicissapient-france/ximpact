@@ -14,6 +14,7 @@
   "scripts": {
     "graphql:update-schema": "node scripts/update-schema.js > ../graphql.schema.json",
     "db:create": "DEV=true DynamoTablePrefix=dev node scripts/create-tables",
+    "db:reset": "DEV=true DynamoTablePrefix=dev node scripts/drop-tables ; node scripts/create-tables",
     "dev": "DEV=true DynamoTablePrefix=dev nodemon src/index.js",
     "lint": "eslint src tests",
     "lint:watch": "esw -w src tests scripts",

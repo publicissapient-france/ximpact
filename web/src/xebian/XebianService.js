@@ -41,6 +41,10 @@ mutation {
     firstName
     lastName
     impacts {
+      customer {
+        id
+        company
+      }
       description
       feedbacks {
         comment

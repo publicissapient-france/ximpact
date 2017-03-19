@@ -6,7 +6,7 @@
         <el-collapse-item v-for="(impact, key) in xebian.impacts" :key="key" :name="key">
           <template slot="title">
             {{impact.description}}
-            <span style="float: right; margin-right: 10px">Auchan</span>
+            <span style="float: right; margin-right: 10px">{{impact.customer.company}}</span>
           </template>
           <ul>
             <li v-for="(feedback, key) in impact.feedbacks" :key="key">

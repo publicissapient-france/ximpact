@@ -7,6 +7,9 @@
         impacts {
             id
             description
+            customer {
+                id
+            }
             feedbacks {
                 id
                 createdAt
