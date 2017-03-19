@@ -4,6 +4,7 @@ const _ = require('lodash');
 const uuid = require('uuid/v4');
 const moment = require('moment');
 const XebianRepository = require('../xebian/repository.xebian');
+const CustomerRepository = require('../customer/repository.customer');
 
 const getImpact = (xebianId, customerId, impactId) =>
   XebianRepository.getXebian(xebianId)
@@ -42,6 +43,8 @@ module.exports = {
         return xebianWithImpact;
       })
       .then(XebianRepository.updateXebianAllFields)
+      .then(() => CustomerRepository.getCustomer(customerId))
+      .then(customer => impact.customer = customer)
       .then(() => impact);
   },
 

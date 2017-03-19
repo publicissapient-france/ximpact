@@ -6,10 +6,16 @@ const _ = require('lodash');
 
 describe('Impact Repository', () => {
   it('should add an impact', (done) => {
-    XebianRepository
-      .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
-      .then(xebian => ImpactRepository.addImpact(xebian.id, 'customerId', 'Etre Moteur'))
-      .then(xebian => assert.deepEqual(_.pick(xebian, ['description']), { description: 'Etre Moteur' }))
+    let customerId;
+    CustomerRepository
+      .addCustomer('mfontania@mycompany.com')
+      .then(customer => customerId = customer.id)
+      .then(() => XebianRepository.addXebian('jsmadja@xebia.fr'))
+      .then(xebian => ImpactRepository.addImpact(xebian.id, customerId, 'Etre Moteur'))
+      .then(impact => {
+        assert.deepEqual(_.pick(impact, ['description']), { description: 'Etre Moteur' });
+        assert.equal(impact.customer.id, customerId);
+      })
       .then(done)
       .catch(done);
   });

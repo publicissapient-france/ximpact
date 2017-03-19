@@ -11,7 +11,15 @@
             createdAt
             updatedAt
             description
-            customerId
+            customer {
+                id
+                email
+                createdAt
+                updatedAt
+                firstName
+                lastName
+                company
+            }
             xebianId
             feedbacks {
                 id

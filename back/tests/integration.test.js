@@ -49,11 +49,13 @@ describe('GraphQL', () => {
       // Une fois l'impact discuté avec le client et le xebian, on crée l'impact
       .then(() => execute(request.post(`${host}/graphql?query`, api.createImpact(xebian, customer))))
       .then(res => impact = res.body.data.impact)
-      .then(() => assert.deepEqual(_.omit(impact, ['id']), {
-        description: 'Etre rapide',
-        xebianId: xebian.id,
-        customerId: customer.id,
-      }))
+      .then(() => {
+        assert.deepEqual(_.omit(impact, ['id','customer']), {
+          description: 'Etre rapide',
+          xebianId: xebian.id,
+        });
+        assert.equal(impact.customer.id, customer.id);
+      })
 
       // Un mois plus tard, le cron crée le feedback et envoie un mail
       // contenant un lien (xebianId, customerId, feedbackId, impactId)

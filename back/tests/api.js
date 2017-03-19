@@ -27,7 +27,15 @@ mutation {
         id
         description
         xebianId
-        customerId
+        customer {
+          id
+          email
+          createdAt
+          updatedAt
+          firstName
+          lastName
+          company
+        }
     }
 }
 `,

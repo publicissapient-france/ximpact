@@ -5,6 +5,7 @@ const {
   GraphQLList,
 } = require('graphql');
 const Feedback = require('../feedback/type.feedback');
+const Customer = require('../customer/type.customer');
 
 const Impact = new GraphQLObjectType({
   name: 'Impact',
@@ -15,8 +16,8 @@ const Impact = new GraphQLObjectType({
     description: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    customerId: {
-      type: new GraphQLNonNull(GraphQLString),
+    customer: {
+      type: new GraphQLNonNull(Customer),
     },
     xebianId: {
       type: new GraphQLNonNull(GraphQLString),
