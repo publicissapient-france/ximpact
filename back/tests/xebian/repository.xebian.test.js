@@ -1,6 +1,5 @@
 const assert = require('assert');
 const Repository = require('../../src/xebian/repository.xebian');
-const CustomerRepository = require('../../src/customer/repository.customer');
 const _ = require('lodash');
 
 describe('Xebian Repository', () => {
@@ -44,51 +43,6 @@ describe('Xebian Repository', () => {
       .catch(done);
   });
 
-  it('should add an impact', (done) => {
-    Repository
-      .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
-      .then(xebian => Repository.addImpact(xebian.id, 'customerId', 'Faire un BBL par mois'))
-      .then(xebian => assert.deepEqual(_.pick(xebian, ['description']), { description: 'Faire un BBL par mois' }))
-      .then(done)
-      .catch(done);
-  });
-
-  it('should add a feedback', (done) => {
-    let xebianId;
-    Repository
-      .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
-      .then((xebian) => {
-        xebianId = xebian.id;
-        return xebian;
-      })
-      .then(xebian => Repository.addImpact(xebian.id, 'customerId', 'Faire un BBL par mois'))
-      .then(impact => Repository.addFeedback(xebianId, impact.id, 'Super!'))
-      .then(feedback => assert.deepEqual(_.pick(feedback, ['comment']), { comment: 'Super!' }))
-      .then(done)
-      .catch(done);
-  });
-
-  it('should updated a feedback', (done) => {
-    let xebianId;
-    let customerId;
-    let impactId;
-    let feedbackId;
-    CustomerRepository
-      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
-      .then(customer => customerId = customer.id)
-      .then(() => Repository.addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja'))
-      .then(xebian => xebianId = xebian.id)
-      .then(() => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
-      .then(impact => impactId = impact.id)
-      .then(() => Repository.addFeedback(xebianId, impactId, 'Super!'))
-      .then(feedback => feedbackId = feedback.id)
-      .then(() => Repository.updateFeedback(feedbackId, customerId, xebianId, impactId, 'Ca c est mon comment'))
-      .then(() => Repository.getFeedback(xebianId, impactId, customerId, feedbackId))
-      .then(feedback => assert.equal(feedback.comment, 'Ca c est mon comment'))
-      .then(done)
-      .catch(done);
-  });
-
   it('should find all xebians', (done) => {
     Repository
       .addXebian('xsmadja@xebia.fr', 'Xulien', 'Smadja')
@@ -97,43 +51,6 @@ describe('Xebian Repository', () => {
         const filtered = _(xebians).filter(xebian => xebian.email === 'xsmadja@xebia.fr').value();
         assert.equal(filtered.length, 1);
       })
-      .then(done)
-      .catch(done);
-  });
-
-  it('should get feedback', (done) => {
-    let xebianId;
-    let customerId;
-    let impactId;
-    let feedbackId;
-    CustomerRepository
-      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
-      .then(customer => customerId = customer.id)
-      .then(() => Repository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
-      .then(xebian => xebianId = xebian.id)
-      .then(() => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
-      .then(impact => impactId = impact.id)
-      .then(() => Repository.addFeedback(xebianId, impactId, 'Super!'))
-      .then(feedback => feedbackId = feedback.id)
-      .then(() => Repository.getFeedback(xebianId, impactId, customerId, feedbackId))
-      .then(feedback => assert.equal(feedback.comment, 'Super!'))
-      .then(done)
-      .catch(done);
-  });
-
-  it('should get impact', (done) => {
-    let xebianId;
-    let customerId;
-    let impactId;
-    CustomerRepository
-      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
-      .then(customer => customerId = customer.id)
-      .then(() => Repository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
-      .then(xebian => xebianId = xebian.id)
-      .then(() => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
-      .then(impact => impactId = impact.id)
-      .then(() => Repository.getImpact(xebianId, customerId, impactId))
-      .then(impact => assert.equal(impact.description, 'Faire un BBL par mois'))
       .then(done)
       .catch(done);
   });

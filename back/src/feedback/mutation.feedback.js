@@ -1,5 +1,5 @@
 const Feedback = require('./type.feedback');
-const Repository = require('../xebian/repository.xebian');
+const FeedbackRepository = require('../feedback/repository.feedback');
 const {
   GraphQLString,
   GraphQLNonNull,
@@ -18,7 +18,7 @@ const feedback_create = {
     },
   },
   resolve(obj, { xebianId, impactId }) {
-    return Repository.addFeedback(xebianId, impactId);
+    return FeedbackRepository.addFeedback(xebianId, impactId);
   },
 };
 
@@ -47,8 +47,8 @@ const feedback_update = {
     },
   },
   resolve(obj, { id, customerId, xebianId, impactId, comment }) {
-    return Repository.getFeedback(xebianId, impactId, customerId, id)
-      .then(() => Repository.updateFeedback(id, customerId, xebianId, impactId, comment));
+    return FeedbackRepository.getFeedback(xebianId, impactId, customerId, id)
+      .then(() => FeedbackRepository.updateFeedback(id, customerId, xebianId, impactId, comment));
   },
 };
 
