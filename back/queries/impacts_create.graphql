@@ -1,6 +1,0 @@
-mutation {
-    impact(description:"Etre rapide", xebianId:"1a829269-dd0f-40d1-9c09-8535a29e815d", customerId:"35cc43a8-35bc-4a3e-8419-63c7977c3c9e") {
-        id,
-        description
-    }
-}

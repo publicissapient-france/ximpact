@@ -25,6 +25,12 @@ const Xebian = new GraphQLObjectType({
     impacts: {
       type: new GraphQLList(Impact),
     },
+    createdAt: {
+      type: GraphQLString,
+    },
+    updatedAt: {
+      type: GraphQLString,
+    },
   },
 });
 

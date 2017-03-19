@@ -1,0 +1,10 @@
+{
+    impact(customerId:"3f1c7e50-1317-4d8a-850d-b9f9d005741a", xebianId:"eb9daaea-87d8-4446-a20b-32b277864c51", id:"e741d224-13c8-4aec-a432-8c0ba4b4476e") {
+        id
+        description
+        createdAt
+        xebianId
+        customerId
+        updatedAt
+    }
+}

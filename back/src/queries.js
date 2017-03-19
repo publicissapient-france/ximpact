@@ -1,5 +1,5 @@
 const customers = require('./customer/query.customer');
-const { xebians, xebian } = require('./xebian/query.xebian');
+const { xebians, xebian, feedback, impact } = require('./xebian/query.xebian');
 const {
   GraphQLObjectType,
   GraphQLString,
@@ -12,6 +12,8 @@ const query = new GraphQLObjectType(
       customers,
       xebians,
       xebian,
+      feedback,
+      impact,
       hello: {
         type: GraphQLString,
         resolve() {

@@ -1,6 +1,6 @@
 const assert = require('assert');
 const Repository = require('../../src/xebian/repository.xebian');
-
+const CustomerRepository = require('../../src/customer/repository.customer');
 const _ = require('lodash');
 
 describe('Xebian Repository', () => {
@@ -48,7 +48,7 @@ describe('Xebian Repository', () => {
     Repository
       .addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja')
       .then(xebian => Repository.addImpact(xebian.id, 'customerId', 'Faire un BBL par mois'))
-      .then(xebian => assert.deepEqual(_.omit(xebian, ['createdAt', 'updatedAt', 'id']), { description: 'Faire un BBL par mois' }))
+      .then(xebian => assert.deepEqual(_.pick(xebian, ['description']), { description: 'Faire un BBL par mois' }))
       .then(done)
       .catch(done);
   });
@@ -63,7 +63,25 @@ describe('Xebian Repository', () => {
       })
       .then(xebian => Repository.addImpact(xebian.id, 'customerId', 'Faire un BBL par mois'))
       .then(impact => Repository.addFeedback(xebianId, impact.id, 'Super!'))
-      .then(feedback => assert.deepEqual(_.omit(feedback, ['createdAt', 'id']), { comment: 'Super!' }))
+      .then(feedback => assert.deepEqual(_.pick(feedback, ['comment']), { comment: 'Super!' }))
+      .then(done)
+      .catch(done);
+  });
+
+  it('should updated a feedback', (done) => {
+    let xebianId, customerId, impactId, feedbackId;
+    CustomerRepository
+      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
+      .then(customer => customerId = customer.id)
+      .then(() => Repository.addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja'))
+      .then(xebian => xebianId = xebian.id)
+      .then(xebian => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
+      .then(impact => impactId = impact.id)
+      .then(impact => Repository.addFeedback(xebianId, impactId, 'Super!'))
+      .then(feedback => feedbackId = feedback.id)
+      .then(() => Repository.updateFeedback(feedbackId, customerId, xebianId, impactId, 'Ca c est mon comment'))
+      .then(() => Repository.getFeedback(xebianId, impactId, customerId, feedbackId))
+      .then(feedback => assert.equal(feedback.comment, 'Ca c est mon comment'))
       .then(done)
       .catch(done);
   });
@@ -76,6 +94,38 @@ describe('Xebian Repository', () => {
         const filtered = _(xebians).filter(xebian => xebian.email === 'xsmadja@xebia.fr').value();
         assert.equal(filtered.length, 1);
       })
+      .then(done)
+      .catch(done);
+  });
+
+  it('should get feedback', (done) => {
+    let xebianId, customerId, impactId, feedbackId;
+    CustomerRepository
+      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
+      .then(customer => customerId = customer.id)
+      .then(() => Repository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
+      .then(xebian => xebianId = xebian.id)
+      .then(() => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
+      .then(impact => impactId = impact.id)
+      .then(impact => Repository.addFeedback(xebianId, impactId, 'Super!'))
+      .then(feedback => feedbackId = feedback.id)
+      .then(feedback => Repository.getFeedback(xebianId, impactId, customerId, feedbackId))
+      .then(feedback => assert.equal(feedback.comment, 'Super!'))
+      .then(done)
+      .catch(done);
+  });
+
+  it('should get impact', (done) => {
+    let xebianId, customerId, impactId;
+    CustomerRepository
+      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
+      .then(customer => customerId = customer.id)
+      .then(() => Repository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
+      .then(xebian => xebianId = xebian.id)
+      .then(() => Repository.addImpact(xebianId, customerId, 'Faire un BBL par mois'))
+      .then(impact => impactId = impact.id)
+      .then(impact => Repository.getImpact(xebianId, customerId, impactId))
+      .then(impact => assert.equal(impact.description, 'Faire un BBL par mois'))
       .then(done)
       .catch(done);
   });

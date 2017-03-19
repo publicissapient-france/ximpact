@@ -15,8 +15,20 @@ const Impact = new GraphQLObjectType({
     description: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    customerId: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    xebianId: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
     feedbacks: {
       type: new GraphQLList(Feedback),
+    },
+    createdAt: {
+      type: GraphQLString,
+    },
+    updatedAt: {
+      type: GraphQLString,
     },
   },
 });

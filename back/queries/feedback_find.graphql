@@ -1,0 +1,10 @@
+{
+    feedback(id: "", customerId:"", xebianId:"", impactId:"") {
+        id,
+        comment
+        createdAt
+        xebianId
+        customerId
+        impactId
+    }
+}

@@ -1,4 +1,6 @@
 const Xebian = require('./type.xebian');
+const Feedback = require('../feedback/type.feedback');
+const Impact = require('../impact/type.impact');
 const Repository = require('./repository.xebian');
 const {
   GraphQLList, GraphQLNonNull, GraphQLString
@@ -24,4 +26,50 @@ const xebian = {
   },
 };
 
-module.exports = { xebians, xebian };
+const feedback = {
+  type: Feedback,
+  args: {
+    id: {
+      name: 'id',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    customerId: {
+      name: 'customerId',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    xebianId: {
+      name: 'xebianId',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    impactId: {
+      name: 'impactId',
+      type: new GraphQLNonNull(GraphQLString),
+    }
+  },
+  resolve(obj, { id, customerId, xebianId, impactId }) {
+    return Repository.getFeedback(xebianId, impactId, customerId, id);
+  },
+};
+
+const impact = {
+  type: Impact,
+  args: {
+    id: {
+      name: 'id',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    customerId: {
+      name: 'customerId',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    xebianId: {
+      name: 'xebianId',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+  },
+  resolve(obj, { id, customerId, xebianId }) {
+    return Repository.getImpact(xebianId, customerId, id);
+  },
+};
+
+module.exports = { xebians, xebian, feedback, impact };

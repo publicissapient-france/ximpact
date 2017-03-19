@@ -60,7 +60,7 @@ describe('GraphQL', () => {
         assert.deepEqual(_.omit(impact, ['id']), { description: 'Etre rapide' });
       })
       .then(() => execute(request.post(`${host}/graphql?query`, api.createFeedback(impact, xebian))))
-      .then(res => assert.deepEqual(res.body.data.feedback, { comment: 'Super Xebian' }))
+      .then(res => assert.deepEqual(res.body.data.feedback_create, { comment: 'Super Xebian' }))
       .then(done)
       .catch(done);
   });

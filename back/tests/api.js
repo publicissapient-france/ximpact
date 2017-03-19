@@ -38,7 +38,7 @@ mutation {
 
   createFeedback: (impact, xebian) => ({
     query: `mutation {
-    feedback(comment:"Super Xebian", impactId:"${impact.id}", xebianId:"${xebian.id}") {
+    feedback_create(comment:"Super Xebian", impactId:"${impact.id}", xebianId:"${xebian.id}") {
         comment
     }
 }`,

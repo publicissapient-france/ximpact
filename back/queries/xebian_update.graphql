@@ -1,8 +1,8 @@
 mutation {
     xebian_update(id: "6e8a2c8d-8b3b-4cfb-9623-5496f07bf691", firstName: "John", lastName: "Mitchel", email: "jmitchel@direstraits.com") {
-        id,
-        firstName,
-        lastName,
+        id
+        firstName
+        lastName
         email
     }
 }

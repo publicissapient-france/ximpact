@@ -10,10 +10,22 @@ const Feedback = new GraphQLObjectType({
     id: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    comment: {
+    xebianId: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    customerId: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    impactId: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    comment: {
+      type: GraphQLString,
+    },
     createdAt: {
+      type: GraphQLString,
+    },
+    updatedAt: {
       type: GraphQLString,
     },
   },

@@ -22,6 +22,12 @@ const Customer = new GraphQLObjectType({
     lastName: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    createdAt: {
+      type: GraphQLString,
+    },
+    updatedAt: {
+      type: GraphQLString,
+    },
   },
 });
 

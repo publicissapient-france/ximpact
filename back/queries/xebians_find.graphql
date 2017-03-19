@@ -4,11 +4,23 @@
         email
         firstName
         lastName
+        createdAt
+        updatedAt
         impacts {
             id
+            createdAt
+            updatedAt
             description
+            customerId
+            xebianId
             feedbacks {
                 id
+                comment
+                createdAt
+                updatedAt
+                customerId
+                xebianId
+                impactId
             }
         }
     }
