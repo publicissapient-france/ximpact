@@ -7,14 +7,8 @@ const getXebian = xebianId =>
 
 module.exports = {
 
-  addXebian: (email, firstName, lastName) =>
-    Promise.promisify(DynamoXebian.create)(
-      {
-        firstName,
-        lastName,
-        email,
-      })
-      .then(result => result.attrs),
+  addXebian: email =>
+    Promise.promisify(DynamoXebian.create)({ email }).then(result => result.attrs),
 
   getXebians: () =>
     new Promise((resolve, reject) => {

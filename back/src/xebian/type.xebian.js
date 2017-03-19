@@ -17,10 +17,10 @@ const Xebian = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
     },
     firstName: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     lastName: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     impacts: {
       type: new GraphQLList(Impact),

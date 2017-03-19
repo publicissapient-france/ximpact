@@ -11,16 +11,16 @@ const Customer = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
     },
     company: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     email: {
       type: new GraphQLNonNull(GraphQLString),
     },
     firstName: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     lastName: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
     },
     createdAt: {
       type: GraphQLString,

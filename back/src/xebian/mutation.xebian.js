@@ -12,17 +12,9 @@ const xebian_create = {
       name: 'email',
       type: new GraphQLNonNull(GraphQLString),
     },
-    firstName: {
-      name: 'firstName',
-      type: new GraphQLNonNull(GraphQLString),
-    },
-    lastName: {
-      name: 'lastName',
-      type: new GraphQLNonNull(GraphQLString),
-    },
   },
-  resolve(obj, { email, firstName, lastName }) {
-    return Repository.addXebian(email, firstName, lastName);
+  resolve(obj, { email }) {
+    return Repository.addXebian(email);
   },
 };
 

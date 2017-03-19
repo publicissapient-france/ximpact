@@ -13,10 +13,8 @@ mutation {
   createXebian: () => ({
     query: `
 mutation {
-    xebian_create(firstName: "Kurt", lastName: "Cobain", email: "kcobain@nirvana.com") {
+    xebian_create(email: "kcobain@nirvana.com") {
         id
-        firstName
-        lastName
         email
     }
 }

@@ -44,12 +44,7 @@ describe('GraphQL', () => {
       // C'est un nouveau Xebian qui sera en mission, il crée également sa fiche
       .then(() => execute(request.post(`${host}/graphql?query`, api.createXebian())))
       .then(res => xebian = res.body.data.xebian_create)
-      .then(() => assert.deepEqual(_.omit(xebian, ['id']),
-        {
-          email: 'kcobain@nirvana.com',
-          firstName: 'Kurt',
-          lastName: 'Cobain',
-        }))
+      .then(() => assert.deepEqual(_.pick(xebian, ['email']), { email: 'kcobain@nirvana.com' }))
 
       // Une fois l'impact discuté avec le client et le xebian, on crée l'impact
       .then(() => execute(request.post(`${host}/graphql?query`, api.createImpact(xebian, customer))))

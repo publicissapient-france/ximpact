@@ -13,7 +13,7 @@ describe('Feedback Repository', () => {
     CustomerRepository
       .addCustomer('mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
-      .then(() => XebianRepository.addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja'))
+      .then(() => XebianRepository.addXebian('jsmadja@xebia.fr'))
       .then(xebian => xebianId = xebian.id)
       .then(() => ImpactRepository.addImpact(xebianId, customerId, 'Faire compiler un module'))
       .then(impact => impactId = impact.id)
@@ -31,7 +31,7 @@ describe('Feedback Repository', () => {
     CustomerRepository
       .addCustomer('mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
-      .then(() => XebianRepository.addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja'))
+      .then(() => XebianRepository.addXebian('jsmadja@xebia.fr'))
       .then(xebian => xebianId = xebian.id)
       .then(() => ImpactRepository.addImpact(xebianId, customerId, 'Etre proactif'))
       .then(impact => impactId = impact.id)
@@ -52,7 +52,7 @@ describe('Feedback Repository', () => {
     CustomerRepository
       .addCustomer('mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
-      .then(() => XebianRepository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
+      .then(() => XebianRepository.addXebian('bleponge@xebia.fr'))
       .then(xebian => xebianId = xebian.id)
       .then(() => ImpactRepository.addImpact(xebianId, customerId, 'Etre ponctuel'))
       .then(impact => impactId = impact.id)

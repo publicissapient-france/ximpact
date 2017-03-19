@@ -15,7 +15,7 @@ describe('Monthly Feedback', () => {
     let customerId;
     CustomerRepository.addCustomer('jdupont@mycomp.com')
       .then(customer => customerId = customer.id)
-      .then(() => XebianRepository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
+      .then(() => XebianRepository.addXebian('bleponge@xebia.fr'))
       .then(xebian => xebianId = xebian.id)
       .then(() => ImpactRepository.addImpact(xebianId, customerId, 'Faire passer tous les TU'))
       .then(impact => FeedbackRepository.addFeedback(xebianId, impact.id))
@@ -31,7 +31,7 @@ describe('Monthly Feedback', () => {
     let impactId;
     CustomerRepository.addCustomer('jdupont@mycomp.com')
       .then(customer => customerId = customer.id)
-      .then(() => XebianRepository.addXebian('kleponge@xebia.fr', 'Kob', 'Leponge'))
+      .then(() => XebianRepository.addXebian('kleponge@xebia.fr'))
       .then(xebian => xebianId = xebian.id)
       .then(() => ImpactRepository.addImpact(xebianId, customerId, 'Faire passer tous les TI'))
       .then(impact => impactId = impact.id)
@@ -52,7 +52,7 @@ describe('Monthly Feedback', () => {
     const createdAt = moment().subtract(2, 'months').valueOf();
     CustomerRepository.addCustomer('jdupont@mycomp.com')
       .then(customer => customerId = customer.id)
-      .then(() => XebianRepository.addXebian('kleponge@xebia.fr', 'Kob', 'Leponge'))
+      .then(() => XebianRepository.addXebian('kleponge@xebia.fr'))
       .then(xebian => xebianId = xebian.id)
       .then(() => ImpactRepository.addImpact(xebianId, customerId, 'Faire passer tous les TI'))
       .then(impact => impactId = impact.id)
@@ -75,7 +75,7 @@ describe('Monthly Feedback', () => {
     const createdAt = moment().subtract(2, 'months').valueOf();
     CustomerRepository.addCustomer('jdupont@mycomp.com')
       .then(customer => customerId = customer.id)
-      .then(() => XebianRepository.addXebian('kleponge@xebia.fr', 'Kob', 'Leponge'))
+      .then(() => XebianRepository.addXebian('kleponge@xebia.fr'))
       .then(xebian => xebianId = xebian.id)
       .then(() => ImpactRepository.addImpact(xebianId, customerId, 'Faire passer tous les TI'))
       .then(impact => impactId = impact.id)
