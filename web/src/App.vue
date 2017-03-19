@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <top-bar></top-bar>
+    <div v-if="!signin">
+      <top-bar></top-bar>
+    </div>
     <div class="wrapper">
       <router-view></router-view>
     </div>
@@ -8,11 +10,18 @@
 </template>
 
 <script>
-  import TopBar from './nav/TopBar';
+  import 'element-ui/lib/theme-default/index.css';
 
   export default {
-    components: {
-      'top-bar': TopBar,
+    data() {
+      return {
+        signin: false,
+      };
+    },
+    watch: {
+      $route() {
+        this.signin = this.$route.path === '/signin';
+      },
     },
   };
 </script>
