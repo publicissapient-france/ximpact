@@ -11,7 +11,7 @@ describe('Feedback Repository', () => {
     let customerId;
     let impactId;
     CustomerRepository
-      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
+      .addCustomer('mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja'))
       .then(xebian => xebianId = xebian.id)
@@ -29,7 +29,7 @@ describe('Feedback Repository', () => {
     let impactId;
     let feedbackId;
     CustomerRepository
-      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
+      .addCustomer('mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('jsmadja@xebia.fr', 'Julien', 'Smadja'))
       .then(xebian => xebianId = xebian.id)
@@ -50,7 +50,7 @@ describe('Feedback Repository', () => {
     let impactId;
     let feedbackId;
     CustomerRepository
-      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
+      .addCustomer('mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
       .then(xebian => xebianId = xebian.id)

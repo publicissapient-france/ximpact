@@ -19,7 +19,7 @@ describe('Impact Repository', () => {
     let customerId;
     let impactId;
     CustomerRepository
-      .addCustomer('My Company', 'Maxime', 'Fontania', 'mfontania@mycompany.com')
+      .addCustomer('mfontania@mycompany.com')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
       .then(xebian => xebianId = xebian.id)

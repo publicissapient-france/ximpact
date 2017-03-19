@@ -3,14 +3,8 @@ const DynamoCustomer = require('./dynamo.customer').DynamoCustomer;
 const _ = require('lodash');
 
 module.exports = {
-  addCustomer: (company, firstName, lastName, email) =>
-    Promise.promisify(DynamoCustomer.create)(
-      {
-        company,
-        firstName,
-        lastName,
-        email,
-      }).then(result => result.attrs),
+  addCustomer: (email) =>
+    Promise.promisify(DynamoCustomer.create)({ email }).then(result => result.attrs),
 
   updateCustomer: (id, company, firstName, lastName, email) =>
     Promise.promisify(DynamoCustomer.update)(

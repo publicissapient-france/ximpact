@@ -13,7 +13,7 @@ describe('Monthly Feedback', () => {
   it('should return an empty list if feedback has been left less than a month ago', (done) => {
     let xebianId;
     let customerId;
-    CustomerRepository.addCustomer('My comp', 'Jean', 'Dupont', 'jdupont@mycomp.com')
+    CustomerRepository.addCustomer('jdupont@mycomp.com')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('bleponge@xebia.fr', 'Bob', 'Leponge'))
       .then(xebian => xebianId = xebian.id)
@@ -29,7 +29,7 @@ describe('Monthly Feedback', () => {
     let xebianId;
     let customerId;
     let impactId;
-    CustomerRepository.addCustomer('My comp', 'Jean', 'Dupont', 'jdupont@mycomp.com')
+    CustomerRepository.addCustomer('jdupont@mycomp.com')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('kleponge@xebia.fr', 'Kob', 'Leponge'))
       .then(xebian => xebianId = xebian.id)
@@ -50,7 +50,7 @@ describe('Monthly Feedback', () => {
     let customerId;
     let impactId;
     const createdAt = moment().subtract(2, 'months').valueOf();
-    CustomerRepository.addCustomer('My comp', 'Jean', 'Dupont', 'jdupont@mycomp.com')
+    CustomerRepository.addCustomer('jdupont@mycomp.com')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('kleponge@xebia.fr', 'Kob', 'Leponge'))
       .then(xebian => xebianId = xebian.id)
@@ -73,7 +73,7 @@ describe('Monthly Feedback', () => {
     let customerId;
     let impactId;
     const createdAt = moment().subtract(2, 'months').valueOf();
-    CustomerRepository.addCustomer('My comp', 'Jean', 'Dupont', 'jdupont@mycomp.com')
+    CustomerRepository.addCustomer('jdupont@mycomp.com')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('kleponge@xebia.fr', 'Kob', 'Leponge'))
       .then(xebian => xebianId = xebian.id)

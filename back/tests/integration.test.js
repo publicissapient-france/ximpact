@@ -39,13 +39,7 @@ describe('GraphQL', () => {
     execute(request.post(`${host}/graphql?query`, api.createCustomer()))
       .then(res => customer = res.body.data.customer_create)
       .then(() =>
-        assert.deepEqual(_.omit(customer, ['id']),
-          {
-            company: 'Dire Straits',
-            email: 'mknopfler@direstraits.com',
-            firstName: 'Mark',
-            lastName: 'Knopfler',
-          }))
+        assert.deepEqual(_.omit(customer, ['id']), { email: 'mknopfler@direstraits.com' }))
 
       // C'est un nouveau Xebian qui sera en mission, il crée également sa fiche
       .then(() => execute(request.post(`${host}/graphql?query`, api.createXebian())))
