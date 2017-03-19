@@ -11,7 +11,7 @@ export default {
     impacts: [],
   },
   createXebian(email) {
-    const graphQuery = encodeURI(`mutation{xebian_create(email:"${email}",firstName:"a",lastName:"a"){id}}`);
+    const graphQuery = encodeURI(`mutation{xebian_create(email:"${email}"){id}}`);
     return GraphService.query(graphQuery)
       .then(response => response.xebian_create);
   },
