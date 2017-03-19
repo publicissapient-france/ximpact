@@ -44,11 +44,15 @@ mutation {
       customer {
         id
         company
+        firstName
+        lastName
+        email
       }
       description
       feedbacks {
         comment
         createdAt
+        updatedAt
       }
     }
   }

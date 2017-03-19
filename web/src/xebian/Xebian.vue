@@ -11,7 +11,7 @@
           <ul>
             <li v-for="(feedback, key) in impact.feedbacks" :key="key">
               {{feedback.comment}}
-              <span style="float: right">{{feedback.createdAt}}</span>
+              <span style="float: right">complété le <b>{{feedback.updatedAt}}</b> par <b>{{impact.customer.firstName}} {{impact.customer.lastName}}</b></span>
             </li>
           </ul>
         </el-collapse-item>

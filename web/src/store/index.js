@@ -27,7 +27,8 @@ export default new Vuex.Store({
       _.each(state.xebian.impacts,
         impact => _.each(impact.feedbacks,
           (feedback) => {
-            feedback.createdAt = moment(feedback.createdAt).format('DD MMMM YYYY');
+            feedback.createdAt = moment(parseInt(feedback.createdAt, 10)).format('DD MMMM YYYY hh:mm');
+            feedback.updatedAt = moment(parseInt(feedback.updatedAt, 10)).format('DD MMMM YYYY hh:mm');
             return null;
           }));
     },
