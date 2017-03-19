@@ -11,7 +11,6 @@
   import TopBar from './nav/TopBar';
 
   export default {
-    name: 'app',
     components: {
       'top-bar': TopBar,
     },

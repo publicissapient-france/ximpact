@@ -11,27 +11,34 @@
           <ul>
             <li v-for="(feedback, key) in impact.feedbacks" :key="key">
               {{feedback.comment}}
-              <span style="float: right">02/2017</span>
+              <span style="float: right">{{feedback.createdAt}}</span>
             </li>
           </ul>
         </el-collapse-item>
       </el-collapse>
     </el-card>
+    <div class="xebian-edition">
+      <xebian-creation></xebian-creation>
+    </div>
   </section>
 </template>
 
 <script>
   import XebianService from './XebianService';
+  import XebianCreation from './creation/XebianCreation';
 
   export default {
     data() {
       return {
-        xebian: XebianService.xebian,
+        xebian: this.$store.state.xebian,
         activeImpact: 0,
       };
     },
+    components: {
+      'xebian-creation': XebianCreation,
+    },
     mounted() {
-      XebianService.getXebian(this.$route.params.id);
+      XebianService.getXebian(this.$route.params.id, this.$store);
     },
   };
 </script>
@@ -39,8 +46,11 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
   .xebian {
     margin: 15px 10px;
-    background: #ffffff;
     border-radius: 3px;
+  }
+
+  h1 {
+    margin-bottom: 60px;
   }
 
   ul {
@@ -51,5 +61,9 @@
       border-bottom: solid 1px #f0f0f0;
       margin-bottom: 20px;
     }
+  }
+
+  .xebian-edition {
+    margin: 15px 0;
   }
 </style>

@@ -15,6 +15,15 @@ export default {
     return GraphService.query(graphQuery)
       .then(response => response.xebian);
   },
+  updateXebian(xebian) {
+    const graphQuery = encodeURI(`
+mutation {
+  xebian_update(id: "${xebian.id}", email: "${xebian.email}", firstName: "${xebian.firstName}", lastName: "${xebian.lastName}") {
+    id
+  }
+}`);
+    return GraphService.query(graphQuery);
+  },
   fetchXebians() {
     const graphQuery = encodeURI('{xebians{id,email,firstName,lastName}}');
     return GraphService.query(graphQuery)
@@ -23,47 +32,24 @@ export default {
         _.each(response.xebians, x => this.xebians.push(x));
       });
   },
-  getXebian() {
-    // const graphQuery =
-    // return GraphService.query(graphQuery)
-    //   .then((response) => {
-    //     _.merge(this.xebian, response.xebian);
-    //   });
-    _.merge(this.xebian, {
-      id: 'be3b6f58-07db-44ed-8fa3-928ad702f840',
-      email: 'blacroix@xebia.fr',
-      firstName: 'Benjamin',
-      lastName: 'Lacroix',
-      impacts: [
-        {
-          description: 'Faire preuve d\'initiative et accompagner l\'équipe en place.',
-          feedbacks: [
-            {
-              comment: 'Très bien.',
-            },
-            {
-              comment: 'Bien.',
-            },
-            {
-              comment: 'Ok.',
-            },
-          ],
-        },
-        {
-          description: 'Lead de l\'équipe en place',
-          feedbacks: [
-            {
-              comment: 'Très bien.',
-            },
-            {
-              comment: 'Bien.',
-            },
-            {
-              comment: 'Ok.',
-            },
-          ],
-        },
-      ],
-    });
+  getXebian(id, store) {
+    const graphQuery =
+      `{
+  xebian(id: "${id}") {
+    id
+    email
+    firstName
+    lastName
+    impacts {
+      description
+      feedbacks {
+        comment
+        createdAt
+      }
+    }
+  }
+}`;
+    return GraphService.query(graphQuery)
+      .then(response => store.commit('setXebian', response.xebian));
   },
 };
