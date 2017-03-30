@@ -6,6 +6,7 @@ module.exports = {
     console.log('It\'s time to feedback');
     ImpactRepository
       .getImpactsToFeedback()
-      .then(impacts => impacts.forEach(impact => FeedbackRepository.addFeedback(impact.xebianId, impact.id)));
+      .then(impacts =>
+        impacts.forEach(impact => FeedbackRepository.addFeedback(impact.xebianId, impact.id)));
   },
 };

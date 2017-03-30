@@ -1,0 +1,17 @@
+mutation {
+    feedback_comment(id: "{{feedbackId}}", text:"d'accord avec le client!", authorEmail:"jsmadja@xebia.fr", xebianId:"{{xebianId}}", impactId:"{{impactId}}", customerId:"{{customerId}}") {
+        id
+        comment
+        createdAt
+        updatedAt
+        xebianId
+        customerId
+        impactId
+        comments {
+            id
+            text
+            authorEmail
+            createdAt
+        }
+    }
+}

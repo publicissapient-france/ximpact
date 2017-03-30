@@ -2,7 +2,10 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLNonNull,
+  GraphQLList,
 } = require('graphql');
+
+const Comment = require('./type.comment');
 
 const Feedback = new GraphQLObjectType({
   name: 'Feedback',
@@ -27,6 +30,9 @@ const Feedback = new GraphQLObjectType({
     },
     updatedAt: {
       type: GraphQLString,
+    },
+    comments: {
+      type: new GraphQLList(Comment),
     },
   },
 });

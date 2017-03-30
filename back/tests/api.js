@@ -10,6 +10,7 @@ const feedback_find = require('require-text')('../queries/feedback_find.graphql'
 const impact_create = require('require-text')('../queries/impact_create.graphql', require);
 const feedback_create = require('require-text')('../queries/feedback_create.graphql', require);
 const feedback_update = require('require-text')('../queries/feedback_update.graphql', require);
+const feedback_comment = require('require-text')('../queries/feedback_comment.graphql', require);
 
 const Handlebars = require('handlebars');
 
@@ -34,6 +35,15 @@ module.exports = {
 
   updateFeedback: (impact, xebian, feedback, customer) => ({
     query: Handlebars.compile(feedback_update)({
+      impactId: impact.id,
+      xebianId: xebian.id,
+      feedbackId: feedback.id,
+      customerId: customer.id,
+    }),
+  }),
+
+  commentFeedback: (impact, xebian, feedback, customer) => ({
+    query: Handlebars.compile(feedback_comment)({
       impactId: impact.id,
       xebianId: xebian.id,
       feedbackId: feedback.id,

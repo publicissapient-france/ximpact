@@ -69,6 +69,14 @@ describe('GraphQL', () => {
         impactId: impact.id,
       }))
 
+      // Le xebian ajoute un commentaire au feedback
+      .then(() => graphql(api.commentFeedback(impact, xebian, feedback, customer)))
+      .then(data => feedback = data.feedback_comment)
+      .then(() => assert.deepEqual(_.omit(feedback.comments[0], ['id', 'createdAt']), {
+        text: 'd\'accord avec le client!',
+        authorEmail: 'jsmadja@xebia.fr',
+      }))
+
       // Listes
       .then(() => graphql(api.getCustomers()))
       .then(() => graphql(api.getXebians()))
@@ -77,7 +85,7 @@ describe('GraphQL', () => {
       .then(() => graphql(api.getXebianById(xebian.id)))
       .then(data => assert.deepEqual(_.omit(data.xebian, ['impacts', 'firstName', 'lastName']), xebian))
       .then(() => graphql(api.getFeedbackById(feedback.id, impact.id, customer.id, xebian.id)))
-      .then(data => assert.deepEqual(_.omit(data.feedback, ['updatedAt']), _.omit(feedback, ['updatedAt'])))
+      .then(data => assert.deepEqual(_.omit(data.feedback, ['updatedAt']), _.omit(feedback, ['updatedAt', 'comments'])))
       .then(() => graphql(api.getImpactById(impact.id, customer.id, xebian.id)))
       .then(data => assert.deepEqual(_.omit(data.impact, ['createdAt', 'updatedAt']), _.omit(impact, ['createdAt'])))
 
