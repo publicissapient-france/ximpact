@@ -39,18 +39,16 @@ yarn run lint:watch
 yarn run test
 ```
 
-## Start local DynamoDB
+## Start local Postgresql
 
 ```shell
-yarn run dynamo
+yarn run postgresql
 ```
 
-> You can open shell at http://localhost:8000/shell/
-
-## Create DynamoDB tables
+## Create Postgresql tables
 
 ```shell
-yarn run db:create
+yarn run db:migrate:up
 ```
 
 ## Update dependencies
