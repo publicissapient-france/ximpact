@@ -1,38 +1,24 @@
-const Promise = require('bluebird');
-const DynamoXebian = require('./dynamo.xebian').DynamoXebian;
-const _ = require('lodash');
-
-const getXebian = xebianId =>
-  Promise.promisify(DynamoXebian.get)(xebianId).then(result => result.attrs);
+const db = require('../../config/db');
 
 module.exports = {
 
-  addXebian: email =>
-    Promise.promisify(DynamoXebian.create)({ email }).then(result => result.attrs),
+  addXebian: email => db('xebian').returning('*').insert({ email })
+    .then(result => result[0]),
 
-  getXebians: () =>
-    new Promise((resolve, reject) => {
-      DynamoXebian.scan().limit(20).loadAll().exec((err, data) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(_.map(data.Items, item => _.omit(item.attrs, ['impacts'])));
-      });
-    }),
+  getXebians: () => db.select('*').from('xebian'),
 
-  updateXebian: (id, firstName, lastName, email) =>
-    Promise.promisify(DynamoXebian.update)(
-      {
-        id,
-        firstName,
-        lastName,
-        email,
-      })
-      .then(result => result.attrs),
+  updateXebian: (id, firstname, lastname, email) =>
+    db('xebian')
+      .returning('*')
+      .where('id', '=', id)
+      .update({ firstname, lastname, email, updated_at: undefined })
+      .then(result => result[0]),
 
-  updateXebianAllFields: xebian =>
-    Promise.promisify(DynamoXebian.update)(xebian).then(result => result.attrs),
-
-  getXebian,
+  getXebian: id =>
+    db
+      .select()
+      .from('xebian')
+      .where({ id })
+      .then(result => result['0']),
 
 };

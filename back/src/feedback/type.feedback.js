@@ -1,11 +1,10 @@
+const Author = require('./type.author');
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLNonNull,
-  GraphQLList,
 } = require('graphql');
-
-const Comment = require('./type.comment');
+const GraphQLJSON = require('graphql-type-json');
 
 const Feedback = new GraphQLObjectType({
   name: 'Feedback',
@@ -13,26 +12,20 @@ const Feedback = new GraphQLObjectType({
     id: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    xebianId: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
-    customerId: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
-    impactId: {
-      type: new GraphQLNonNull(GraphQLString),
-    },
     comment: {
       type: GraphQLString,
     },
-    createdAt: {
+    badges: {
+      type: GraphQLJSON,
+    },
+    created_at: {
       type: GraphQLString,
     },
-    updatedAt: {
+    updated_at: {
       type: GraphQLString,
     },
-    comments: {
-      type: new GraphQLList(Comment),
+    author: {
+      type: Author,
     },
   },
 });

@@ -1,8 +1,8 @@
 {
     xebian(id: "{{id}}") {
         id
-        firstName
-        lastName
+        firstname
+        lastname
         email
         impacts {
             id
@@ -12,7 +12,10 @@
             }
             feedbacks {
                 id
-                createdAt
+                created_at
+                author {
+                    id
+                }
             }
         }
     }

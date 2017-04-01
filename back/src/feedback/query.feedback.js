@@ -11,21 +11,9 @@ const feedback = {
       name: 'id',
       type: new GraphQLNonNull(GraphQLString),
     },
-    customerId: {
-      name: 'customerId',
-      type: new GraphQLNonNull(GraphQLString),
-    },
-    xebianId: {
-      name: 'xebianId',
-      type: new GraphQLNonNull(GraphQLString),
-    },
-    impactId: {
-      name: 'impactId',
-      type: new GraphQLNonNull(GraphQLString),
-    },
   },
-  resolve(obj, { id, customerId, xebianId, impactId }) {
-    return FeedbackRepository.getFeedback(xebianId, impactId, customerId, id);
+  resolve(obj, { id }) {
+    return FeedbackRepository.getFeedback(id);
   },
 };
 

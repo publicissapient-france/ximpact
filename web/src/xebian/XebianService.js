@@ -6,8 +6,8 @@ export default {
   xebian: {
     id: '',
     email: '',
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     impacts: [],
   },
   createXebian(email) {
@@ -18,14 +18,14 @@ export default {
   updateXebian(xebian) {
     const graphQuery = encodeURI(`
 mutation {
-  xebian_update(id: "${xebian.id}", email: "${xebian.email}", firstName: "${xebian.firstName}", lastName: "${xebian.lastName}") {
+  xebian_update(id: "${xebian.id}", email: "${xebian.email}", firstname: "${xebian.firstname}", lastname: "${xebian.lastname}") {
     id
   }
 }`);
     return GraphService.query(graphQuery);
   },
   fetchXebians() {
-    const graphQuery = encodeURI('{xebians{id,email,firstName,lastName}}');
+    const graphQuery = encodeURI('{xebians{id,email,firstname,lastname}}');
     return GraphService.query(graphQuery)
       .then((response) => {
         this.xebians.length = 0;
@@ -38,21 +38,27 @@ mutation {
   xebian(id: "${id}") {
     id
     email
-    firstName
-    lastName
+    firstname
+    lastname
     impacts {
+      description
       customer {
         id
         company
-        firstName
-        lastName
+        firstname
+        lastname
         email
       }
-      description
       feedbacks {
+        author {
+          id
+          firstname
+          lastname
+        }
         comment
-        createdAt
-        updatedAt
+        badges
+        created_at
+        updated_at
       }
     }
   }

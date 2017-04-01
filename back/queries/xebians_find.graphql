@@ -2,9 +2,9 @@
     xebians {
         id
         email
-        firstName
-        lastName
-        createdAt
-        updatedAt
+        firstname
+        lastname
+        created_at
+        updated_at
     }
 }

@@ -15,7 +15,7 @@ export default {
       });
   },
   createImpact(xebian, customer, impact) {
-    const graphQuery = encodeURI(`mutation{impact(xebianId:"${xebian.id}",customerId:"${customer.id}",description:"${impact}"){id}}`);
+    const graphQuery = encodeURI(`mutation{impact_create(xebianId:"${xebian.id}",customerId:"${customer.id}",description:"${impact}"){id}}`);
     return GraphService.query(graphQuery);
   },
 };

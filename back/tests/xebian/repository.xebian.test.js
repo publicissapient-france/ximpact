@@ -18,11 +18,11 @@ describe('Xebian Repository', () => {
       .addXebian('lfontania@xebia.fr')
       .then(xebian => Repository.updateXebian(xebian.id, 'Naxime', 'Pontania', 'npontania@zelia.fr'))
       .then((customer) => {
-        assert.deepEqual(_.omit(customer, ['createdAt', 'updatedAt', 'id']),
+        assert.deepEqual(_.omit(customer, ['created_at', 'updated_at', 'id']),
           {
             email: 'npontania@zelia.fr',
-            firstName: 'Naxime',
-            lastName: 'Pontania',
+            firstname: 'Naxime',
+            lastname: 'Pontania',
           });
       })
       .then(done)
@@ -42,10 +42,7 @@ describe('Xebian Repository', () => {
     Repository
       .addXebian('xsmadja@xebia.fr')
       .then(() => Repository.getXebians())
-      .then((xebians) => {
-        const filtered = _(xebians).filter(xebian => xebian.email === 'xsmadja@xebia.fr').value();
-        assert.equal(filtered.length, 1);
-      })
+      .then(xebians => assert.equal(xebians.length, 1))
       .then(done)
       .catch(done);
   });

@@ -1,32 +1,17 @@
-const Promise = require('bluebird');
-const DynamoCustomer = require('./dynamo.customer').DynamoCustomer;
-const _ = require('lodash');
+const db = require('../../config/db');
 
 module.exports = {
-  addCustomer: email =>
-    Promise.promisify(DynamoCustomer.create)({ email }).then(result => result.attrs),
+  addCustomer: email => db('customer').returning('*').insert({ email })
+    .then(result => result[0]),
 
-  updateCustomer: (id, company, firstName, lastName, email) =>
-    Promise.promisify(DynamoCustomer.update)(
-      {
-        id,
-        company,
-        firstName,
-        lastName,
-        email,
-      }).then(result => result.attrs),
+  updateCustomer: (id, company, firstname, lastname, email) =>
+    db('customer')
+      .returning('*')
+      .where('id', '=', id)
+      .update({ company, firstname, lastname, email, updated_at: undefined })
+      .then(result => result[0]),
 
-  getCustomers: () =>
-    new Promise((resolve, reject) => {
-      DynamoCustomer.scan().limit(20).loadAll().exec((err, data) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(_.map(data.Items, item => item.attrs));
-      });
-    }),
+  getCustomers: () => db.select('*').from('customer'),
 
-  getCustomer: id =>
-    Promise.promisify(DynamoCustomer.get)(id).then(result => result.attrs),
-
+  getCustomer: id => db.select().from('customer').where({ id }).then(result => result['0']),
 };

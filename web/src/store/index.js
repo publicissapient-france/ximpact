@@ -9,14 +9,14 @@ export default new Vuex.Store({
   state: {
     xebian: {
       id: '',
-      firstName: '',
-      lastName: '',
+      firstname: '',
+      lastname: '',
       impacts: [],
     },
     customer: {
       id: '',
-      firstName: '',
-      lastName: '',
+      firstname: '',
+      lastname: '',
       email: '',
       company: '',
     },
@@ -27,8 +27,8 @@ export default new Vuex.Store({
       _.each(state.xebian.impacts,
         impact => _.each(impact.feedbacks,
           (feedback) => {
-            feedback.createdAt = moment(parseInt(feedback.createdAt, 10)).format('DD MMMM YYYY hh:mm');
-            feedback.updatedAt = moment(parseInt(feedback.updatedAt, 10)).format('DD MMMM YYYY hh:mm');
+            feedback.created_at = moment(feedback.created_at).format('DD MMMM YYYY hh:mm');
+            feedback.updated_at = moment(feedback.updated_at).format('DD MMMM YYYY hh:mm');
             return null;
           }));
     },

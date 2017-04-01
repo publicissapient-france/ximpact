@@ -29,18 +29,18 @@ const xebian_update = {
       name: 'email',
       type: new GraphQLNonNull(GraphQLString),
     },
-    firstName: {
-      name: 'firstName',
+    firstname: {
+      name: 'firstname',
       type: new GraphQLNonNull(GraphQLString),
     },
-    lastName: {
-      name: 'lastName',
+    lastname: {
+      name: 'lastname',
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve(obj, { id, email, firstName, lastName }) {
+  resolve(obj, { id, email, firstname, lastname }) {
     return Repository.getXebian(id).then(() =>
-      Repository.updateXebian(id, firstName, lastName, email));
+      Repository.updateXebian(id, firstname, lastname, email));
   },
 };
 

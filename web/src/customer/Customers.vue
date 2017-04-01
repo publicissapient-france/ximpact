@@ -12,11 +12,11 @@
           label="Email">
         </el-table-column>
         <el-table-column
-          prop="firstName"
+          prop="firstname"
           label="Nom">
         </el-table-column>
         <el-table-column
-          prop="lastName"
+          prop="lastname"
           label="Prénom">
         </el-table-column>
         <el-table-column

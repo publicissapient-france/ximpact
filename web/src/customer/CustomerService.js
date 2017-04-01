@@ -11,14 +11,14 @@ export default {
   updateCustomer(customer) {
     const graphQuery = encodeURI(`
 mutation {
-  customer_update(id: "${customer.id}", email: "${customer.email}", firstName: "${customer.firstName}", lastName: "${customer.lastName}", company: "${customer.company}") {
+  customer_update(id: "${customer.id}", email: "${customer.email}", firstname: "${customer.firstname}", lastname: "${customer.lastname}", company: "${customer.company}") {
     id
   }
 }`);
     return GraphService.query(graphQuery);
   },
   fetchCustomers() {
-    const graphQuery = encodeURI('{customers{id,email,firstName,lastName, company}}');
+    const graphQuery = encodeURI('{customers{id,email,firstname,lastname, company}}');
     return GraphService.query(graphQuery)
       .then((response) => {
         this.customers.length = 0;

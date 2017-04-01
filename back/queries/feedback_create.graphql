@@ -1,9 +1,6 @@
 mutation {
-    feedback_create(xebianId:"{{xebianId}}", impactId:"{{impactId}}") {
+    feedback_create(xebianId:"{{xebianId}}", impactId:"{{impactId}}", comment:"Great") {
         id
-        createdAt
-        impactId
-        customerId
-        xebianId
+        created_at
     }
 }

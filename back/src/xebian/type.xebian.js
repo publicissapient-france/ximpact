@@ -16,19 +16,19 @@ const Xebian = new GraphQLObjectType({
     email: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    firstName: {
+    firstname: {
       type: GraphQLString,
     },
-    lastName: {
+    lastname: {
       type: GraphQLString,
     },
     impacts: {
       type: new GraphQLList(Impact),
     },
-    createdAt: {
+    created_at: {
       type: GraphQLString,
     },
-    updatedAt: {
+    updated_at: {
       type: GraphQLString,
     },
   },

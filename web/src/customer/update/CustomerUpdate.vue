@@ -1,12 +1,12 @@
 <template>
   <el-card class="box-card">
-    <h1>Éditer {{customerForm.firstName}} {{customerForm.lastName}}</h1>
+    <h1>Éditer {{customerForm.firstname}} {{customerForm.lastname}}</h1>
     <el-form :model="customerForm" :rules="customerRules" ref="customerForm" label-width="120px">
-      <el-form-item label="Prénom" prop="firstName">
-        <el-input placeholder="Entrez le prénom du Client" v-model="customerForm.firstName"></el-input>
+      <el-form-item label="Prénom" prop="firstname">
+        <el-input placeholder="Entrez le prénom du Client" v-model="customerForm.firstname"></el-input>
       </el-form-item>
-      <el-form-item label="Nom" prop="lastName">
-        <el-input placeholder="Entrez le nom du Client" v-model="customerForm.lastName"></el-input>
+      <el-form-item label="Nom" prop="lastname">
+        <el-input placeholder="Entrez le nom du Client" v-model="customerForm.lastname"></el-input>
       </el-form-item>
       <el-form-item label="Entreprise" prop="email">
         <el-input placeholder="Entrez l'entreprise du Client" v-model="customerForm.company"></el-input>
@@ -29,14 +29,14 @@
       return {
         customerForm: this.$store.state.customer,
         customerRules: {
-          firstName: [
+          firstname: [
             {
               required: true,
               message: 'Veuillez saisir le prénom du Client',
               trigger: 'blur',
             },
           ],
-          lastName: [
+          lastname: [
             {
               required: true,
               message: 'Veuillez saisir le nom du Client',

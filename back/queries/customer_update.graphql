@@ -1,8 +1,8 @@
 mutation {
-    customer_update(id: "{{id}}", firstName: "Mark", lastName: "Knopfler", email: "mknopfler@direstraits.com", company: "Dire Straits") {
+    customer_update(id: "{{id}}", firstname: "Mark", lastname: "Knopfler", email: "mknopfler@direstraits.com", company: "Dire Straits") {
         id
-        firstName
-        lastName
+        firstname
+        lastname
         email
         company
     }

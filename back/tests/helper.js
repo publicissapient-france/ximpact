@@ -4,12 +4,6 @@ const Database = require('./database');
 global.assert = require('assert');
 
 // setup
-before(Database.createTables);
-// beforeEach(Database.createTables);
+beforeEach(Database.deleteTables);
 
 // teardown
-after(Database.deleteTables);
-// afterEach(Database.deleteTables);
-// after(Database.deleteTables);
-afterEach(() => {
-});

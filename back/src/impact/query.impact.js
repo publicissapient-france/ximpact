@@ -12,18 +12,10 @@ const impact = {
       name: 'id',
       type: new GraphQLNonNull(GraphQLString),
     },
-    customerId: {
-      name: 'customerId',
-      type: new GraphQLNonNull(GraphQLString),
-    },
-    xebianId: {
-      name: 'xebianId',
-      type: new GraphQLNonNull(GraphQLString),
-    },
   },
-  resolve(obj, { id, customerId, xebianId }) {
-    return ImpactRepository.getImpact(xebianId, customerId, id)
-      .then(_impact => CustomerRepository.getCustomer(customerId)
+  resolve(obj, { id }) {
+    return ImpactRepository.getImpact(id)
+      .then(_impact => CustomerRepository.getCustomer(_impact.customer_id)
         .then(customer => _impact.customer = customer)
         .then(() => _impact));
   },

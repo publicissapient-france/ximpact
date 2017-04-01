@@ -1,11 +1,9 @@
 mutation {
-    feedback_update(id: "{{feedbackId}}", comment:"OKAY", customerId:"{{customerId}}", xebianId:"{{xebianId}}", impactId:"{{impactId}}") {
+    feedback_update(id: "{{feedbackId}}", comment: "OKAY", badges: "[]") {
         id
         comment
-        createdAt
-        updatedAt
-        xebianId
-        customerId
-        impactId
+        badges
+        created_at
+        updated_at
     }
 }

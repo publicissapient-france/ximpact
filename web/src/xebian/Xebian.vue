@@ -1,7 +1,7 @@
 <template>
   <section class="xebian">
     <el-card class="box-card">
-      <h1>Xebian / {{xebian.firstName}} {{xebian.lastName}}</h1>
+      <h1>Xebian / {{xebian.firstname}} {{xebian.lastname}}</h1>
       <el-collapse v-model="activeImpact" accordion>
         <el-collapse-item v-for="(impact, key) in xebian.impacts" :key="key" :name="key">
           <template slot="title">
@@ -11,7 +11,7 @@
           <ul>
             <li v-for="(feedback, key) in impact.feedbacks" :key="key">
               {{feedback.comment}}
-              <span style="float: right">complété le <b>{{feedback.updatedAt}}</b> par <b>{{impact.customer.firstName}} {{impact.customer.lastName}}</b></span>
+              <span style="float: right">complété le <b>{{feedback.updated_at}}</b> par <b>{{feedback.author.firstname}} {{feedback.author.lastname}}</b></span>
             </li>
           </ul>
         </el-collapse-item>

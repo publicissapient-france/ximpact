@@ -1,17 +1,7 @@
-const Promise = require('bluebird');
-const DynamoXebian = require('../xebian/dynamo.xebian').DynamoXebian;
-const _ = require('lodash');
-const uuid = require('uuid/v4');
-const XebianRepository = require('../xebian/repository.xebian');
-const ImpactRepository = require('../impact/repository.impact');
-const moment = require('moment');
-const Comment = require('../feedback/comment.model');
+const db = require('../../config/db');
 
-const getFeedback = (xebianId, impactId, customerId, feedbackId) =>
-  ImpactRepository.getImpact(xebianId, customerId, impactId)
-    .then(impact => _(impact.feedbacks).find(f => f.id === feedbackId));
 
-const badges = [
+const reference_badges = [
   {
     id: 'people-first',
     label: 'People First',
@@ -40,58 +30,29 @@ const badges = [
 
 module.exports = {
 
-  addFeedback: (xebianId, impactId, createdAt) => {
-    let feedback;
-    return XebianRepository.getXebian(xebianId)
-      .then((xebian) => {
-        const impact = _(xebian.impacts).filter(_impact => _impact.id === impactId).first();
-        impact.feedbacks = impact.feedbacks || [];
-        feedback = {
-          id: uuid(),
-          createdAt: createdAt || moment().valueOf(),
-          xebianId,
-          customerId: impact.customerId,
-          impactId,
-          badges,
-        };
-        impact.feedbacks.push(feedback);
-        return xebian;
+  getFeedback: id => db.select().from('feedback').where({ id }).then(result => result[0]),
+
+  updateFeedback: (id, comment, badges, customer_id, xebian_id) =>
+    db('feedback')
+      .returning('*')
+      .where('id', '=', id)
+      .update({ customer_id, xebian_id, badges: JSON.stringify(badges), comment })
+      .then(result => result[0]),
+
+  addFeedback: (impact_id, comment, customer_id, xebian_id, created_at, updated_at) =>
+    db('feedback')
+      .returning('*')
+      .insert({
+        impact_id,
+        comment,
+        xebian_id,
+        customer_id,
+        badges: JSON.stringify(reference_badges),
+        created_at,
+        updated_at,
       })
-      .then(XebianRepository.updateXebianAllFields)
-      .then(() => feedback);
-  },
-  getFeedback,
+      .then(result => result[0]),
 
-  updateFeedback: (feedbackId, customerId, xebianId, impactId, comment) =>
-    XebianRepository.getXebian(xebianId)
-      .then((xebian) => {
-        const feedbacks = _(xebian.impacts).find(i => i.id === impactId).feedbacks;
-        const feedback = _(feedbacks).find(f => f.id === feedbackId);
-        feedback.comment = comment;
-        feedback.updatedAt = moment().valueOf();
-        return Promise.promisify(DynamoXebian.update)(
-          {
-            id: xebianId,
-            impacts: xebian.impacts,
-          })
-          .then(() => feedback);
-      }),
-
-  addComment: (feedbackId, xebianId, impactId, text, authorEmail) =>
-    XebianRepository.getXebian(xebianId)
-      .then((xebian) => {
-        const impact = _(xebian.impacts).find(i => i.id === impactId);
-        const feedbacks = impact.feedbacks;
-        const feedback = _(feedbacks).find(f => f.id === feedbackId);
-        feedback.comments = feedback.comments || [];
-        feedback.comments.push(new Comment(text, authorEmail));
-        feedback.updatedAt = moment().valueOf();
-        return Promise.promisify(DynamoXebian.update)(
-          {
-            id: xebianId,
-            impacts: xebian.impacts,
-          })
-          .then(() => feedback);
-      }),
+  getFeedbacksByImpact: impact_id => db.select('*').from('feedback').where({ impact_id }),
 
 };

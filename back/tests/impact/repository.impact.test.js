@@ -14,7 +14,7 @@ describe('Impact Repository', () => {
       .then(xebian => ImpactRepository.addImpact(xebian.id, customerId, 'Etre Moteur'))
       .then((impact) => {
         assert.deepEqual(_.pick(impact, ['description']), { description: 'Etre Moteur' });
-        assert.equal(impact.customer.id, customerId);
+        assert.equal(impact.customer_id, customerId);
       })
       .then(done)
       .catch(done);
@@ -31,7 +31,7 @@ describe('Impact Repository', () => {
       .then(xebian => xebianId = xebian.id)
       .then(() => ImpactRepository.addImpact(xebianId, customerId, 'Etre vaillant'))
       .then(impact => impactId = impact.id)
-      .then(() => ImpactRepository.getImpact(xebianId, customerId, impactId))
+      .then(() => ImpactRepository.getImpact(impactId))
       .then(impact => assert.equal(impact.description, 'Etre vaillant'))
       .then(done)
       .catch(done);

@@ -1,12 +1,12 @@
 <template>
   <el-card class="box-card">
-    <h1>Éditer {{xebianForm.firstName}} {{xebianForm.lastName}}</h1>
+    <h1>Éditer {{xebianForm.firstname}} {{xebianForm.lastname}}</h1>
     <el-form :model="xebianForm" :rules="xebianRules" ref="xebianForm" label-width="120px">
-      <el-form-item label="Prénom" prop="firstName">
-        <el-input placeholder="Entrez le prénom du Xebian" v-model="xebianForm.firstName"></el-input>
+      <el-form-item label="Prénom" prop="firstname">
+        <el-input placeholder="Entrez le prénom du Xebian" v-model="xebianForm.firstname"></el-input>
       </el-form-item>
-      <el-form-item label="Nom" prop="lastName">
-        <el-input placeholder="Entrez le nom du Xebian" v-model="xebianForm.lastName"></el-input>
+      <el-form-item label="Nom" prop="lastname">
+        <el-input placeholder="Entrez le nom du Xebian" v-model="xebianForm.lastname"></el-input>
       </el-form-item>
       <el-form-item label="Email (Xebia)" prop="email">
         <el-input placeholder="Entrez l'adresse du Xebian" v-model="xebianForm.email"></el-input>
@@ -26,14 +26,14 @@
       return {
         xebianForm: this.$store.state.xebian,
         xebianRules: {
-          firstName: [
+          firstname: [
             {
               required: true,
               message: 'Veuillez saisir le prénom du Xebian',
               trigger: 'blur',
             },
           ],
-          lastName: [
+          lastname: [
             {
               required: true,
               message: 'Veuillez saisir le nom du Xebian',

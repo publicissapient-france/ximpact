@@ -4,22 +4,19 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 
-const Comment = new GraphQLObjectType({
-  name: 'Comment',
+const Author = new GraphQLObjectType({
+  name: 'Author',
   fields: {
     id: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    text: {
+    firstname: {
       type: GraphQLString,
     },
-    authorEmail: {
-      type: GraphQLString,
-    },
-    createdAt: {
+    lastname: {
       type: GraphQLString,
     },
   },
 });
 
-module.exports = Comment;
+module.exports = Author;

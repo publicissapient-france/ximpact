@@ -12,12 +12,12 @@ const customer_create = {
       name: 'email',
       type: new GraphQLNonNull(GraphQLString),
     },
-    firstName: {
-      name: 'firstName',
+    firstname: {
+      name: 'firstname',
       type: GraphQLString,
     },
-    lastName: {
-      name: 'lastName',
+    lastname: {
+      name: 'lastname',
       type: GraphQLString,
     },
     company: {
@@ -41,12 +41,12 @@ const customer_update = {
       name: 'email',
       type: new GraphQLNonNull(GraphQLString),
     },
-    firstName: {
-      name: 'firstName',
+    firstname: {
+      name: 'firstname',
       type: new GraphQLNonNull(GraphQLString),
     },
-    lastName: {
-      name: 'lastName',
+    lastname: {
+      name: 'lastname',
       type: new GraphQLNonNull(GraphQLString),
     },
     company: {
@@ -54,9 +54,9 @@ const customer_update = {
       type: new GraphQLNonNull(GraphQLString),
     },
   },
-  resolve(obj, { id, company, email, firstName, lastName }) {
+  resolve(obj, { id, company, email, firstname, lastname }) {
     return Repository.getCustomer(id)
-      .then(() => Repository.updateCustomer(id, company, firstName, lastName, email));
+      .then(() => Repository.updateCustomer(id, company, firstname, lastname, email));
   },
 };
 

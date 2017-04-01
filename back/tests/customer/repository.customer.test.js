@@ -7,7 +7,7 @@ describe('Customer Repository', () => {
     Repository
       .addCustomer('mfontania@mycompany.com')
       .then((customer) => {
-        assert.deepEqual(_.omit(customer, ['createdAt', 'id']),
+        assert.deepEqual(_.pick(customer, ['email']),
           {
             email: 'mfontania@mycompany.com',
           });
@@ -30,12 +30,12 @@ describe('Customer Repository', () => {
       .addCustomer('lfontania@mycompany.com')
       .then(customer => Repository.updateCustomer(customer.id, 'The Company', 'Naxime', 'Pontania', 'npontania@thecompany.com'))
       .then((customer) => {
-        assert.deepEqual(_.omit(customer, ['createdAt', 'updatedAt', 'id']),
+        assert.deepEqual(_.omit(customer, ['created_at', 'updated_at', 'id']),
           {
             company: 'The Company',
             email: 'npontania@thecompany.com',
-            firstName: 'Naxime',
-            lastName: 'Pontania',
+            firstname: 'Naxime',
+            lastname: 'Pontania',
           });
       })
       .then(done)

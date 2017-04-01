@@ -1,10 +1,9 @@
 {
-    feedback(id: "{{id}}", customerId:"{{customerId}}", xebianId:"{{xebianId}}", impactId:"{{impactId}}") {
-        id,
+    feedback(id: "{{id}}") {
+        id
         comment
-        createdAt
-        xebianId
-        customerId
-        impactId
+        badges
+        created_at
+        updated_at
     }
 }

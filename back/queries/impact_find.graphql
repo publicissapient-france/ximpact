@@ -1,18 +1,17 @@
 {
-    impact(customerId:"{{customerId}}", xebianId:"{{xebianId}}", id:"{{id}}") {
+    impact(id:"{{id}}") {
         id
         description
-        createdAt
-        xebianId
+        created_at
         customer {
             id
             company
             email
-            firstName
-            lastName
-            createdAt
-            updatedAt
+            firstname
+            lastname
+            created_at
+            updated_at
         }
-        updatedAt
+        updated_at
     }
 }
