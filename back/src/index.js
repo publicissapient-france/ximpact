@@ -20,4 +20,4 @@ app.use('/graphql', graphqlHTTP({
 }));
 app.listen(4000, () => console.log('Now browse to http://localhost:4000/graphql'));
 
-new CronJob('0 */10 * * * *', monthlyFeedback.sendFeedbackRequest, null, true, 'Europe/Paris');
+new CronJob('* * * * * *', monthlyFeedback.sendFeedbackRequest, null, true, 'Europe/Paris');

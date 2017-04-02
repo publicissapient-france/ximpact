@@ -1,7 +1,7 @@
 const customers = require('./customer/query.customer');
 const { xebians, xebian } = require('./xebian/query.xebian');
 const { impact } = require('./impact/query.impact');
-const { feedback } = require('./feedback/query.feedback');
+const { feedback, feedback_by_token } = require('./feedback/query.feedback');
 const { GraphQLObjectType } = require('graphql');
 
 const query = new GraphQLObjectType(
@@ -12,6 +12,7 @@ const query = new GraphQLObjectType(
       xebians,
       xebian,
       feedback,
+      feedback_by_token,
       impact,
     }),
   });

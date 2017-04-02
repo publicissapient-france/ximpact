@@ -4,6 +4,7 @@ const Promise = require('bluebird');
 const request = require('superagent-promise')(superagent, Promise);
 const _ = require('lodash');
 const api = require('./api');
+const FeedbackRepository = require('../src/feedback/repository.feedback');
 require('../src/index');
 
 const host = 'localhost:4000';
@@ -13,6 +14,7 @@ const execute = fn =>
     .end()
     .then((res) => {
       if (res.body.errors) {
+        console.log(res);
         throw new Error(res.body.errors[0].message);
       }
       return Promise.resolve(res.body.data);
@@ -59,10 +61,14 @@ describe('GraphQL', () => {
         assert.equal(impact.customer.id, customer.id);
       })
       // Un mois plus tard, le cron crée le feedback et envoie un mail
-      // contenant un lien (xebianId, customerId, feedbackId, impactId)
+      // contenant un lien avec un token
       .then(() => graphql(api.createFeedback(impact, xebian)))
       .then(data => feedback = data.feedback_create)
       .then(() => assert.ok(feedback.id))
+
+      .then(() => FeedbackRepository.createToken(feedback))
+      .then(token => graphql(api.getFeedbackByToken(token)))
+      .then(_feedback => assert.equal(feedback.id, _feedback.feedback_by_token.id))
 
       // Le client renseigne son commentaire de feedback
       .then(() => graphql(api.updateFeedback(feedback)))

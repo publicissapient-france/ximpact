@@ -6,8 +6,9 @@ const xebian_update = require('require-text')('../queries/xebian_update.graphql'
 const xebians_find = require('require-text')('../queries/xebians_find.graphql', require);
 const xebian_find = require('require-text')('../queries/xebian_find.graphql', require);
 const impact_find = require('require-text')('../queries/impact_find.graphql', require);
-const feedback_find = require('require-text')('../queries/feedback_find.graphql', require);
 const impact_create = require('require-text')('../queries/impact_create.graphql', require);
+const feedback_find = require('require-text')('../queries/feedback_find.graphql', require);
+const feedback_find_by_token = require('require-text')('../queries/feedback_find_by_token.graphql', require);
 const feedback_create = require('require-text')('../queries/feedback_create.graphql', require);
 const feedback_update = require('require-text')('../queries/feedback_update.graphql', require);
 
@@ -52,12 +53,15 @@ module.exports = {
 
   getXebianById: id => ({ query: Handlebars.compile(xebian_find)({ id }) }),
 
-  getFeedbackById: (id, impactId, customerId, xebianId) => ({
+  getFeedbackById: id => ({
     query: Handlebars.compile(feedback_find)({
       id,
-      impactId,
-      customerId,
-      xebianId,
+    }),
+  }),
+
+  getFeedbackByToken: token => ({
+    query: Handlebars.compile(feedback_find_by_token)({
+      token,
     }),
   }),
 

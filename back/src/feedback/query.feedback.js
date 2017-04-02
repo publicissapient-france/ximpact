@@ -17,4 +17,17 @@ const feedback = {
   },
 };
 
-module.exports = { feedback };
+const feedback_by_token = {
+  type: Feedback,
+  args: {
+    token: {
+      name: 'token',
+      type: new GraphQLNonNull(GraphQLString),
+    },
+  },
+  resolve(obj, { token }) {
+    return FeedbackRepository.getFeedbackByToken(token);
+  },
+};
+
+module.exports = { feedback, feedback_by_token };

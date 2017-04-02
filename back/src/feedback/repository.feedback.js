@@ -32,6 +32,20 @@ module.exports = {
 
   getFeedback: id => db.select().from('feedback').where({ id }).then(result => result[0]),
 
+  createToken: (feedback) => {
+    let created_at = feedback.created_at;
+    if (feedback.created_at instanceof Date) {
+      created_at = feedback.created_at.toISOString();
+    }
+    return `${feedback.id}_${created_at.substring(0, 19)}`;
+  },
+
+  getFeedbackByToken: token =>
+    db.select()
+      .from('feedback')
+      .whereRaw(`id= ${token.split('_')[0]} AND created_at > '${token.split('_')[1]}'`)
+      .then(result => result[0]),
+
   updateFeedback: (id, comment, badges, customer_id, xebian_id) =>
     db('feedback')
       .returning('*')
@@ -50,6 +64,16 @@ module.exports = {
         badges: JSON.stringify(reference_badges),
         created_at,
         updated_at,
+      })
+      .then(result => result[0]),
+
+  createCustomerFeedback: (impact_id, customer_id) =>
+    db('feedback')
+      .returning('*')
+      .insert({
+        impact_id,
+        customer_id,
+        badges: JSON.stringify(reference_badges),
       })
       .then(result => result[0]),
 

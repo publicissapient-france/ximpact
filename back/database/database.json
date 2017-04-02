@@ -1,0 +1,19 @@
+{
+  "dev": {
+    "driver": "postgresql",
+    "user": "postgres",
+    "password": "mysecretpassword",
+    "host": "localhost",
+    "database": "postgres",
+    "multipleStatements": true
+  },
+  "dev2": {
+    "driver": "mysql",
+    "user": "root",
+    "password": "my-secret-pw",
+    "host": "localhost",
+    "database": "impact",
+    "multipleStatements": true
+  },
+  "sql-file": true
+}

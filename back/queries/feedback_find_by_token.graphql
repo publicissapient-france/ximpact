@@ -1,0 +1,10 @@
+{
+    feedback_by_token(token: "{{token}}") {
+        id
+        comment
+        badges
+        created_at
+        updated_at
+        impact_id
+    }
+}

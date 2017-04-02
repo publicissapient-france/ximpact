@@ -8,7 +8,7 @@ describe('Impact Repository', () => {
   it('should add an impact', (done) => {
     let customerId;
     CustomerRepository
-      .addCustomer('mfontania@mycompany.com')
+      .addCustomer('jsmadja+customer@xebia.fr')
       .then(customer => customerId = customer.id)
       .then(() => XebianRepository.addXebian('jsmadja@xebia.fr'))
       .then(xebian => ImpactRepository.addImpact(xebian.id, customerId, 'Etre Moteur'))

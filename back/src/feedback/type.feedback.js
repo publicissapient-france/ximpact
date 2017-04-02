@@ -5,11 +5,15 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 const GraphQLJSON = require('graphql-type-json');
+const GraphQLDate = require('graphql-date');
 
 const Feedback = new GraphQLObjectType({
   name: 'Feedback',
   fields: {
     id: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    impact_id: {
       type: new GraphQLNonNull(GraphQLString),
     },
     comment: {
@@ -19,10 +23,10 @@ const Feedback = new GraphQLObjectType({
       type: GraphQLJSON,
     },
     created_at: {
-      type: GraphQLString,
+      type: GraphQLDate,
     },
     updated_at: {
-      type: GraphQLString,
+      type: GraphQLDate,
     },
     author: {
       type: Author,

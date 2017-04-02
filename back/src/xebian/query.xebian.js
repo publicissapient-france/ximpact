@@ -62,9 +62,7 @@ const xebian = {
     let resultXebian;
     return XebianRepository
       .getXebian(id)
-      .then((_xebian) => {
-        resultXebian = _xebian;
-      })
+      .then(_xebian => resultXebian = _xebian)
       .then(() => attachImpacts(resultXebian))
       .then(() => resultXebian);
   },

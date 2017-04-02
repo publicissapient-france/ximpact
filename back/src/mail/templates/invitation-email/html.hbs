@@ -1,27 +1,15 @@
 {{>header language=language}}
-<h1>Invitation à donner un feedback</h1>
-<p class="ligne"></p>
+<h1>Invitation à donner un feedback à {{xebian.firstname}} {{xebian.lastname}}</h1>
 <p>
-    Bonjour, <b>{{firstname}} {{lastname}}</b>.
+    Bonjour, <b>{{customer.firstname}} {{customer.lastname}}</b>
 </p>
 <p>
-    Pour ce faire, il te suffit de <b>créer ton compte :</b>
+    Nous vous invitons à laisser un feedback à {{xebian.firstname}} {{xebian.lastname}} concernant son impact
+    <pre>{{impact.description}}</pre>
 </p>
-<table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-    <tbody>
-    <tr>
-        <td align="center">
-            <table border="0" cellpadding="0" cellspacing="0">
-                <tbody>
-                <tr>
-                    <td><a href="{{invitation_url}}" target="_blank">Je crée mon compte</a></td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<p>
+    Pourriez-vous vous rendre <a href="https://impact.xebia.fr/feedbacks/{{feedback.token}}">à cette adresse</a>.
+</p>
 <p>
     Pour en savoir plus sur X-Impact, n'hésite pas à consulter <a href="http://impact.xebia.fr">notre site</a>.
 </p>
