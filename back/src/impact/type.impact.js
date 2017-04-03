@@ -6,6 +6,7 @@ const {
 } = require('graphql');
 const Feedback = require('../feedback/type.feedback');
 const Customer = require('../customer/type.customer');
+const GraphQLDate = require('graphql-date');
 
 const Impact = new GraphQLObjectType({
   name: 'Impact',
@@ -26,10 +27,10 @@ const Impact = new GraphQLObjectType({
       type: new GraphQLList(Feedback),
     },
     created_at: {
-      type: GraphQLString,
+      type: GraphQLDate,
     },
     updated_at: {
-      type: GraphQLString,
+      type: GraphQLDate,
     },
   },
 });

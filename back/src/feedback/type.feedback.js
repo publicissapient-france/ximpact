@@ -13,8 +13,8 @@ const Feedback = new GraphQLObjectType({
     id: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    impact_id: {
-      type: new GraphQLNonNull(GraphQLString),
+    impact: {
+      type: GraphQLJSON,
     },
     comment: {
       type: GraphQLString,
@@ -28,7 +28,10 @@ const Feedback = new GraphQLObjectType({
     updated_at: {
       type: GraphQLDate,
     },
-    author: {
+    customer: {
+      type: Author,
+    },
+    xebian: {
       type: Author,
     },
   },

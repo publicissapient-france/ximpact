@@ -6,6 +6,7 @@ const {
 } = require('graphql');
 
 const Impact = require('../impact/type.impact');
+const GraphQLDate = require('graphql-date');
 
 const Xebian = new GraphQLObjectType({
   name: 'Xebian',
@@ -26,10 +27,10 @@ const Xebian = new GraphQLObjectType({
       type: new GraphQLList(Impact),
     },
     created_at: {
-      type: GraphQLString,
+      type: GraphQLDate,
     },
     updated_at: {
-      type: GraphQLString,
+      type: GraphQLDate,
     },
   },
 });

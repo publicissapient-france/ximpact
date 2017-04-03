@@ -3,6 +3,7 @@ const {
   GraphQLString,
   GraphQLNonNull,
 } = require('graphql');
+const GraphQLDate = require('graphql-date');
 
 const Customer = new GraphQLObjectType({
   name: 'Customer',
@@ -23,10 +24,10 @@ const Customer = new GraphQLObjectType({
       type: GraphQLString,
     },
     created_at: {
-      type: GraphQLString,
+      type: GraphQLDate,
     },
     updated_at: {
-      type: GraphQLString,
+      type: GraphQLDate,
     },
   },
 });

@@ -30,11 +30,11 @@ const createAuthor = person => ({
 const attachAuthor = (feedback) => {
   if (feedback.xebian_id) {
     return XebianRepository.getXebian(feedback.xebian_id)
-      .then(xebian => feedback.author = createAuthor(xebian));
+      .then(xebian => feedback.xebian = createAuthor(xebian));
   }
   if (feedback.customer_id) {
     return CustomerRepository.getCustomer(feedback.customer_id)
-      .then(customer => feedback.author = createAuthor(customer));
+      .then(customer => feedback.customer = createAuthor(customer));
   }
   return Promise.resolve();
 };

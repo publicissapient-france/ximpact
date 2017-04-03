@@ -5,5 +5,16 @@
         badges
         created_at
         updated_at
+        impact
+        customer {
+            id
+            firstname
+            lastname
+        }
+        xebian {
+            id
+            firstname
+            lastname
+        }
     }
 }

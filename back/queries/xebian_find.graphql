@@ -13,7 +13,10 @@
             feedbacks {
                 id
                 created_at
-                author {
+                customer {
+                    id
+                }
+                xebian {
                     id
                 }
             }
