@@ -30,6 +30,7 @@
     "aws-sdk": "2.36.0",
     "bluebird": "3.5.0",
     "cron": "1.2.1",
+    "db-migrate": "^0.10.0-beta.20",
     "email-templates": "2.5.4",
     "express": "4.15.2",
     "express-graphql": "0.6.4",
