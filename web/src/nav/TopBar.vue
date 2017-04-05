@@ -2,7 +2,7 @@
   <el-menu router theme="dark" class="top-bar" :default-active="active" mode="horizontal">
     <el-menu-item index="/xebians">Xebians</el-menu-item>
     <el-menu-item index="/customers">Clients</el-menu-item>
-    <el-menu-item index="/impacts/creation">Créer un impact</el-menu-item>
+    <el-menu-item index="/impacts/create">Créer un impact</el-menu-item>
   </el-menu>
 </template>
 

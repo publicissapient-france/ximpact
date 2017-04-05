@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="!signin">
+    <div v-if="topBar">
       <top-bar></top-bar>
     </div>
     <div class="wrapper">
@@ -15,12 +15,12 @@
   export default {
     data() {
       return {
-        signin: false,
+        topBar: true,
       };
     },
     watch: {
       $route() {
-        this.signin = this.$route.path === '/signin';
+        this.topBar = this.$route.path !== '/signin' && this.$route.path !== '/feedbacks';
       },
     },
   };

@@ -20,6 +20,24 @@ export default new Vuex.Store({
       email: '',
       company: '',
     },
+    impact: {
+      id: '',
+      description: '',
+    },
+    feedback: {
+      impact: {
+        id: '',
+        description: '',
+      },
+      customer: {
+        id: '',
+        firstname: '',
+      },
+      xebian: {
+        id: '',
+        firstname: '',
+      },
+    },
   },
   mutations: {
     setXebian(state, xebian) {
@@ -34,6 +52,10 @@ export default new Vuex.Store({
     },
     setCustomer(state, customer) {
       _.merge(state.customer, customer);
+      return null;
+    },
+    setFeedback(state, feedback) {
+      _.merge(state.feedback, feedback);
       return null;
     },
   },

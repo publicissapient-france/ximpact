@@ -3,7 +3,8 @@ import Router from 'vue-router';
 import store from 'store';
 
 import Signin from '../signin/Signin';
-import ImpactCreation from '../impact/creation/ImpactCreation';
+import ImpactCreate from '../impact/create/ImpactCreate';
+import FeedbackUpdate from '../feedback/update/FeedbackUpdate';
 import Customers from '../customer/Customers';
 import Xebians from '../xebian/Xebians';
 import Xebian from '../xebian/Xebian';
@@ -22,8 +23,8 @@ const router = new Router({
       component: Signin,
     },
     {
-      path: '/impacts/creation',
-      component: ImpactCreation,
+      path: '/impacts/create',
+      component: ImpactCreate,
     },
     {
       path: '/xebians',
@@ -40,6 +41,10 @@ const router = new Router({
     {
       path: '/customers/:id',
       component: Customer,
+    },
+    {
+      path: '/feedbacks/:id',
+      component: FeedbackUpdate,
     },
   ],
 });

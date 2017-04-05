@@ -40,27 +40,6 @@ mutation {
     email
     firstname
     lastname
-    impacts {
-      description
-      customer {
-        id
-        company
-        firstname
-        lastname
-        email
-      }
-      feedbacks {
-        author {
-          id
-          firstname
-          lastname
-        }
-        comment
-        badges
-        created_at
-        updated_at
-      }
-    }
   }
 }`;
     return GraphService.query(graphQuery)
