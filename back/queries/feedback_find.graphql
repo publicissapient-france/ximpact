@@ -5,7 +5,12 @@
         badges
         created_at
         updated_at
-        impact
+        impact {
+            id
+            description
+            created_at
+            updated_at
+        }
         customer {
             id
             firstname

@@ -1,4 +1,5 @@
 const Author = require('./type.author');
+const ImpactInfo = require('../impact/type.impact.info');
 const {
   GraphQLObjectType,
   GraphQLString,
@@ -14,7 +15,7 @@ const Feedback = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
     },
     impact: {
-      type: GraphQLJSON,
+      type: ImpactInfo,
     },
     comment: {
       type: GraphQLString,

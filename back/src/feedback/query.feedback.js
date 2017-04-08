@@ -39,7 +39,16 @@ const feedback_by_token = {
     },
   },
   resolve(obj, { token }) {
-    return FeedbackRepository.getFeedbackByToken(token);
+    let dbFeedback;
+    return FeedbackRepository.getFeedbackByToken(token)
+      .then(_feedback => dbFeedback = _feedback)
+      .then(() => ImpactRepository.getImpact(dbFeedback.impact_id))
+      .then(impact => dbFeedback.impact = impact)
+      .then(() => CustomerRepository.getCustomer(dbFeedback.customer_id))
+      .then(customer => dbFeedback.customer = customer)
+      .then(() => XebianRepository.getXebian(dbFeedback.xebian_id))
+      .then(xebian => dbFeedback.xebian = xebian)
+      .then(() => dbFeedback);
   },
 };
 

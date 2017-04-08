@@ -8,12 +8,14 @@ const MailService = require('../mail/mail.service');
 const createAndSendFeedback = (impact) => {
   let customer;
   let xebian;
+  let feedback;
   return FeedbackRepository.createCustomerFeedback(impact.id, impact.customer_id)
+    .then(_feedback => feedback = _feedback)
     .then(() => CustomerRepository.getCustomer(impact.customer_id))
     .then(_customer => customer = _customer)
     .then(() => XebianRepository.getXebian(impact.xebian_id))
     .then(_xebian => xebian = _xebian)
-    .then((feedback) => {
+    .then(() => {
       feedback.token = FeedbackRepository.createToken(feedback);
       return MailService.send({ to: customer.email, feedback, customer, xebian, impact, template: 'invitation-email' });
     });
