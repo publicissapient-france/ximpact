@@ -19,10 +19,10 @@
     "lint": "eslint src tests",
     "lint:watch": "esw -w src tests scripts",
     "pretest": "npm run lint && npm run db:migrate:reset",
-    "test": "DEV=true istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive --timeout 100000",
-    "itest": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive --timeout 100000",
+    "test": "DEV=true istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive --bail",
+    "itest": "istanbul --include-all-sources cover ./node_modules/mocha/bin/_mocha -- -R spec tests --recursive",
     "posttest": "istanbul report clover",
-    "coverage": "DEV=true istanbul --include-all-sources cover mocha --report lcovonly -- --timeout 100000 --recursive -R spec tests && cat ./coverage/lcov.info | coveralls",
+    "coverage": "DEV=true istanbul --include-all-sources cover mocha --report lcovonly -- --recursive -R spec tests && cat ./coverage/lcov.info | coveralls",
     "npm-check": "npm-check -E -u",
     "postgresql": "docker run -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres"
   },

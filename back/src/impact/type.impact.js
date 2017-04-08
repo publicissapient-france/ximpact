@@ -6,6 +6,7 @@ const {
 } = require('graphql');
 const Feedback = require('../feedback/type.feedback');
 const Customer = require('../customer/type.customer');
+const XebianInfo = require('../xebian/type.xebian.info');
 const GraphQLDate = require('graphql-date');
 
 const Impact = new GraphQLObjectType({
@@ -17,8 +18,8 @@ const Impact = new GraphQLObjectType({
     description: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    xebian_id: {
-      type: new GraphQLNonNull(GraphQLString),
+    xebian: {
+      type: new GraphQLNonNull(XebianInfo),
     },
     customer: {
       type: new GraphQLNonNull(Customer),

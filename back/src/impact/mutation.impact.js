@@ -1,6 +1,7 @@
 const Impact = require('./type.impact');
 const ImpactRepository = require('../impact/repository.impact');
 const CustomerRepository = require('../customer/repository.customer');
+const XebianRepository = require('../xebian/repository.xebian');
 const {
   GraphQLString,
   GraphQLNonNull,
@@ -28,6 +29,8 @@ module.exports = {
       .then(_impact => impact = _impact)
       .then(() => CustomerRepository.getCustomer(customerId))
       .then(customer => impact.customer = customer)
+      .then(() => XebianRepository.getXebian(impact.xebian_id))
+      .then(xebian => impact.xebian = xebian)
       .then(() => impact);
   },
 };

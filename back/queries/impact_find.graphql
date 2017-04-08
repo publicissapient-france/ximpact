@@ -12,6 +12,12 @@
             created_at
             updated_at
         }
+        xebian {
+            id
+            firstname
+            lastname
+            email
+        }
         updated_at
     }
 }

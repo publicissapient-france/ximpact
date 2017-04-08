@@ -54,11 +54,9 @@ describe('GraphQL', () => {
       .then(() => graphql(api.createImpact(xebian, customer)))
       .then(data => impact = data.impact_create)
       .then(() => {
-        assert.deepEqual(_.omit(impact, ['id', 'customer']), {
-          description: 'Etre rapide',
-          xebian_id: xebian.id,
-        });
+        assert.deepEqual(_.omit(impact, ['id', 'customer', 'xebian']), { description: 'Etre rapide' });
         assert.equal(impact.customer.id, customer.id);
+        assert.equal(impact.xebian.id, xebian.id);
       })
       // Un mois plus tard, le cron crée le feedback et envoie un mail
       // contenant un lien avec un token
@@ -77,29 +75,29 @@ describe('GraphQL', () => {
         comment: 'OKAY',
       }))
 
-       // Le xebian ajoute un commentaire au feedback
-       .then(() => graphql(api.addFeedback(impact, xebian)))
-       .then(data => feedback = data.feedback_create)
-       .then(() => assert.ok(feedback.id))
+      // Le xebian ajoute un commentaire au feedback
+      .then(() => graphql(api.addFeedback(impact, xebian)))
+      .then(data => feedback = data.feedback_create)
+      .then(() => assert.ok(feedback.id))
 
-       // Listes
-       .then(() => graphql(api.getCustomers()))
-       .then(() => graphql(api.getXebians()))
+      // Listes
+      .then(() => graphql(api.getCustomers()))
+      .then(() => graphql(api.getXebians()))
 
-       // ById
-       .then(() => graphql(api.getXebianById(xebian.id)))
-       .then(data => assert.deepEqual(_.omit(data.xebian, ['impacts', 'firstname', 'lastname']), xebian))
-       .then(() => graphql(api.getFeedbackById(feedback.id, impact.id, customer.id, xebian.id)))
-       .then(data => assert.deepEqual(_.pick(data.feedback, ['id']), _.pick(feedback, ['id'])))
-       .then(() => graphql(api.getImpactById(impact.id, customer.id, xebian.id)))
-       .then(data => assert.deepEqual(_.pick(data.impact, ['id']), _.pick(impact, ['id'])))
+      // ById
+      .then(() => graphql(api.getXebianById(xebian.id)))
+      .then(data => assert.deepEqual(_.omit(data.xebian, ['impacts', 'firstname', 'lastname']), xebian))
+      .then(() => graphql(api.getFeedbackById(feedback.id, impact.id, customer.id, xebian.id)))
+      .then(data => assert.deepEqual(_.pick(data.feedback, ['id']), _.pick(feedback, ['id'])))
+      .then(() => graphql(api.getImpactById(impact.id, customer.id, xebian.id)))
+      .then(data => assert.deepEqual(_.pick(data.impact, ['id']), _.pick(impact, ['id'])))
 
-       // Updates
-       .then(() => graphql(api.updateXebian(xebian.id)))
-       .then(data => assert.deepEqual(_.omit(data.xebian_update, ['impacts', 'firstname', 'lastname']), xebian))
+      // Updates
+      .then(() => graphql(api.updateXebian(xebian.id)))
+      .then(data => assert.deepEqual(_.omit(data.xebian_update, ['impacts', 'firstname', 'lastname']), xebian))
 
-       .then(() => graphql(api.updateCustomer(customer.id)))
-       .then(data => assert.deepEqual(_.omit(data.customer_update, ['company', 'firstname', 'lastname']), customer))
+      .then(() => graphql(api.updateCustomer(customer.id)))
+      .then(data => assert.deepEqual(_.omit(data.customer_update, ['company', 'firstname', 'lastname']), customer))
 
       .then(() => done())
       .catch(done);

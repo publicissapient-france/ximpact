@@ -2,7 +2,14 @@ mutation {
     impact_create(description: "Etre rapide", xebianId: "{{xebianId}}", customerId: "{{customerId}}") {
         id
         description
-        xebian_id
+        xebian {
+            id
+            email
+            created_at
+            updated_at
+            firstname
+            lastname
+        }
         customer {
             id
             email
