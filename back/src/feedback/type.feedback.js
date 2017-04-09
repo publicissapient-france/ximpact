@@ -15,6 +15,9 @@ const Feedback = new GraphQLObjectType({
     id: {
       type: new GraphQLNonNull(GraphQLString),
     },
+    token: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
     impact: {
       type: ImpactInfo,
     },

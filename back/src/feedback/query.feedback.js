@@ -30,7 +30,10 @@ const feedback = {
       .then(customer => dbFeedback.customer = customer)
       .then(() => XebianRepository.getXebian(dbFeedback.impact.xebian_id))
       .then(xebian => dbFeedback.xebian = xebian)
-      .then(() => dbFeedback);
+      .then(() => {
+        dbFeedback.token = FeedbackRepository.createToken(dbFeedback);
+        return dbFeedback;
+      });
   },
 };
 
@@ -52,7 +55,10 @@ const feedback_by_token = {
       .then(customer => dbFeedback.customer = customer)
       .then(() => XebianRepository.getXebian(dbFeedback.impact.xebian_id))
       .then(xebian => dbFeedback.xebian = xebian)
-      .then(() => dbFeedback);
+      .then(() => {
+        dbFeedback.token = FeedbackRepository.createToken(dbFeedback);
+        return dbFeedback;
+      });
   },
 };
 

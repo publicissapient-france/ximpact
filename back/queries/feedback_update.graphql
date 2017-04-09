@@ -1,5 +1,5 @@
 mutation {
-    feedback_update(id: "{{feedbackId}}", comment: "OKAY", badges: "[]") {
+    feedback_update(id: "{{feedbackId}}", comment: "OKAY", badges: "[{id: 'people',label: 'PeopleFirst',description: 'son bien-être', value: false}]") {
         id
         comment
         badges

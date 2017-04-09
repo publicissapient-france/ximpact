@@ -1,6 +1,7 @@
 {
     feedback(id: "{{id}}") {
         id
+        token
         badges
         comment
         customer {
