@@ -72,7 +72,7 @@ describe('GraphQL', () => {
       .then(() => graphql(api.updateFeedback(feedback)))
       .then(data => feedback = data.feedback_update)
       .then(() => assert.deepEqual(_.pick(feedback, ['comment']), {
-        comment: 'OKAY',
+        comment: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
       }))
 
       // Le xebian ajoute un commentaire au feedback
