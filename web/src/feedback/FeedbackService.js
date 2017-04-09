@@ -29,7 +29,13 @@ export default {
     return Promise.reject();
   },
   update(feedback) {
-    const graphQuery = encodeURI(`mutation{feedback_update(id:"${feedback.id}",comment:"${feedback.comment}",badges:"${feedback.badges}"){id}}`);
+    const graphQuery = `
+    mutation {
+      feedback_update(id: "${feedback.id}", comment: "${feedback.comment}", badges: "${JSON.stringify(feedback.badges)}")
+      {
+        id
+      }
+    }`;
     return GraphService.query(graphQuery)
       .then(response => response.feedback_update);
   },
