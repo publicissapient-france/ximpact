@@ -2,7 +2,12 @@
     feedback_by_token(token: "{{token}}") {
         id
         token
-        badges
+        badges {
+            id
+            value
+            description
+            label
+        }
         comment
         customer {
             id

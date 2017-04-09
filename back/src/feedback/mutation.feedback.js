@@ -1,8 +1,10 @@
 const Feedback = require('./type.feedback');
+const BadgeInputType = require('./type.input.badge');
 const FeedbackRepository = require('../feedback/repository.feedback');
 const {
   GraphQLString,
   GraphQLNonNull,
+  GraphQLList,
 } = require('graphql');
 
 const feedback_create = {
@@ -39,7 +41,7 @@ const feedback_update = {
     },
     badges: {
       name: 'badges',
-      type: GraphQLString,
+      type: new GraphQLList(BadgeInputType),
     },
   },
   resolve(obj, { id, comment, badges }) {

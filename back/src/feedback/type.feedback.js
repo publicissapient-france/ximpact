@@ -1,12 +1,13 @@
 const XebianInfo = require('../xebian/type.xebian.info');
 const Customer = require('../customer/type.customer');
 const ImpactInfo = require('../impact/type.impact.info');
+const Badge = require('./type.badge');
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLNonNull,
+  GraphQLList,
 } = require('graphql');
-const GraphQLJSON = require('graphql-type-json');
 const GraphQLDate = require('graphql-date');
 
 const Feedback = new GraphQLObjectType({
@@ -25,7 +26,7 @@ const Feedback = new GraphQLObjectType({
       type: GraphQLString,
     },
     badges: {
-      type: GraphQLJSON,
+      type: new GraphQLList(Badge),
     },
     created_at: {
       type: GraphQLDate,
