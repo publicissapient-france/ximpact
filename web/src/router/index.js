@@ -43,7 +43,7 @@ const router = new Router({
       component: Customer,
     },
     {
-      path: '/feedbacks/:id',
+      path: '/feedbacks/:token',
       component: FeedbackUpdate,
     },
   ],

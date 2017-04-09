@@ -37,6 +37,8 @@ export default new Vuex.Store({
         id: '',
         firstname: '',
       },
+      comment: '',
+      badges: [],
     },
   },
   mutations: {

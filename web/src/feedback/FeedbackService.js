@@ -1,12 +1,15 @@
 import GraphService from '../tool/GraphService';
 
 export default {
-  get(id, store) {
-    if (id) {
-      const graphQuery = encodeURI(`
+  get(token, store) {
+    if (token) {
+      const graphQuery = `
 {
-  feedback(id: "${id}") {
-    badges
+  feedback_by_token(token: "${token}") {
+    id
+    badges {
+      id
+    }
     comment
     customer {
       firstname
@@ -14,13 +17,20 @@ export default {
     xebian {
       firstname
     }
-    impact
+    impact {
+      description
+    }
   }
 }
-`);
+`;
       return GraphService.query(graphQuery)
-        .then(response => store.commit('setFeedback', response.feedback));
+        .then(response => store.commit('setFeedback', response.feedback_by_token));
     }
     return Promise.reject();
+  },
+  update(feedback) {
+    const graphQuery = encodeURI(`mutation{feedback_update(id:"${feedback.id}",comment:"${feedback.comment}",badges:"${feedback.badges}"){id}}`);
+    return GraphService.query(graphQuery)
+      .then(response => response.feedback_update);
   },
 };
