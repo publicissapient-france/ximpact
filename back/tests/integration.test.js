@@ -32,7 +32,7 @@ ${query.query}`);
     });
 };
 
-describe('GraphQL', () => {
+describe.only('GraphQL', () => {
   it('should do the full process', (done) => {
     let customer;
     let xebian;
