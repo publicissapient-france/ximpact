@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const graphqlHTTP = require('express-graphql');
 const query = require('./queries');
 const mutation = require('./mutations');
@@ -9,6 +10,7 @@ const monthlyFeedback = require('./monthly-feedback/monthly-feedback');
 const schema = new GraphQLSchema({ query, mutation });
 
 const app = express();
+app.options('/graphql', cors());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
   res.header('Access-Control-Allow-Methods', 'POST');
