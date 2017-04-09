@@ -52,7 +52,7 @@ module.exports = {
       .returning('*')
       .where('id', '=', id)
       .update({ customer_id, xebian_id, badges, comment })
-      .then((result) => result[0]),
+      .then(result => result[0]),
 
   addFeedback: (impact_id, comment, customer_id, xebian_id, created_at, updated_at) =>
     db('feedback')
