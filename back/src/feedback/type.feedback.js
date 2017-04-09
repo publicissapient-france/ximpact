@@ -1,4 +1,5 @@
-const Author = require('./type.author');
+const XebianInfo = require('../xebian/type.xebian.info');
+const Customer = require('../customer/type.customer');
 const ImpactInfo = require('../impact/type.impact.info');
 const {
   GraphQLObjectType,
@@ -30,10 +31,16 @@ const Feedback = new GraphQLObjectType({
       type: GraphQLDate,
     },
     customer: {
-      type: Author,
+      type: Customer,
     },
     xebian: {
-      type: Author,
+      type: XebianInfo,
+    },
+    customer_author: {
+      type: Customer,
+    },
+    xebian_author: {
+      type: XebianInfo,
     },
   },
 });

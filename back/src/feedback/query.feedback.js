@@ -23,8 +23,12 @@ const feedback = {
       .then(() => ImpactRepository.getImpact(dbFeedback.impact_id))
       .then(impact => dbFeedback.impact = impact)
       .then(() => CustomerRepository.getCustomer(dbFeedback.customer_id))
-      .then(customer => dbFeedback.customer = customer)
+      .then(customer => dbFeedback.customer_author = customer)
       .then(() => XebianRepository.getXebian(dbFeedback.xebian_id))
+      .then(xebian => dbFeedback.xebian_author = xebian)
+      .then(() => CustomerRepository.getCustomer(dbFeedback.impact.customer_id))
+      .then(customer => dbFeedback.customer = customer)
+      .then(() => XebianRepository.getXebian(dbFeedback.impact.xebian_id))
       .then(xebian => dbFeedback.xebian = xebian)
       .then(() => dbFeedback);
   },
@@ -46,7 +50,7 @@ const feedback_by_token = {
       .then(impact => dbFeedback.impact = impact)
       .then(() => CustomerRepository.getCustomer(dbFeedback.customer_id))
       .then(customer => dbFeedback.customer = customer)
-      .then(() => XebianRepository.getXebian(dbFeedback.xebian_id))
+      .then(() => XebianRepository.getXebian(dbFeedback.impact.xebian_id))
       .then(xebian => dbFeedback.xebian = xebian)
       .then(() => dbFeedback);
   },

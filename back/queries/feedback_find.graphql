@@ -1,25 +1,35 @@
 {
     feedback(id: "{{id}}") {
         id
-        comment
         badges
-        created_at
-        updated_at
-        impact {
-            id
-            description
-            created_at
-            updated_at
-        }
+        comment
         customer {
             id
+            email
             firstname
             lastname
         }
         xebian {
             id
+            email
             firstname
             lastname
+        }
+        customer_author {
+            id
+            email
+            firstname
+            lastname
+        }
+        xebian_author {
+            id
+            email
+            firstname
+            lastname
+        }
+        impact {
+            id
+            description
         }
     }
 }

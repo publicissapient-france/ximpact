@@ -30,7 +30,8 @@ const reference_badges = [
 
 module.exports = {
 
-  getFeedback: id => db.select().from('feedback').where({ id }).then(result => result[0]),
+  getFeedback: id => db.select().from('feedback').where({ id })
+    .then(result => result[0]),
 
   createToken: (feedback) => {
     let created_at = feedback.created_at;
