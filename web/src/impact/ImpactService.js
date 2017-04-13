@@ -5,7 +5,7 @@ export default {
   customers: [],
   xebians: [],
   fetchData() {
-    const graphQuery = encodeURI('{xebians{email,id}customers{email,id}}');
+    const graphQuery = '{xebians{email,id}customers{email,id}}';
     return GraphService.query(graphQuery)
       .then((response) => {
         this.customers.length = 0;
@@ -15,7 +15,7 @@ export default {
       });
   },
   createImpact(xebian, customer, impact) {
-    const graphQuery = encodeURI(`mutation{impact_create(xebianId:"${xebian.id}",customerId:"${customer.id}",description:"${impact}"){id}}`);
+    const graphQuery = `mutation{impact_create(xebianId:"${xebian.id}",customerId:"${customer.id}",description:"${impact}"){id}}`;
     return GraphService.query(graphQuery);
   },
 };

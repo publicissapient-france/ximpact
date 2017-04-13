@@ -11,21 +11,21 @@ export default {
     impacts: [],
   },
   createXebian(email) {
-    const graphQuery = encodeURI(`mutation{xebian_create(email:"${email}"){id}}`);
+    const graphQuery = `mutation{xebian_create(email:"${email}"){id}}`;
     return GraphService.query(graphQuery)
       .then(response => response.xebian_create);
   },
   updateXebian(xebian) {
-    const graphQuery = encodeURI(`
+    const graphQuery = `
 mutation {
   xebian_update(id: "${xebian.id}", email: "${xebian.email}", firstname: "${xebian.firstname}", lastname: "${xebian.lastname}") {
     id
   }
-}`);
+}`;
     return GraphService.query(graphQuery);
   },
   fetchXebians() {
-    const graphQuery = encodeURI('{xebians{id,email,firstname,lastname}}');
+    const graphQuery = '{xebians{id,email,firstname,lastname}}';
     return GraphService.query(graphQuery)
       .then((response) => {
         this.xebians.length = 0;
