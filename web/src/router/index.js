@@ -20,6 +20,7 @@ const router = new Router({
     },
     {
       path: '/signin',
+      name: 'signin',
       component: Signin,
     },
     {
@@ -44,6 +45,7 @@ const router = new Router({
     },
     {
       path: '/feedbacks/:token',
+      name: 'feedbacks',
       component: FeedbackUpdate,
     },
   ],

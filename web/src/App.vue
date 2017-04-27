@@ -15,12 +15,17 @@
   export default {
     data() {
       return {
-        topBar: true,
+        topBar: this.topBarVisible(),
       };
     },
     watch: {
       $route() {
-        this.topBar = this.$route.path !== '/signin' && this.$route.path !== '/feedbacks';
+        this.topBar = this.topBarVisible();
+      },
+    },
+    methods: {
+      topBarVisible() {
+        return this.$route.name !== 'signin' && this.$route.name !== 'feedbacks';
       },
     },
   };

@@ -40,6 +40,19 @@ mutation {
     email
     firstname
     lastname
+    impacts {
+      updated_at
+      customer {
+        firstname
+        lastname
+        company
+      }
+      description
+      feedbacks {
+        comment
+        updated_at
+      }
+    }
   }
 }`;
     return GraphService.query(graphQuery)
