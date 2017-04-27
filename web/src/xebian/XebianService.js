@@ -51,6 +51,15 @@ mutation {
       feedbacks {
         comment
         updated_at
+        customer {
+          firstname
+          lastname
+          company
+        }
+        xebian {
+          firstname
+          lastname
+        }
       }
     }
   }

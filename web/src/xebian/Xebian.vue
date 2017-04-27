@@ -11,6 +11,10 @@
         <li v-for="(feedback, key) in impact.feedbacks" :key="key">
           {{feedback.comment}}
           <div class="badges" v-if="feedback.comment">
+            <span v-if="feedback.customer"
+                  class="badge badge0">{{feedback.customer.firstname}} {{feedback.customer.lastname}}</span>
+            <span v-if="feedback.xebian"
+                  class="badge badge2">{{feedback.xebian.firstname}} {{feedback.xebian.lastname}}</span>
             <span class="badge badge1">{{feedback.updated_at}}</span>
           </div>
         </li>
@@ -67,11 +71,17 @@
       border-radius: 3px;
 
       &.badge0 {
-        background: #bab7c9;
+        background: #819f99;
         color: #ffffff;
       }
 
       &.badge1 {
+        background: #68768C;
+        color: #ffffff;
+        opacity: .6;
+      }
+
+      &.badge2 {
         background: #9894ad;
         color: #ffffff;
       }
