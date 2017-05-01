@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import GraphService from '../tool/GraphService';
+import moment from '../tool/Moment';
+import Constant from '../constant';
 
 export default {
   xebians: [],
@@ -41,6 +43,7 @@ mutation {
     firstname
     lastname
     impacts {
+      id
       updated_at
       customer {
         firstname
@@ -65,6 +68,18 @@ mutation {
   }
 }`;
     return GraphService.query(graphQuery)
-      .then(response => store.commit('setXebian', response.xebian));
+      .then((response) => {
+        _.each(response.xebian.impacts,
+          (impact) => {
+            impact.updated_at = moment(impact.updated_at, Constant.backendDateFormat)
+              .format(Constant.appDateFormat);
+            _.each(impact.feedbacks, (feedback) => {
+              feedback.updated_at = moment(feedback.updated_at, Constant.backendDateFormat)
+                .format(Constant.appDateFormat);
+              return null;
+            });
+          });
+        store.commit('setXebian', response.xebian);
+      });
   },
 };

@@ -1,13 +1,6 @@
 import GraphService from '../tool/GraphService';
-
-const toValidQuery = (string) => {
-  let validQuery = string;
-  validQuery = validQuery.replace(/"id"/g, 'id');
-  validQuery = validQuery.replace(/"description"/g, 'description');
-  validQuery = validQuery.replace(/"label"/g, 'label');
-  validQuery = validQuery.replace(/"value"/g, 'value');
-  return validQuery;
-};
+import moment from '../tool/Moment';
+import Constant from '../constant';
 
 export default {
   get(token, store) {
@@ -41,8 +34,30 @@ export default {
     return Promise.reject();
   },
   update(feedback) {
-    const graphQuery = `mutation{feedback_update(id:"${feedback.id}",comment:"${feedback.comment}",badges:${JSON.stringify(feedback.badges)}){id}}`;
-    return GraphService.query(toValidQuery(graphQuery))
+    const graphQuery = `mutation{feedback_update(id:"${feedback.id}",comment:"${feedback.comment}"){id}}`;
+    return GraphService.query(graphQuery)
       .then(response => response.feedback_update);
+  },
+  create(xebianId, comment, impactId) {
+    const graphQuery = `mutation {
+    feedback_create(
+      xebianId:"${xebianId}",
+      comment:"${comment}",
+      impactId:"${impactId}")
+      {
+        comment
+        updated_at
+        xebian {
+          firstname
+          lastname
+        }
+      }
+    }`;
+    return GraphService.query(graphQuery)
+      .then((response) => {
+        response.feedback_create.updated_at = moment(response.feedback_create.updated_at,
+          Constant.backendDateFormat).format(Constant.appDateFormat);
+        return response.feedback_create;
+      });
   },
 };

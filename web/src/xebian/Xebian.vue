@@ -18,6 +18,17 @@
             <span class="badge badge1">{{feedback.updated_at}}</span>
           </div>
         </li>
+        <el-form :model="feedback" ref="createFeedback">
+          <el-form-item label="Commentaire(s)" prop="comment">
+            <el-input type="textarea" :rows="2"
+                      placeholder="Entrez un commentaire à propos des feedbacks précédents"
+                      v-model="feedback.comment">
+            </el-input>
+          </el-form-item>
+          <el-row type="flex" class="button" justify="end">
+            <el-button type="primary" @click="createFeedback(impact.id)">OK</el-button>
+          </el-row>
+        </el-form>
       </ul>
     </el-card>
     <div class="xebian-edition">
@@ -27,13 +38,18 @@
 </template>
 
 <script>
+  import _ from 'lodash';
   import XebianService from './XebianService';
   import XebianUpdate from './update/XebianUpdate';
+  import FeedbackService from '../feedback/FeedbackService';
 
   export default {
     data() {
       return {
         xebian: this.$store.state.xebian,
+        feedback: {
+          comment: '',
+        },
         activeImpact: 0,
       };
     },
@@ -42,6 +58,27 @@
     },
     mounted() {
       XebianService.getXebian(this.$route.params.id, this.$store);
+    },
+    methods: {
+      createFeedback(impactId) {
+        FeedbackService.create('1', this.feedback.comment, impactId) // TODO change by current user id
+          .then((feedback) => {
+            const impact = _.find(this.xebian.impacts, i => i.id === impactId);
+            if (impact) {
+              impact.feedbacks.push(feedback);
+            }
+            this.$store.commit('setXebian', this.xebian);
+            this.$forceUpdate();
+            this.$message({
+              message: 'Feedback créé ;) !',
+              type: 'success',
+            });
+          })
+          .catch(error => this.$message({
+            message: `Une erreur s'est produite :( essayez à nouveau plus tard. ${error.message}`,
+            type: 'error',
+          }));
+      },
     },
   };
 </script>
