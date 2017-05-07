@@ -7,6 +7,8 @@ const { GraphQLSchema } = require('graphql');
 const CronJob = require('cron').CronJob;
 const monthlyFeedback = require('./monthly-feedback/monthly-feedback');
 
+const port = process.env.PORT || 4000;
+
 const schema = new GraphQLSchema({ query, mutation });
 
 const app = express();
@@ -20,6 +22,6 @@ app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true,
 }));
-app.listen(4000, () => console.log('Now browse to http://localhost:4000/graphql'));
+app.listen(port, () => console.log(`Now browse to http://localhost:${port}/graphql`));
 
 new CronJob('* * * * * *', monthlyFeedback.sendFeedbackRequest, null, true, 'Europe/Paris');

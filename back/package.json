@@ -16,6 +16,7 @@
     "db:migrate:reset": "db-migrate reset --config database/database.json --migrations-dir database/migrations && npm run db:migrate:up",
     "graphql:schema:update": "node scripts/update-schema.js > ../graphql.schema.json",
     "dev": "DEV=true nodemon src/index.js",
+    "start": "node src/index.js",
     "lint": "eslint src tests",
     "lint:watch": "esw -w src tests scripts",
     "pretest": "npm run lint && npm run db:migrate:reset",
@@ -24,7 +25,8 @@
     "posttest": "istanbul report clover",
     "coverage": "DEV=true istanbul --include-all-sources cover mocha --report lcovonly -- --recursive -R spec tests && cat ./coverage/lcov.info | coveralls",
     "npm-check": "npm-check -E -u",
-    "postgresql": "docker run -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres"
+    "postgresql": "docker run -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres",
+    "package": "zip -r ximpact-back.zip package.json src config"
   },
   "dependencies": {
     "aws-sdk": "2.36.0",
@@ -42,11 +44,10 @@
     "knex": "0.12.9",
     "lodash": "4.17.4",
     "moment": "2.18.1",
-    "mysql": "2.13.0",
-    "mysql2": "1.2.0",
     "node-sass": "^4.5.2",
     "nodemailer": "3.1.8",
     "nodemailer-ses-transport": "1.5.0",
+    "pg": "^6.1.5",
     "request-promise": "4.2.0",
     "require-text": "0.0.1"
   },

@@ -112,3 +112,16 @@ yarn run e2e
 ```shell
 yarn test
 ```
+
+## Deploy in production
+
+### Install ElasticBeanstalk CLI
+
+```shell
+brew install awsebcli
+eb --version
+```
+
+# Endpoints
+
+Server : http://ximpact-production.eu-central-1.elasticbeanstalk.com/graphql
