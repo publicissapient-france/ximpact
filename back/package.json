@@ -26,7 +26,8 @@
     "coverage": "DEV=true istanbul --include-all-sources cover mocha --report lcovonly -- --recursive -R spec tests && cat ./coverage/lcov.info | coveralls",
     "npm-check": "npm-check -E -u",
     "postgresql": "docker run -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres",
-    "package": "zip -r ximpact-back.zip package.json src config"
+    "package": "zip -r ximpact-back.zip package.json src config",
+    "deploy": "eb deploy"
   },
   "dependencies": {
     "aws-sdk": "2.36.0",
